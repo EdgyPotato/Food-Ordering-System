@@ -1,0 +1,14 @@
+body{
+    margin: 0px;
+}
+
+.topbar{
+    background-color: rgb(114, 87, 139);
+    height:8%;
+    background: linear-gradient(90deg, #4F007D 0%, #9930C8 100%);
+    
+}
+
+.return{
+    padding-left: 30px;
+}
