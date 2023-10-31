@@ -24,14 +24,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <html>
 
-<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
 <body>
   <div class="topbar">
-    <svg class="return" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
-      <path fill-rule="evenodd" d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z" clip-rule="evenodd" />
-    </svg>
+    <div class="return"><a href=cusmenu><img src="{{ asset('image/return.png')}}" width="30px" height="30px"></a></div>
+  </div>
+  <div class="content">
+    <div class="empty"></div>
+    <div class="upperfont">
+      <p id="p1">Login</p>
+      <p id="p2">Please sign in to continue</p>
+    </div>
+    <div class="empty2"></div>
+    <div class="form">
+      <form>
+        <div><p2>Username</p2><br/>
+          <div class="username">
+            <img src="{{ asset('image/username.png')}}" width="35px" height="35px">
+            <input type="text">
+          </div>
+        </div>
+        <br/>
+        <div><p2>Password</p2><br/>
+          <div class="password">
+            <img src="{{ asset('image/password.png')}}" width="35px" height="35px">
+            <input type="password">
+          </div>
+        </div>
+        <div class="submit">
+          <input type="submit" value="LOGIN">
+        </div>
+      </form>
+    </div>
+    <div class="prompt">Reminder: Customer no need to sign in</div>
+    <div class="back"><a href=cusmenu>Press here back to menu</a></div>
+  </div>
 </body>
-
-</div>
 </html>
