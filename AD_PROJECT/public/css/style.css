@@ -3,9 +3,8 @@ body{
 }
 
 .topbar{
-    background-color: rgb(114, 87, 139);
     height:8%;
-    background: linear-gradient(90deg, #4F007D 0%, #9930C8 100%);
+    background: linear-gradient(90deg, #bd8bd9 0%, #9930C8 100%);
     display:flex;
     align-items: center;
 }
