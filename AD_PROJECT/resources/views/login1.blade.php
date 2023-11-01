@@ -21,9 +21,9 @@
   ```
 -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<html>
 
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="{{ asset('css/style.css')}}">
 
 <body>
@@ -42,14 +42,14 @@
         <div><p2>Username</p2><br/>
           <div class="username">
             <img src="{{ asset('image/username.png')}}" width="35px" height="35px">
-            <input type="text">
+            <input type="text" required>
           </div>
         </div>
         <br/>
         <div><p2>Password</p2><br/>
           <div class="password">
             <img src="{{ asset('image/password.png')}}" width="35px" height="35px">
-            <input type="password">
+            <input type="password" required>
           </div>
         </div>
         <div class="submit">
