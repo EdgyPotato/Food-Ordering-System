@@ -100,7 +100,7 @@ input[type="submit"]:hover{
 .prompt{
     display: flex;
     justify-content: center;
-    margin-top: 40%;
+    margin-top: 15%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 15px;
     font-weight: 450;
