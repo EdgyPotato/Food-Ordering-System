@@ -1,5 +1,6 @@
 html{
     height: 100%;
+    margin:0%;
 }
 
 body{
@@ -14,6 +15,13 @@ body{
     display:flex;
     flex-direction: column;
     justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    top:0%;
+}
+
+.emptyarea{
+    height:23%;
 }
 
 .firstrow{
@@ -41,20 +49,21 @@ body{
 .searchbar{
     display: flex;
     justify-content: center;
-    margin:2%;
-    height: 15%;
+    margin:1%;
+    height:max-content;
 }
 
 .searchbar input{
     border-radius: 20px;
     width: 80%;
+    height:150%;
     
 }
 
 .categories{
     display: flex;
     justify-content: space-around;
-    margin:2%;
+    margin:1%;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 17px;
     color: white;
@@ -63,8 +72,64 @@ body{
 
 i{
     position: absolute;
-    right: 13%;
+    right: 12%;
+    margin-top:5px;
 }
+
+.box{
+    border: 2px black solid;
+    border-radius: 20px;
+    margin: 2% 2% 2% 2%;
+}
+
+#categories{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    color: black;
+    font-weight: bold;
+    margin-left: 3%;
+    margin-top: 2%;
+}
+
+.bottombar{
+    display:flex;
+    background-color: white;
+    width: 100%;
+    bottom:0%;
+    height: 6%;
+    color:black; 
+    justify-content: space-between;
+    align-items: center;
+    position:fixed;
+}
+
+.emptyarea2{
+    height: 6%;
+}
+
+.box{
+    padding: 3%;
+}
+
+.add{
+    margin-right: 2%;
+}
+
+.mode{
+    margin-left:5%;
+    border: 2px solid;
+}
+
+.mode select{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    height: 4%;
+}
+
+
+
+
+
 
 
 

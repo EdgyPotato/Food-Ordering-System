@@ -34,6 +34,10 @@ Route::get('/cusmenu', function () {
     return view ('cusmenu');
 });
 
+Route::get('/viewcart', function () {
+    return view ('viewcart');
+});
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
