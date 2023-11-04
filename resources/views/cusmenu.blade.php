@@ -28,10 +28,12 @@
             for ($i = 0; $i < 10; $i++) {
                 echo "<div id='categories'>Food</div>";
                 echo "<div class='box'>";
-                    echo "<div>picture</div>";
-                    echo "<div>food name</div>";
-                    echo "<div>description</div>";
-                    echo "<div>price</div>";
+                    echo "<div class='picture'>picture</div>";
+                    echo "<div class='nopicture'>";
+                        echo "<div class='food'>food name</div>";
+                        echo "<div class='description'>description</div>";
+                        echo "<div class='price'>price</div>";
+                    echo "</div>";
                 echo "</div>";
             }
         ?>
