@@ -72,14 +72,14 @@
 
         <script>
         function scrollToSubtitle() {
-            const yOffset = -50; // Adjust this value based on the height of your fixed top bar
+            const yOffset = -50; // Adjust this value based on the height of your fixed top bar >>>>
             const element = document.getElementById('food');
             const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
 
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
         </script>
-    </body>
+    </body> 
     
 </html>
 
