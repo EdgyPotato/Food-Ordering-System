@@ -34,6 +34,9 @@ Route::get('/cusmenu', function () {
     return view ('cusmenu');
 });
 
+Route::get('/food', function () {
+    return view ('menu');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
