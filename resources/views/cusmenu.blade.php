@@ -22,7 +22,6 @@
                 <div id="c3">Others</div>              
             </div>
         </div>
-        <div class="emptyarea"></div>
         <div class="whitearea">
         <?php
             $sql = DB::table('menu')

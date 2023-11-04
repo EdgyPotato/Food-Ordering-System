@@ -171,6 +171,15 @@ i{
     margin-top: 2%;
 }
 
+#food{
+    padding-top: 52%;
+}
+
+#beverage{
+    padding-top: 52%;
+    margin-top: -52%;
+}
+
 
 
 
