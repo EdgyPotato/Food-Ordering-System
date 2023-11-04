@@ -39,14 +39,16 @@
     <div class="empty2"></div>
     <div class="form">
       <form>
-        <div><p2>Username</p2><br/>
+        <div>
+          <p2>Username</p2><br />
           <div class="username">
             <img src="{{ asset('image/username.png')}}" width="35px" height="35px">
             <input type="text" required>
           </div>
         </div>
-        <br/>
-        <div><p2>Password</p2><br/>
+        <br />
+        <div>
+          <p2>Password</p2><br />
           <div class="password">
             <img src="{{ asset('image/password.png')}}" width="35px" height="35px">
             <input type="password" required>
@@ -61,4 +63,5 @@
     <div class="back"><a href=cusmenu>Press here back to menu</a></div>
   </div>
 </body>
+
 </html>
