@@ -89,18 +89,17 @@
 
                     </div>
                     <div class="flex flex-row justify-between">
-                        <form class="mt-3" action="/addon.php">
-                            <div class="flex flex-row justify-between items-center mb-2">
-                                <div>
+                        <label class="flex">
+                            <form action="/addon.php">
                                     <input class="w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-500 border-pigment-indigo-500 border-2 rounded" type="checkbox" id="addon1" name="addon1" value="addon1">
-                                    <label class="ml-2 text-lg align-middle" for="addon1">Add Spaghetti</label>
-                                    <label class="mx-auto text-lg align-middle items">+ RM 2.00</label>
-                                
-                                </div>
-                            </div>
                             <!-- Repeat the above div for each item -->
                         </form>
+                        <label class="ml-2 text-lg align-middle" for="addon1">Add Spaghetti</label>
+                        </label>
+                        
+                        <label class="text-lg align-middle items">+ RM 2.00</label>
                     </div>
+                    
 
                 </div>
             </div>
