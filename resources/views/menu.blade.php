@@ -80,28 +80,11 @@
                             <label class="ml-2 text-lg align-middle" for="addon4">Add French Fries</label><br>
                         </form>
                         <div class="my-3 text-center align-middle">
-                            <p class="h-auto">+ RM 2.00</p>
-                            <p class="h-auto">+ RM 3.00</p>
-                            <p class="h-auto">+ RM 1.00</p>
-                            <p class="h-auto">+ RM 2.00</p>
+                            <p class="leading-7">+ RM 2.00</p>
+                            <p class="leading-7">+ RM 3.00</p>
+                            <p class="leading-7">+ RM 1.00</p>
+                            <p class="leading-7">+ RM 2.00</p>
                         </div>
-                        
-
-                    </div>
-                    <div class="flex flex-row justify-between">
-                        <form class="mt-3" action="/addon.php">
-                            <div class="flex flex-row justify-between items-center mb-2">
-                                <div>
-                                    <input class="w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-500 border-pigment-indigo-500 border-2 rounded" type="checkbox" id="addon1" name="addon1" value="addon1">
-                                    <label class="ml-2 text-lg align-middle" for="addon1">Add Spaghetti</label>
-                                    <label class="mx-auto text-lg align-middle items">+ RM 2.00</label>
-                                
-                                </div>
-                            </div>
-                            <!-- Repeat the above div for each item -->
-                        </form>
-                    </div>
-
                 </div>
             </div>
     </body>
