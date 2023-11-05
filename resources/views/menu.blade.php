@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <div class="w-full px-8 py-3 sticky inset-x-0 bottom-0 shadow-inner bg-white">
+    <div class="w-full px-8 py-3 sticky inset-x-0 bottom-0 shadow-inner bg-pigment-indigo-100">
         <!--add a button to add a certain number using php/javascript to change number and another button to add to cart-->
         <div class="flex flex-row justify-between">
             <div class="flex flex-row justify-center items-center text-center">
