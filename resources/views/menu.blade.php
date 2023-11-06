@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <div class="w-full px-8 py-3 sticky inset-x-0 bottom-0 shadow-inner bg-pigment-indigo-100">
+    <div class="w-full px-8 py-3 fixed inset-x-0 bottom-0 shadow-inner bg-pigment-indigo-100">
         <!--add a button to add a certain number using php/javascript to change number and another button to add to cart-->
         <div class="flex flex-row justify-between">
             <div class="flex flex-row justify-center items-center text-center">
@@ -110,9 +110,9 @@
                         document.getElementById("count").innerHTML = count;
                     }
                 </script>
-                <button class="text-5xl text-pigment-indigo-400" onclick="minus()"><img id="minus" src="{{ asset('image/minus.png')}}" width="20px" height="20px"></button>
+                <button class="text-5xl text-pigment-indigo-400" onclick="minus()"><img id="minus" src="{{asset('image/minus.png')}}" width="20px" height="20px"></button>
                 <p class="inline-block w-10 h-10 text-3xl font-bold mx-3 bg-pigment-indigo-100 border-2 border-pigment-indigo-500 rounded-lg shadow-md" id="count">0</p>
-                <button class="text-5xl text-pigment-indigo-400" onclick="add()"><img id="add" src="{{ asset('image/add.png')}}" width="20px" height="20px"></button>
+                <button class="text-5xl text-pigment-indigo-400" onclick="add()"><img id="add" src="{{asset('image/add.png')}}" width="20px" height="20px"></button>
             </div>
             <form method="post" name="addcart">
                 <button class="inline-block px-4 py-2 text-center text-xl font-bold bg-pigment-indigo-400 border-4 border-pigment-indigo-500 text-white rounded-lg shadow-md">Add to Cart</button>
