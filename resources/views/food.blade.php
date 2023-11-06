@@ -8,6 +8,26 @@
     <style>
         @media screen and (max-width: 720px) {}
     </style>
+    <script>
+        //temporary js script as reference to future php script
+        var count = 0;
+
+        function add() {
+            count += 1;
+            if (count > 99) {
+                count = 99;
+            }
+            document.getElementById("count").innerHTML = count;
+        }
+
+        function minus() {
+            count -= 1;
+            if (count < 0) {
+                count = 0;
+            }
+            document.getElementById("count").innerHTML = count;
+        }
+    </script>
     <title>Menu</title>
 </head>
 
@@ -18,11 +38,11 @@
         </div>
     </div>
     <div class="flex flex-col items-center">
-        <div class="w-80 mt-8 bg-white shadow-md max-w-md rounded-xl">
+        <div class="w-11/12 mt-8 bg-white shadow-md max-w-md rounded-xl">
             <img class="rounded-xl" src="{{ asset('image/food.jpg')}}">
         </div>
 
-        <div class="flex flex-col w-80 px-5 py-5 -mt-8 mb-8 bg-white shadow-md max-w-md rounded-xl">
+        <div class="flex flex-col w-11/12 px-5 py-5 -mt-8 mb-28 bg-white shadow-md max-w-md rounded-xl">
             <div class="w-full flex justify-between items-center">
                 <h1 class="text-2xl font-bold">F01. Fish & Chips</h1>
                 <h2 class="text-sm font-bold">RM 13.00</h2>
@@ -88,28 +108,8 @@
     </div>
 
     <div class="w-full px-8 py-3 fixed inset-x-0 bottom-0 shadow-inner bg-pigment-indigo-100">
-        <!--add a button to add a certain number using php/javascript to change number and another button to add to cart-->
         <div class="flex flex-row justify-between">
             <div class="flex flex-row justify-center items-center text-center">
-                <script>
-                    var count = 0;
-
-                    function add() {
-                        count += 1;
-                        if (count > 99) {
-                            count = 99;
-                        }
-                        document.getElementById("count").innerHTML = count;
-                    }
-
-                    function minus() {
-                        count -= 1;
-                        if (count < 0) {
-                            count = 0;
-                        }
-                        document.getElementById("count").innerHTML = count;
-                    }
-                </script>
                 <button class="text-5xl text-pigment-indigo-400" onclick="minus()"><img id="minus" src="{{asset('image/minus.png')}}" width="20px" height="20px"></button>
                 <p class="inline-block w-10 h-10 text-3xl font-bold mx-3 bg-pigment-indigo-100 border-2 border-pigment-indigo-500 rounded-lg shadow-md" id="count">0</p>
                 <button class="text-5xl text-pigment-indigo-400" onclick="add()"><img id="add" src="{{asset('image/add.png')}}" width="20px" height="20px"></button>
