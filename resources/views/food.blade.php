@@ -37,6 +37,7 @@
             <a href=cusmenu><img src="{{ asset('image/return.png')}}" width="30px" height="30px"></a>
         </div>
     </div>
+
     <div class="flex flex-col items-center">
         <div class="w-11/12 mt-8 bg-white shadow-md max-w-md rounded-xl">
             <img class="rounded-xl" src="{{ asset('image/food.jpg')}}">
@@ -47,7 +48,9 @@
                 <h1 class="text-2xl font-bold">F01. Fish & Chips</h1>
                 <h2 class="text-sm font-bold">RM 13.00</h2>
             </div>
+
             <hr class="w-full mx-auto my-3 h-1 bg-gray-200 border-0 rounded">
+
             <div class="w-full">
                 <div class="flex flex-row justify-between">
                     <div>
@@ -69,7 +72,9 @@
                     <label class="ml-2 text-lg align-middle" for="topping4">Salted Egg Sauce</label><br>
                 </form>
             </div>
+
             <hr class="w-full mx-auto my-3 h-1 bg-gray-200 border-0 rounded">
+
             <div class="w-full">
                 <div class="flex flex-row justify-between">
                     <h2 class="text-xl font-bold">Add-On</h1>
@@ -96,7 +101,9 @@
                     </div>
                 </div>
             </div>
+
             <hr class="w-full mx-auto my-3 h-1 bg-gray-200 border-0 rounded">
+            
             <div class="w-full">
                 <h2 class="text-xl font-bold">Special Request</h1>
                     <p class="text-sm text-gray-600">Please let us know if you are allergic to any anything or require us to avoid anything.</p>
