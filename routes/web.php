@@ -38,6 +38,9 @@ Route::get('/viewcart', function () {
     return view ('viewcart');
 });
 
+Route::get('/staffmenu', function () {
+    return view ('staffmenu');
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
