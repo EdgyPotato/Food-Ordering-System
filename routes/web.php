@@ -42,8 +42,15 @@ Route::get('/staffmenu', function () {
     return view ('staffmenu');
 });
 
+Route::get('/createuser', function () {
+    return view ('createuser');
+});
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
+
+    
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

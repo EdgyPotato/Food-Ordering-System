@@ -1,0 +1,114 @@
+html{
+    height: 100%;
+    margin:0%;
+}
+body{
+    background-color: #EFECF0;
+    margin:0%;
+    height:100%;
+}
+#purpleside{
+    width: 1.4%;
+    height: 100%;
+    background: linear-gradient(0deg, #4F007D 0%, #9930C8 100%);
+    position: fixed;
+}
+.sidenav {
+    height: 100%;
+   /* 100% Full-height */
+    width: 23%;
+   /* 0 width - change this with JavaScript */
+    position: fixed;
+   /* Stay in place */
+    z-index: 1;
+   /* Stay on top */
+    top: 0;
+   /* Stay at the top */
+    left: 0;
+    background-color: #ffffff;
+   /* Black*/
+    overflow-x: hidden;
+   /* Disable horizontal scroll */
+    transition: 0.7s;
+   /* 0.5 second transition effect to slide in the sidenav */
+}
+/* The navigation menu links */
+.sidenav a {
+    margin-left: 10%;
+    text-decoration: none;
+    font-size: 25px;
+    color: #000000;
+    display: block;
+    transition: 0.7s;
+}
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
+#main {
+    transition: margin-left .7s;
+    padding: 20px;
+}
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+       padding-top: 15px;
+   }
+    .sidenav a {
+       font-size: 18px;
+   }
+}
+.molekcafe{
+    font-family: 'Segoe Script', sans-serif;
+    font-size: 40px;
+    color: #4F007D;
+    text-align: center;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.icon{
+    height: 50%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items:flex-start;
+    margin-left: 15%;
+}
+
+.icon a{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.icon u{
+    margin: 20px;
+    white-space: nowrap;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+a.logout{
+    bottom: 0%;
+    margin-top: 60% ;
+}
+
+.whitearea{
+    bottom:0%;
+    display: flex;
+    flex-direction: column;
+    height: 75%;
+}
+
