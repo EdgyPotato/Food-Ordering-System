@@ -4,22 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ asset('css/staffmenu.css')}}">
+    <!-- Load icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Your Page Title</title>
 </head>
 <body>
     <div class="purplearea"></div>
     <div class="navbar" id="navbar">
-        <div class="buttonarea" id="buttonarea">
-            <a class="navbutton" href="javascript:void(0)" onclick="toggleNavbar()">
-                <img src="{{ asset('image/menubar.png')}}" width="35px" height="35px">
-            </a>
+        <div class="whitearea">
+            <div class = "molekcafe" id="molekcafe">Molek</br>Cafe</div>
+            <div class = "icon">
+                <a href="#"><img src="{{ asset('image/reservation.png')}}" width="35px" height="35px"><u id = "icon">Reservation</u></a>
+                <a href="#"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px"><u id = "icon">Menu List</u></a>
+                <a href="#"><img src="{{ asset('image/order.png')}}" width="35px" height="35px"><u id= "icon">Order List</u></a>
+                <a href="#"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px"><u id = "icon">Notification</u></a>
+            </div>
+            <div class="logout">
+                <a href= "login1"><img src="{{ asset('image/logout.png')}}" width="35px" height="35px">LOGOUT</a>
+            </div>
         </div>
     </div>
     
     <div class="main" id="main">
         <div class="toprow">
             <div class="createacc"><a href="createuser">Create Account</a></div>
-            <div class="search">Search Bar</div>
+            <div class="search">
+                <!-- The form -->
+                <form id="example" action="staffmenu" method="GET">
+                    <input id="searchbar" type="text" placeholder="Search by name.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
         </div>
         <div>
             <table>
@@ -31,7 +46,16 @@
                     <th></th>
                 </tr>
                 <?php
-                    $sql = DB::table('user')->get();
+                    $search = '';
+
+                    if(request()->has('search')) {
+                        $search = request('search');
+                    }
+
+                    $sql = DB::table('user')
+                        ->where('username', 'LIKE', '%' . $search . '%')
+                        ->get();
+                
                     foreach ($sql as $user){
                         echo"<tr>";
                             echo"<td>".$user->id."</td>";                            
@@ -47,45 +71,6 @@
     </div>
 
     <script>
-        function toggleNavbar() {
-            document.body.style.backgroundColor = "#EFECF0";
-            var status = 0;
-            var width = document.getElementById("navbar").style.width;
-            
-            if (width === "7%") {
-                status = 1;
-            } else {
-                status = 0;
-            }
-
-            if (status === 0) {
-                document.getElementById("navbar").style.width = "7%";
-                document.getElementById("main").style.marginLeft = "8%";
-                document.getElementById("main").style.width = "92%";
-                document.querySelectorAll(".buttonarea a").forEach(function(element) {
-                    element.style.right = "30%";
-                });
-                const element = document.getElementById("molekcafe");
-                element.style.visibility = "hidden";
-                document.querySelectorAll("#icon").forEach(icon => {
-                    icon.style.visibility = "hidden";
-                });
-            }
-
-            if (status === 1) {
-                document.getElementById("navbar").style.width = "20%";
-                document.getElementById("main").style.marginLeft = "21%";
-                document.getElementById("main").style.width = "79%";
-                document.querySelectorAll(".buttonarea a").forEach(function(element) {
-                    element.style.right = "4%";
-                });
-                document.getElementById("molekcafe").style.visibility = "visible";
-                document.querySelectorAll("#icon").forEach(icon => {
-                    icon.style.visibility = "visible";
-                });
-            }
-        }
-
         function togglePassword() {
             var x = document.getElementById("password");
             if (x.type === "password") {
@@ -93,7 +78,7 @@
             } else {
                 x.type = "password";
             }
-        }
+        } 
     </script>
 </body>
 </html>

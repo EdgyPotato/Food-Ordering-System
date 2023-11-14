@@ -20,19 +20,21 @@
 </head>
 
 <body>
-    <!-- Example of top bar -->
-    <div id="top-bar">Top Bar</div>
-    <div height="1000%"></div>
-    <!-- Example of subtitle with an id -->
-    <h2 id="subtitle">Subtitle</h2>
-    
-    <!-- Example of a word that should link to the subtitle -->
-    <p><a href="#subtitle">Click here to jump to the subtitle</a></p>
-    <div height="1000%"></div>
+    <?php $a = 0 ?>
+    <button onclick=press()>
+    <?php $a++; echo $a;?>
+        <script>
+        function press(){
+            for(var i=0; i<5; i++){
+                var num = 0;
+                num++;
 
-    <?php
-        // PHP code for dynamic content generation goes here
-    ?>
+                alert(num);
+
+                <?php $a = 3; echo $a;?>
+            }
+        }
+        </script>
 </body>
 
 </html>

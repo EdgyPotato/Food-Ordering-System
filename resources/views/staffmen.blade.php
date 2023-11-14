@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('css/staffmenu.css')}}">
+    <link rel="stylesheet" href="{{ asset('css/staffmen.css')}}">
 
     <body>
         <div id="mySidenav" class="sidenav">

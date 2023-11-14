@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -38,13 +38,19 @@ Route::get('/viewcart', function () {
     return view ('viewcart');
 });
 
+Route::get('/createuser', function () {
+    return view ('createuser');
+});
+
+Route::get('/staffmen', function () {
+    return view ('staffmen');
+});
+
 Route::get('/staffmenu', function () {
     return view ('staffmenu');
 });
 
-Route::get('/createuser', function () {
-    return view ('createuser');
-});
+Route::get('staffmenu', [UserController::class,'testRequest']);
 
 
 Route::get('/dashboard', function () {
