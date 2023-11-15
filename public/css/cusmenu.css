@@ -67,7 +67,6 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 17px;
     color: white;
-    font-weight: bold;
 }
 
 i{
@@ -82,7 +81,7 @@ i{
     margin: 2% 2% 2% 2%;
 }
 
-#food, #beverage{
+#food, #beverage, #others{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 17px;
     color: black;
@@ -172,13 +171,40 @@ i{
 }
 
 #food{
+    margin-top:0%;
     padding-top: 52%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-#beverage{
+
+#beverage, #others{
     padding-top: 52%;
     margin-top: -52%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+    font-size: 20px;
 }
+
+.categories a:hover{
+    color:#17E89B !important;
+}
+
+.categories a:visited{
+    color: white;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
+.categories a:link{
+    color: white;
+    text-decoration: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}
+
 
 
 
