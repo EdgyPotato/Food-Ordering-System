@@ -50,6 +50,10 @@ Route::get('/staffmenu', function () {
     return view ('staffmenu');
 });
 
+Route::get('/menulist', function () {
+    return view ('menulist');
+});
+
 Route::get('staffmenu', [UserController::class,'testRequest']);
 
 

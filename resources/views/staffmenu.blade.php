@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="{{ asset('css/staffmenu.css')}}">
     <!-- Load icon library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Your Page Title</title>
+    <title>Menu</title>
 </head>
 <body>
     <div class="purplearea"></div>
@@ -14,10 +14,10 @@
         <div class="whitearea">
             <div class = "molekcafe" id="molekcafe">Molek</br>Cafe</div>
             <div class = "icon">
-                <a href="#"><img src="{{ asset('image/reservation.png')}}" width="35px" height="35px"><u id = "icon">Reservation</u></a>
-                <a href="#"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px"><u id = "icon">Menu List</u></a>
-                <a href="#"><img src="{{ asset('image/order.png')}}" width="35px" height="35px"><u id= "icon">Order List</u></a>
-                <a href="#"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px"><u id = "icon">Notification</u></a>
+                <div id="i1"><a href="staffmenu"><img src="{{ asset('image/reservation.png')}}" width="35px" height="35px"><u id = "icon">Reservation</u></a></div>
+                <div id="i2"><a href="menulist"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px"><u id = "icon">Menu List</u></a></div>
+                <div id="i3"><a href="staffmenu"><img src="{{ asset('image/order.png')}}" width="35px" height="35px"><u id= "icon">Order List</u></a></div>
+                <div id="i4"><a href="#"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px"><u id = "icon">Notification</u></a></div>
             </div>
             <div class="logout">
                 <a href= "login1"><img src="{{ asset('image/logout.png')}}" width="35px" height="35px">LOGOUT</a>
@@ -78,7 +78,7 @@
             } else {
                 x.type = "password";
             }
-        } 
+        }
     </script>
 </body>
 </html>
