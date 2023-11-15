@@ -23,27 +23,27 @@ Route::get('/testing', function () {
 });
 
 Route::get('/dbsave', function () {
-    return view ('dbsave');
+    return view('dbsave');
 });
 
 Route::get('/login1', function () {
-    return view ('login1');
+    return view('login1');
 });
 
 Route::get('/cusmenu', function () {
-    return view ('cusmenu');
+    return view('cusmenu');
+});
+
+Route::get('/food', function () {
+    return view('food');
 });
 
 Route::get('/viewcart', function () {
-    return view ('viewcart');
+    return view('cart');
 });
 
 Route::get('/createuser', function () {
     return view ('createuser');
-});
-
-Route::get('/staffmen', function () {
-    return view ('staffmen');
 });
 
 Route::get('/staffmenu', function () {
@@ -69,4 +69,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
