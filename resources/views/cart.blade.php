@@ -32,13 +32,13 @@
 
         function quantity() {
             document.getElementById("quantity").innerHTML = count;
+            total();
         }
-
-        <?php
-        $sql = DB::table('menu')
-            ->where('categories', '=', 'food')
-            ->get();
-        ?>
+        
+        function total() {
+            totalPrice = count*13.00;
+            document.getElementById("total").innerHTML = "RM " + totalPrice.toFixed(2);
+        }
     </script>
     <title>Menu</title>
 </head>
@@ -76,14 +76,6 @@
             </div>
         </div>
 
-        <!--
-        <?php
-        foreach ($sql as $food) {
-            echo $food->foodname;
-        }
-        ?>
-        -->
-
         <div class="fixed inset-x-0 bottom-0">
             <div class="w-full py-3 shadow-inner rounded-t-3xl bg-pigment-indigo-200">
                 <div class="flex flex-row justify-center items-center">
@@ -96,7 +88,11 @@
                 </div>
                 <div class="flex flex-row justify-center items-center">
                     <h1 class="text-xl font-bold mx-2">Nett total:</h1>
-                    <p class="text-2xl font-bold text-pigment-indigo-400">RM 13.00</h2>
+                    <p class="text-2xl font-bold text-pigment-indigo-400" id="total">RM
+                        <script>
+                            total();
+                        </script>
+                    </p>
                 </div>
             </div>
             <button data-modal-target="confirmation-modal" data-modal-toggle="confirmation-modal" class="w-full py-4 text-center text-xl font-bold bg-pigment-indigo-400 active:bg-pigment-indigo-500 text-white shadow-inner" name="checkout">Checkout</button>
