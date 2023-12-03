@@ -253,26 +253,36 @@ form{
     background-color: rgb(142, 254, 172);
 }
 
-@media only screen and (min-device-width: 600px) and (max-device-width: 1024px) and (orientation: portrait) {
-    .navbar{
-        width: 23%;
-    }
+input[type='file'] {
+    opacity:1;    
+}
 
-    .main{
-        padding: 0% 0% 0% 25%;
-        width: 75%;
-    }
+textarea {
+    width: 150px;
+    height: 200px;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 3px solid #000000;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 20px;
+    resize: none;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 20px;
+}
 
-    #i1, #i2, #i3, #i4{
-        width: 90%;
-        padding-left: 15%;
-    }
-
-    .purplebar{
-        height: 6%;
-    }
-
-    .text_input{
-        height: 64%;
+@media screen and (orientation: portrait) {
+    html {
+      /* Rotate the content container */
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      /* Set content width to viewport height */
+      width: 100vh;
+      /* Set content height to viewport width */
+      height: 100vw;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
     }
   }
