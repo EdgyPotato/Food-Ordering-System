@@ -114,6 +114,11 @@ Route::get('reservation_staff', function () {
     return test("reservation_staff");
 });
 
+//testing
+Route::get('addmenu1', function () {
+    return view("addmenu1");
+});
+
 
 Route::post('auth', [LoginController::class,'authenticate'] );
 Route::post('register', [UserController::class,'register'] );
