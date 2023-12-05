@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("choice_no");
             $table->string("top_or_add");
-            $table->string("food_no");
+            $table->integer("food_no");
 
             $table->timestamps();
         });

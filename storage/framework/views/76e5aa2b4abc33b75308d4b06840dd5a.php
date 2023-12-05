@@ -50,6 +50,7 @@
             </div>
             <div class="m-12 p-6 border-solid rounded-2xl shadow-lg bg-white min-w-screen transition-all">
                 <form action="menu" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
                     <div class="grid gap-6 mb-6 md:grid-cols-2">
                         <div>
                             <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Food ID</label>
@@ -61,12 +62,12 @@
                         </div>
                         <div>
                             <label for="foodprice" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price (RM)</label>
-                            <input type="number" id="foodprice" name="foodprice" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12.90" required>
+                            <input type="number" step="any" id="foodprice" name="foodprice" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="12.90" required>
                         </div>
                         <div>
                             <label for="categories" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories</label>
                             <select id="categories" name="categories" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option class="w-10" value="food">Food</option>
+                                <option value="food">Food</option>
                                 <option value="beverages">Beverage</option>
                                 <option value="other">Other</option>
                             </select>
@@ -84,6 +85,7 @@
                                 <label for="id" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white bg">Topping (Required)</label>
                                 <img src="<?php echo e(asset('image/plus.png')); ?>" class="h-4 w-4" onclick="addTopping()">
                             </div>
+                            <div id="countTopping"></div>
                             <!--<input type="text" id="topping1" name="topping1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Topping Title" required required style="display: none;">
                             <input type="text" id="option1[1]" name="option" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-8/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Options" required required style="display: none;">-->
                         </div>
@@ -131,6 +133,7 @@
 
             // Create a container for choices and the "plus" icon
             var choicesContainer = document.createElement('div');
+            choicesContainer.id = "topping" + count ;
             var firstrowNode = document.createElement('div');
             choicesContainer.classList.add('choices-container');
 
@@ -191,11 +194,15 @@
 
 
         function addTopping() {
-            var toppingarea = document.getElementById("toppingarea");
+            //Create a topping container to count the quantity of topping
+            var countTopping = document.getElementById("countTopping");
+
             // Create a new container for the topping
             var toppingContainer = document.createElement('div');
-            toppingarea.appendChild(toppingContainer);
-
+            toppingContainer.id = "topping" + count;
+            countTopping.appendChild(toppingContainer);
+            
+            
             // Create a new input element for the topping
             var toppingNode = document.createElement('input');
             toppingNode.type = 'text';
@@ -231,22 +238,22 @@
             imgNode.style.height = "16px";
             imgNode.style.marginRight = "40px";
             imgNode.id = "image" + count;
-
             imgNode.onclick = function() {
-                addOption(optionContainer, optionContainer.childElementCount+1);
+                addOption(optionContainer, optionContainer.childElementCount+1, toppingContainer.id);
             };
 
             //append element into firstrow
-            addOption(firstrowOption, 1);
+            addOption(firstrowOption, 1, toppingContainer.id);
             firstrowOption.appendChild(imgNode);
+            count++;
         }
 
-        function addOption(container, optioncount) {
+        function addOption(container, optioncount, toppingCount) {
             // Create a new input element for the option
             var optionNode = document.createElement('input');
             optionNode.type = 'text';
-            optionNode.name = 'choice'+'[]';
-            optionNode.placeholder = 'Choice '+ optioncount;
+            optionNode.name = 'choice' + toppingCount + '[]';  // Unique name for each topping
+            optionNode.placeholder = 'Choice ' + optioncount;
             optionNode.classList.add('bg-gray-50');
             optionNode.classList.add('border', 'border-gray-300');
             optionNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
@@ -254,7 +261,7 @@
             optionNode.classList.add('block', 'w-8/12', 'p-2.5');
             optionNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
             optionNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
-            optionNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500'); 
+            optionNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
 
             // Append the option input to the choices container
             container.appendChild(optionNode);

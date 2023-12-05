@@ -33,79 +33,79 @@ class MenuController extends Controller
         $menu->categories = $categories;
         $menu->image_url = $url;
         $menu->save();
-        
-        
-        $ctopping = 1;
-        $cstring = "topping" . strval($ctopping);
-        
-        $c = 1;
+
+        $toppinglist = $request->input("topping");
+
+        $counter = 1;
+        $counter2 = 1;
         $latestToppingId = null;
-        while ($request->has($cstring)) {
-            $choicestr = "choice".strval($c);
-            echo $cstring;
+        foreach($toppinglist as $toppinglist){
             $topping = new Topping();
             $topping->foodid = $id;
+            $topping->title = $toppinglist;
             $topping->save();
 
-            if($c == 1){
+            if($counter==1){
                 $latestTopping = Topping::latest()->first();
-                $latestToppingId = $latestTopping->id; 
+                $latestToppingId = $latestTopping->id;
+                $counter2++;
             }
             else{
                 $latestToppingId++;
             }
-            
-            
-            foreach ($request->input($choicestr) as $inputchoice) {
+
+            $stringChoice = "choicetopping".strval($counter);
+            $choicelist = $request->input($stringChoice);
+            foreach($choicelist as$choicelist){
                 $choice = new Toptions();
-                $choice->option = $inputchoice;
+                $choice->option = $choicelist;
                 $choice->topping_id = $latestToppingId;
                 $choice->save();
             }
-            $c++;
-            $ctopping++;
-            $cstring = "topping" . strval($ctopping);
+            $counter++;
         }
+
+    
 
         //AddOn
-        $caddon = 1;
-        $cstring = "addon" . strval($caddon);
+        // $caddon = 1;
+        // $cstring = "addon" . strval($caddon);
         
-        $c = 1;
-        $latestAddonId = 0;
+        // $c = 1;
+        // $latestAddonId = 0;
 
-        while ($request->has($cstring)) {
-            $choicestr = "onchoice".strval($c);
-            $pricestr = $choicestr."price";
-            echo $choicestr;
-            $addon = new Addon();
-            $addon->foodid = $id;
-            $addon->save();
+        // while ($request->has($cstring)) {
+        //     $choicestr = "onchoice".strval($c);
+        //     $pricestr = $choicestr."price";
+        //     echo $choicestr;
+        //     $addon = new Addon();
+        //     $addon->foodid = $id;
+        //     $addon->save();
 
-            if($c == 1){
-                $latestAddon = Addon::latest()->first();
-                $latestAddonId = $latestAddon->id; 
-            }
-            else{
-                $latestAddonId++;
-            }
+        //     if($c == 1){
+        //         $latestAddon = Addon::latest()->first();
+        //         $latestAddonId = $latestAddon->id; 
+        //     }
+        //     else{
+        //         $latestAddonId++;
+        //     }
             
             
-            $inputChoices = $request->input($choicestr);
-            $inputPrices = $request->input($pricestr);
-            foreach (array_combine($inputChoices, $inputPrices) as $inputChoice => $price) {
-                $choice = new Aoptions();
-                $choice->option = $inputChoice;
-                $choice->price = $price;
-                $choice->addon_id = $latestAddonId;
-                $choice->save();
-            }
-            $c++;
-            $caddon++;
-            $cstring = "addon" . strval($caddon);
-        }
+        //     $inputChoices = $request->input($choicestr);
+        //     $inputPrices = $request->input($pricestr);
+        //     foreach (array_combine($inputChoices, $inputPrices) as $inputChoice => $price) {
+        //         $choice = new Aoptions();
+        //         $choice->option = $inputChoice;
+        //         $choice->price = $price;
+        //         $choice->addon_id = $latestAddonId;
+        //         $choice->save();
+        //     }
+        //     $c++;
+        //     $caddon++;
+        //     $cstring = "addon" . strval($caddon);
+        // }
         
-        return redirect()->back();        
+        // return redirect()->back();        
     }
 
     public function index(Request $request){
@@ -124,15 +124,14 @@ class MenuController extends Controller
     public function getTempOrder(Request $request){
         $count = 1;
         $radiostr = "radio" . $count;
-        $latestfood = tempOrder::latest()->first();
-        $latestfoodid = 0;
-        if($latestfood){
-            $latestfoodid = $latestfood->food_no+1;
+        $latestfoodid = tempOrder::max('food_no');
+        if($latestfoodid){
+            $latestfoodid = $latestfoodid+1;
         }else{
             $latestfoodid = 1;
         }
 
-        $food_no = new FoodOrderNo();
+        $food_no = new FoodOrderNo(); //change to take the largest number
         $food_no->id = $latestfoodid;
         $food_no->table_no = session('table');
         $food_no->quantity = $request->input("quantity");
@@ -141,6 +140,7 @@ class MenuController extends Controller
             $food_no->request = $requestinput;
         else
             $food_no->request = null;
+
         $food_no->save();
 
         while ($request->has($radiostr)) {

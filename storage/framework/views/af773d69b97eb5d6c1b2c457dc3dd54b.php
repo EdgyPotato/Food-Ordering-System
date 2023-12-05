@@ -60,7 +60,7 @@
                         echo "<div class='w-full'>
                         <div class='flex flex-row justify-between'>
                             <div>
-                                <h2 class='text-xl font-bold'>Add Topping</h1>
+                                <h2 class='text-xl font-bold'>".$topping->title."</h1>
                                     <p class='text-sm text-gray-600'>Select one of the options</p>
                             </div>
                             <div class='w-20 my-auto bg-pigment-indigo-500 shadow-md max-w-md rounded-2xl'>

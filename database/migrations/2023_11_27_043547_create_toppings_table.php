@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('toppings', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('foodid');
             $table->timestamps();
         });
