@@ -94,14 +94,14 @@ class MenuController extends Controller
             $stringPrice = "priceaddon".strval($c1);
             $choicelist = $request->input($stringChoice);
             $pricelist = $request->input($stringPrice);
+            $a = 0;
             foreach($choicelist as $choicelist){
                 $choice = new Aoptions();
                 $choice->option = $choicelist;
                 $choice->addon_id = $latestToppingId;
-                
-                $choice->price = $pricelist[$choicelist-1];
-                
+                $choice->price = $pricelist[$a];
                 $choice->save();
+                $a++;
             }
             $c1++;
         }
@@ -254,26 +254,27 @@ class MenuController extends Controller
             $ordernumber = OrderNo::latest()->first();
             $foodorderno = FoodOrderNo::where('table_no', $table)->get();
             if($foodorderno){
-
-                foreach($foodorderno as $foodorderno){
+                foreach($foodorderno as $foodordernos){
                     $orderno = new OrderFoodNo();
-                    $orderno->id = $foodorderno->id;
+                    $orderno->id = $foodordernos->id;
                     $orderno->table_no = $table;
-                    $orderno->quantity = $foodorderno->quantity;
-                    $orderno->request = $foodorderno->request;
+                    $orderno->quantity = $foodordernos->quantity;
+                    $orderno->request = $foodordernos->request;
+                    $orderno->order_no = $ordernumber->id;
                     $orderno->save();
-                    $tempOrder = tempOrder::where('food_no',$foodorderno->id)->get();
+                    $tempOrder = tempOrder::where('food_no',$foodordernos->id)->get();
                     
                     foreach($tempOrder as $tempOrder){
                         $order = new Order();
-                        $order->order_no = $ordernumber->id;
                         $order->choice_no = $tempOrder->choice_no;
                         $order->top_or_add = $tempOrder->top_or_add;
                         $order->food_no = $tempOrder->food_no;
                         $order->save();
                     }
+                    $foodordernos->delete();
                 }
             }
+            return redirect()->back();
         }
     }
 

@@ -50,20 +50,65 @@
                 </div>
             </header>
 
-            <main class="grid grid-cols-2 justify-between items-center my-12 px-12 pt-[120px] gap-x-24 gap-y-12 w-full h-full">
+            <main class="grid grid-cols-2 justify-between items-start my-12 px-12 pt-[120px] gap-x-12 gap-y-12 w-full h-full">
+            <?php foreach($orderno as $orderno){ 
+                $order = DB::table('order_food_nos')
+                ->where('order_no', '=', $orderno->id)
+                ->get();
+            ?>
                 <div class="flex flex-col px-6 py-6 bg-pigment-indigo-400 shadow-md rounded-3xl">
-                    <h1 class="text-3xl text-white font-bold">Table 1</h1>
+                    <h1 class="text-3xl text-white font-bold">Table <?php if(isset($order[0])) echo $order[0]->table_no; ?></h1>
                     <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
                         <div class="px-4 pt-4">
+                            <?php 
+                            foreach($order as $orders){ 
+                                $toppingorder = DB::table('orders')
+                                ->where('food_no', '=', $orders->id)
+                                ->first();
+                                if($toppingorder->top_or_add == "topping"){
+                                    $var = DB::table('toptions')
+                                    ->where('id', '=', $toppingorder->choice_no) 
+                                    ->first();
+                                    $var2 = DB::table('toppings')
+                                    ->where('id', '=', $var->topping_id) 
+                                    ->first();
+                                    $var3 = DB::table('menus')
+                                    ->where('foodid', '=', $var2->foodid) 
+                                    ->first();
+                                }else{
+                                    $var = DB::table('aoptions')
+                                    ->where('id', '=', $toppingorder->choice_no) 
+                                    ->first();
+                                    $var2 = DB::table('addons')
+                                    ->where('id', '=', $var->addon_id) 
+                                    ->first();
+                                    $var3 = DB::table('menus')
+                                    ->where('foodid', '=', $var2->foodid) 
+                                    ->first();
+                                }
+                            ?>
                             <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                                <p class="mx-2 italic text-grey-700">+ Extra noodles</p>
+                            <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid.'. '.$var3->foodname ?></h1>    
+                            <?php
+                                $toppingorder = DB::table('orders')
+                                ->where('food_no', '=', $orders->id)
+                                ->get();
+                                foreach($toppingorder as $description){
+                                    if($description->top_or_add == "topping"){
+                                        $temp = DB::table('toptions')
+                                        ->where('id', '=', $description->choice_no)
+                                        ->first();
+                                    }else{
+                                        $temp = DB::table('aoptions')
+                                        ->where('id', '=', $description->choice_no)
+                                        ->first();
+                                    } 
+                                ?>
+                                
+                                <p class="mx-2 italic text-grey-700">+ <?php echo $temp->option ?></p>
+                                <?php } ?>
                             </div>
-                            <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                            </div>
+                            <?php } ?>
                         </div>
                     </div>
 
@@ -72,50 +117,9 @@
                         <button type="submit" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
                     </div>
                 </div>
-
-                <div class="flex flex-col px-6 py-6 bg-pigment-indigo-400 shadow-md rounded-3xl">
-                    <h1 class="text-3xl text-white font-bold">Table 2</h1>
-                    <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
-                        <div class="px-4 pt-4">
-                            <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                                <p class="mx-2 italic text-grey-700">+ Extra noodles</p>
-                            </div>
-                            <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row justify-between items-center mt-6">
-                        <a href="/orderlist/edit"><button class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-36">Edit</button></a>
-                        <button type="submit" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
-                    </div>
-                </div>
-
-                <div class="flex flex-col px-6 py-6 bg-pigment-indigo-400 shadow-md rounded-3xl">
-                    <h1 class="text-3xl text-white font-bold">Table 3</h1>
-                    <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
-                        <div class="px-4 pt-4">
-                            <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                                <p class="mx-2 italic text-grey-700">+ Extra noodles</p>
-                            </div>
-                            <div class="mb-4">
-                                <h1 class="text-xl mx-2 font-bold">F01. Fish & Chips</h1>
-                                <p class="mx-2 italic text-grey-700">+ No sauce</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row justify-between items-center mt-6">
-                        <a href="/orderlist/edit"><button type="button" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-36">Edit</button></a>
-                        <button type="submit" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
-                    </div>
-                </div>
+            <?php    
+                }
+            ?>
             </main>
         </div>
     </div>

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("choice_no");
             $table->string("top_or_add");
             $table->integer("food_no");
-            $table->integer("order_no");
             $table->timestamps();
         });
     }

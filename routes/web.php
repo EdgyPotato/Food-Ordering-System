@@ -4,6 +4,8 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrderController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -114,10 +116,6 @@ Route::get('reservation_staff', function () {
     return test("reservation_staff");
 });
 
-Route::get('orderlist', function () {
-    return test("orderlist");
-});
-
 //testing
 Route::get('addmenu1', function () {
     return view("addmenu1");
@@ -133,3 +131,4 @@ Route::get('topping', [MenuController::class,'getTempOrder']);
 Route::get('addcart', [MenuController::class,'cart']);
 Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
+Route::get('orderlist', [OrderController::class,'view']);
