@@ -39,13 +39,14 @@ class MenuController extends Controller
         $counter = 1;
         $counter2 = 1;
         $latestToppingId = null;
+        if($toppinglist)
         foreach($toppinglist as $toppinglist){
             $topping = new Topping();
             $topping->foodid = $id;
             $topping->title = $toppinglist;
             $topping->save();
 
-            if($counter==1){
+            if($counter2==1){
                 $latestTopping = Topping::latest()->first();
                 $latestToppingId = $latestTopping->id;
                 $counter2++;
@@ -65,47 +66,44 @@ class MenuController extends Controller
             $counter++;
         }
 
-    
+        //Addon (not topping)
+        $addonlist = $request->input("addon");
+        $c1 = 1;
+        $c2 = 1;
+        $latestToppingId = null;
+        if($addonlist)
+        foreach($addonlist as $addonlist){
+            $topping = new Addon();
+            $topping->foodid = $id;
+            $topping->title = $addonlist;
+            $topping->save();
 
-        //AddOn
-        // $caddon = 1;
-        // $cstring = "addon" . strval($caddon);
-        
-        // $c = 1;
-        // $latestAddonId = 0;
+            if($c2==1){
+                $latestTopping = Addon::latest()->first();
+                $latestToppingId = $latestTopping->id;
+                $c2++;
+            }
+            else{
+                $latestToppingId++;
+            }
 
-        // while ($request->has($cstring)) {
-        //     $choicestr = "onchoice".strval($c);
-        //     $pricestr = $choicestr."price";
-        //     echo $choicestr;
-        //     $addon = new Addon();
-        //     $addon->foodid = $id;
-        //     $addon->save();
+            $stringChoice = "choiceaddon".strval($c1);
+            $stringPrice = "priceaddon".strval($c1);
+            $choicelist = $request->input($stringChoice);
+            $pricelist = $request->input($stringPrice);
+            foreach($choicelist as $choicelist){
+                $choice = new Aoptions();
+                $choice->option = $choicelist;
+                $choice->addon_id = $latestToppingId;
+                
+                $choice->price = $pricelist[$choicelist-1];
+                
+                $choice->save();
+            }
+            $c1++;
+        }
 
-        //     if($c == 1){
-        //         $latestAddon = Addon::latest()->first();
-        //         $latestAddonId = $latestAddon->id; 
-        //     }
-        //     else{
-        //         $latestAddonId++;
-        //     }
-            
-            
-        //     $inputChoices = $request->input($choicestr);
-        //     $inputPrices = $request->input($pricestr);
-        //     foreach (array_combine($inputChoices, $inputPrices) as $inputChoice => $price) {
-        //         $choice = new Aoptions();
-        //         $choice->option = $inputChoice;
-        //         $choice->price = $price;
-        //         $choice->addon_id = $latestAddonId;
-        //         $choice->save();
-        //     }
-        //     $c++;
-        //     $caddon++;
-        //     $cstring = "addon" . strval($caddon);
-        // }
-        
-        // return redirect()->back();        
+        return redirect()->back();        
     }
 
     public function index(Request $request){

@@ -86,15 +86,13 @@
                                 <img src="{{ asset('image/plus.png') }}" class="h-4 w-4" onclick="addTopping()">
                             </div>
                             <div id="countTopping"></div>
-                            <!--<input type="text" id="topping1" name="topping1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Topping Title" required required style="display: none;">
-                            <input type="text" id="option1[1]" name="option" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-8/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Options" required required style="display: none;">-->
                         </div>
                         <div id="addonarea">
                             <div class="flex justify-between items-center">
                                 <label for="id" class="flex mb-2 text-sm font-medium text-gray-900 dark:text-white bg">Add-on (Optional)</label>
-                                <img src="{{ asset('image/plus.png') }}" class="h-4 w-4" onclick="addTopping()">
+                                <img src="{{ asset('image/plus.png') }}" class="h-4 w-4" onclick="addAddon()">
                             </div>
-                            
+                            <div id="countAddon"></div> 
                         </div>
                     </div>
 
@@ -105,93 +103,7 @@
     </div>
     <script>
         var count = 1;
-
-        function addTopping2() {
-            // Create a new container for the topping
-            var toppingContainer = document.createElement('div');
-            
-            //Create a topping container to count the quantity of topping
-            var countTopping = document.createElement('div');
-
-            // Create a new input element for the topping
-            var toppingNode = document.createElement('input');
-            toppingNode.type = 'text';
-            toppingNode.name = 'topping[]'; // Use an array for multiple choices
-            toppingNode.placeholder = 'Enter Topping Title';
-            toppingNode.classList.add('bg-gray-50');
-            toppingNode.classList.add('mt-4');
-            toppingNode.classList.add('border', 'border-gray-300');
-            toppingNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
-            toppingNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
-            toppingNode.classList.add('block', 'w-full', 'p-2.5');
-            toppingNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
-            toppingNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
-            toppingNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
-
-            // Append the topping input to the container
-            toppingContainer.appendChild(toppingNode);
-
-            // Create a container for choices and the "plus" icon
-            var choicesContainer = document.createElement('div');
-            choicesContainer.id = "topping" + count ;
-            var firstrowNode = document.createElement('div');
-            choicesContainer.classList.add('choices-container');
-
-            // Create a "plus" image for adding options
-            var imgSrc = "{{ asset('image/plus.png') }}";
-            var imgNode = document.createElement("img");
-            imgNode.src = imgSrc;
-            imgNode.style.width = "16px";
-            imgNode.style.height = "16px";
-            imgNode.style.marginRight = "40px";
-            imgNode.id = "image" + count;
-            imgNode.onclick = function() {
-                tOptionsCount = addOption();
-            };
-
-            firstrowNode.classList.add('flex','items-center', 'justify-between');
-            choicesContainer.appendChild(firstrowNode);
-
-            tOptionsCount = addOption(firstrowNode, tOptionsCount)
-            // Append the "plus" image to the choices container
-            firstrowNode.appendChild(imgNode);
-
-            // Append the choices container to the topping container
-            toppingContainer.appendChild(choicesContainer);
-
-            // Get the container where you want to append the new topping
-            var toppingArea = document.getElementById('toppingarea');
-
-            // Append the topping container to the topping area
-            toppingArea.appendChild(toppingContainer);
-            count++;
-        }
-
-
-        function addOption2(container, tOptionsCount, count) {
-            // Create a new input element for the option
-            var optionNode = document.createElement('input');
-            optionNode.type = 'text';
-            optionNode.name = 'option'+count+'[]';
-            optionNode.placeholder = 'Choice ' + tOptionsCount;
-            optionNode.classList.add('bg-gray-50');
-            optionNode.classList.add('border', 'border-gray-300');
-            optionNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
-            optionNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
-            optionNode.classList.add('block', 'w-8/12', 'p-2.5');
-            optionNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
-            optionNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
-            optionNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500'); 
-
-            // Append the option input to the choices container
-            container.appendChild(optionNode);
-
-            // Increment the option count
-            tOptionsCount++;
-            return tOptionsCount;
-        }
-
-
+        var count2 = 1;
 
         function addTopping() {
             //Create a topping container to count the quantity of topping
@@ -202,6 +114,17 @@
             toppingContainer.id = "topping" + count;
             countTopping.appendChild(toppingContainer);
             
+            //image node
+            var imgSrc = "{{ asset('image/dustbin.png') }}";
+            var imgNode = document.createElement("img");
+            imgNode.src = imgSrc;
+            imgNode.style.width = "16px";
+            imgNode.style.height = "16px";
+            imgNode.style.marginLeft = "8px";
+            imgNode.id = "image" + count;
+            imgNode.onclick = function() {
+                deleteTopping(this.parentNode.parentNode);
+            };
             
             // Create a new input element for the topping
             var toppingNode = document.createElement('input');
@@ -209,20 +132,25 @@
             toppingNode.name = 'topping[]'; // Use an array for multiple choices
             toppingNode.placeholder = 'Enter Topping Title';
             toppingNode.classList.add('bg-gray-50');
-            toppingNode.classList.add('mt-4');
             toppingNode.classList.add('border', 'border-gray-300');
             toppingNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
             toppingNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
-            toppingNode.classList.add('block', 'w-full', 'p-2.5');
+            toppingNode.classList.add('block', 'w-11/12', 'p-2.5');
             toppingNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');                                              
             toppingNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');                     
             toppingNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
 
+            //create containerTopping to store toppingNode and imgNode
+            var containerTopping = document.createElement('div');
+            containerTopping.classList.add('flex', 'items-center', 'mt-4');
+            toppingContainer.appendChild(containerTopping);
             // Append the topping input to the container
-            toppingContainer.appendChild(toppingNode); //topping title append in div
+            containerTopping.appendChild(toppingNode); //topping title append in div
+            containerTopping.appendChild(imgNode);
             
             //create the choice container
             var optionContainer = document.createElement("div");
+            optionContainer.id = "optionContainer";
             toppingContainer.appendChild(optionContainer);
 
             //create first row of option
@@ -236,7 +164,7 @@
             imgNode.src = imgSrc;
             imgNode.style.width = "16px";
             imgNode.style.height = "16px";
-            imgNode.style.marginRight = "40px";
+            imgNode.style.marginRight = "60px";
             imgNode.id = "image" + count;
             imgNode.onclick = function() {
                 addOption(optionContainer, optionContainer.childElementCount+1, toppingContainer.id);
@@ -258,7 +186,7 @@
             optionNode.classList.add('border', 'border-gray-300');
             optionNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
             optionNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
-            optionNode.classList.add('block', 'w-8/12', 'p-2.5');
+            optionNode.classList.add('block', 'w-6/12', 'p-2.5');
             optionNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
             optionNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
             optionNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
@@ -266,6 +194,169 @@
             // Append the option input to the choices container
             container.appendChild(optionNode);
         }
+
+        function addAddon() {
+            //Create a topping container to count the quantity of topping
+            var countAddon = document.getElementById("countAddon");
+
+            // Create a new container for the topping
+            var toppingContainer = document.createElement('div');
+            toppingContainer.id = "addon" + count2;
+            countAddon.appendChild(toppingContainer);
+            
+            //image node
+            var imgSrc = "{{ asset('image/dustbin.png') }}";
+            var imgNode = document.createElement("img");
+            imgNode.src = imgSrc;
+            imgNode.style.width = "16px";
+            imgNode.style.height = "16px";
+            imgNode.style.marginLeft = "8px";
+            imgNode.id = "image" + count2;
+            imgNode.onclick = function() {
+                deleteTopping(this.parentNode.parentNode);
+            };
+            
+            // Create a new input element for the topping
+            var toppingNode = document.createElement('input');
+            toppingNode.type = 'text';
+            toppingNode.name = 'addon[]'; // Use an array for multiple choices
+            toppingNode.placeholder = 'Enter Addon Title';
+            toppingNode.classList.add('bg-gray-50');
+            toppingNode.classList.add('border', 'border-gray-300');
+            toppingNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
+            toppingNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
+            toppingNode.classList.add('block', 'w-11/12', 'p-2.5');
+            toppingNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');                                              
+            toppingNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');                     
+            toppingNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
+
+            //create containerTopping to store toppingNode and imgNode
+            var containerTopping = document.createElement('div');
+            containerTopping.classList.add('flex', 'items-center', 'mt-4');
+            toppingContainer.appendChild(containerTopping);
+            // Append the topping input to the container
+            containerTopping.appendChild(toppingNode); //topping title append in div
+            containerTopping.appendChild(imgNode);
+            
+            //create the choice container
+            var optionContainer = document.createElement("div");
+            optionContainer.id = "optionContainer";
+            toppingContainer.appendChild(optionContainer);
+
+            //create first row of option
+            var firstrowOption = document.createElement("div");
+            firstrowOption.classList.add('flex', 'items-center');
+            optionContainer.appendChild(firstrowOption);
+
+            //image node
+            var imgSrc = "{{ asset('image/plus.png') }}";
+            var imgNode = document.createElement("img");
+            imgNode.src = imgSrc;
+            imgNode.style.width = "16px";
+            imgNode.style.height = "16px";
+            imgNode.style.marginLeft = "40px";
+            imgNode.id = "image" + count2;
+            imgNode.onclick = function() {
+                addAOption(optionContainer, (optionContainer.childElementCount+1), toppingContainer.id);
+            };
+
+            //append element into firstrow
+            addAOption(firstrowOption, 1, toppingContainer.id);
+            firstrowOption.appendChild(imgNode);
+            count2++;
+        }
+
+        function addAOption(container, optioncount, toppingCount) {
+            // Create a new input element for the option
+            var optionNode = document.createElement('input');
+            optionNode.type = 'text';
+            optionNode.name = 'choice' + toppingCount + '[]';  // Unique name for each topping
+            optionNode.placeholder = 'Choice ' + optioncount;
+            optionNode.classList.add('bg-gray-50');
+            optionNode.classList.add('border', 'border-gray-300');
+            optionNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
+            optionNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
+            optionNode.classList.add('block', 'w-6/12', 'p-2.5');
+            optionNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
+            optionNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
+            optionNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
+
+            var priceNode = document.createElement('input');
+            priceNode.type = 'number';
+            priceNode.step = 'any';
+            priceNode.name = 'price' + toppingCount + '[]';  // Unique name for each topping
+            priceNode.placeholder = 'Price ' + optioncount;
+            priceNode.classList.add('bg-gray-50');
+            priceNode.classList.add('border', 'border-gray-300');
+            priceNode.classList.add('text-gray-900', 'text-sm', 'rounded-lg');
+            priceNode.classList.add('focus:ring-blue-500', 'focus:border-blue-500');
+            priceNode.classList.add('block', 'w-1/4', 'p-2.5');
+            priceNode.classList.add('dark:bg-gray-700', 'dark:border-gray-600');
+            priceNode.classList.add('dark:placeholder-gray-400', 'dark:text-white');
+            priceNode.classList.add('dark:focus:ring-blue-500', 'dark:focus:border-blue-500');
+
+            // Append the option input to the choices container
+            if(optioncount == 1){
+                container.appendChild(optionNode);
+                container.appendChild(priceNode);
+            }else{
+                var tempNode = document.createElement('div');
+                tempNode.classList.add('flex', 'items-center');
+                container.appendChild(tempNode);
+                tempNode.appendChild(optionNode);
+                tempNode.appendChild(priceNode);
+            }
+            
+        }
+
+        // function deleteTopping(deleteNode) {
+        //     deleteNode.remove();
+        //     updateTopping();
+        //     count--;
+        // }
+
+        // function updateTopping() {
+        //     // Get the parent container
+        //     var countTopping = document.getElementById("countTopping");
+
+        //     // Get all remaining toppings
+        //     var toppings = countTopping.getElementsByClassName("topping");
+
+        //     // Update the choice names for remaining toppings
+        //     for (var i = 0; i < toppings.length; i++) {
+        //         var optionContainer = toppings[i].querySelector("#optionContainer");
+        //         updateChoiceNames(optionContainer, i + 1);
+        //     }
+        // }
+
+        // function updateChoiceNames(container, toppingIndex) {
+        //     // Get all option elements in the container
+        //     var options = container.querySelectorAll("input[type='text']");
+
+        //     // Update the name attribute for each option
+        //     for (var j = 0; j < options.length; j++) {
+        //         options[j].name = "choice" + toppingIndex + "[]";
+        //         options[j].placeholder = "Choice " + (j + 1);
+        //     }
+        // }
+
+        // function updateTopping(){
+        //     var countNode = document.getElementById("countTopping");
+    
+        //     var inputNodes = countNode.getElementsByTagName("input");
+            
+        //     var counter = 1
+        //     // Iterate through input nodes
+        //     for (var i = 0; i < inputNodes.length; i++) {
+                
+        //         if(i%2 == 1)
+        //         {
+        //             inputNodes[i].name = "choicetopping" + count + "[]";
+        //             alert(inputNodes[i].name);
+        //             counter++;
+        //         }
+        //     }
+        // }
     </script>
 </body>
 
