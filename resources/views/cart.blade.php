@@ -146,7 +146,7 @@
                     <div class="p-6 text-center">
                         <img class="mx-auto mb-4 w-12 h-12" src="{{asset('image/complete.png')}}" width="50px" height="50px">
                         <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Order successfully confirmed</h3>
-                        <button data-modal-hide="complete-modal" name="action" value="submit" type="submit" class="text-white bg-pigment-indigo-400 active:bg-pigment-indigo-500 focus:ring-4 focus:outline-none focus:ring-pigment-indigo-300 dark:focus:ring-pigment-indigo-700 font-semibold rounded-lg inline-flex items-center px-10 py-2.5 text-center">OK</button>
+                        <button data-modal-hide="complete-modal" name="action" value="submit_1" type="submit" class="text-white bg-pigment-indigo-400 active:bg-pigment-indigo-500 focus:ring-4 focus:outline-none focus:ring-pigment-indigo-300 dark:focus:ring-pigment-indigo-700 font-semibold rounded-lg inline-flex items-center px-10 py-2.5 text-center">OK</button>
                     </div>
                 </div>
             </div>

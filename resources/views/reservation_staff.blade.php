@@ -15,7 +15,7 @@
             <div class = "icon">
                 <div id="i1"><a href="reservation_staff"><img src="{{ asset('image/reservation.png')}}" width="35px" height="35px"><u id = "icon">Reservation</u></a></div>
                 <div id="i2"><a href="menulist"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px"><u id = "icon">Menu List</u></a></div>
-                <div id="i3"><a href="staffmenu"><img src="{{ asset('image/order.png')}}" width="35px" height="35px"><u id= "icon">Order List</u></a></div>
+                <div id="i3"><a href="orderlist"><img src="{{ asset('image/order.png')}}" width="35px" height="35px"><u id= "icon">Order List</u></a></div>
                 <div id="i4"><a href="#"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px"><u id = "icon">Notification</u></a></div>
             </div>
             <div class="logout">

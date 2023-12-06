@@ -6,6 +6,9 @@ use App\Models\Addon;
 use App\Models\Aoptions;
 use App\Models\FoodOrderNo;
 use App\Models\Menu;
+use App\Models\Order;
+use App\Models\OrderFoodNo;
+use App\Models\OrderNo;
 use App\Models\tempOrder;
 use App\Models\Topping;
 use App\Models\Toptions;
@@ -174,8 +177,7 @@ class MenuController extends Controller
 
     public function cart(){
         $table = session('table');
-        $food = FoodOrderNo::where('table_no', $table)->get();
-            
+        $food = FoodOrderNo::where('table_no', $table)->get();          
         
         return view('cart', compact('food'));
         
@@ -244,8 +246,34 @@ class MenuController extends Controller
             $temporder = DB::table('temp_orders')
                     ->where('food_no', '=', $editfood->id)
                     ->get();   
-            #return redirect("tofood?id={$var3->foodid}&edit_id={$editfood->id}");
             return view("foodedit", compact('food', 'topping', 'addon', 'temporder'));
+        }else if($action="submit"){
+            $table = session('table');
+            $ordernumber=new OrderNo();
+            $ordernumber->save();
+            $ordernumber = OrderNo::latest()->first();
+            $foodorderno = FoodOrderNo::where('table_no', $table)->get();
+            if($foodorderno){
+
+                foreach($foodorderno as $foodorderno){
+                    $orderno = new OrderFoodNo();
+                    $orderno->id = $foodorderno->id;
+                    $orderno->table_no = $table;
+                    $orderno->quantity = $foodorderno->quantity;
+                    $orderno->request = $foodorderno->request;
+                    $orderno->save();
+                    $tempOrder = tempOrder::where('food_no',$foodorderno->id)->get();
+                    
+                    foreach($tempOrder as $tempOrder){
+                        $order = new Order();
+                        $order->order_no = $ordernumber->id;
+                        $order->choice_no = $tempOrder->choice_no;
+                        $order->top_or_add = $tempOrder->top_or_add;
+                        $order->food_no = $tempOrder->food_no;
+                        $order->save();
+                    }
+                }
+            }
         }
     }
 
