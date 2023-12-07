@@ -12,4 +12,9 @@ class OrderController extends Controller
         $orderno = OrderNo::all();
         return view('orderlist', compact('orderno'));
     }
+
+    public function viewhistory(){
+        $orderno = OrderNo::all();
+        return view('carthistory', compact('orderno'));
+    }
 }

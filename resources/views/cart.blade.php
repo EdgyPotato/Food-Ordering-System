@@ -12,10 +12,9 @@
 </head>
 
 <body class="bg-gray-200">
-    <div class="w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
-        <div class="return">
-            <a href="/?table=<?php echo session('table'); ?>"><img src="{{ asset('image/return.png')}}" width="30px" height="30px"></a>
-        </div>
+    <div class="flex justify-between items-center w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
+        <a href="/?table={{ session('table') }}"><img src="{{ asset('image/return.png')}}" width="30px" height="30px"></a>
+        <a href="history">History</a>
     </div>
 
     <form method="GET" action="addminus">

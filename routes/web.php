@@ -89,6 +89,10 @@ Route::get('cart', function () {
     return view('cart');
 });
 
+Route::get('carthistory', function () {
+    return view('carthistory');
+});
+
 
 //Admin
 Route::get('dashboard', function () {
@@ -117,9 +121,6 @@ Route::get('reservation_staff', function () {
 });
 
 //testing
-Route::get('addmenu1', function () {
-    return view("addmenu1");
-});
 
 
 Route::post('auth', [LoginController::class,'authenticate'] );
@@ -132,3 +133,4 @@ Route::get('addcart', [MenuController::class,'cart']);
 Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
 Route::get('orderlist', [OrderController::class,'view']);
+Route::get('history', [OrderController::class,'viewhistory']);
