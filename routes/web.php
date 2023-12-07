@@ -29,7 +29,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'orderlist',);
+            $staffpath = array('reservation_staff', 'orderlist', 'preparing',);
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -37,7 +37,7 @@ function test($path){
                     return view($path);
                 }
             }
-            return redirect('reservation_staff');
+            return redirect('reservation_staff',);
         }
         
     }
@@ -118,6 +118,10 @@ Route::get('addmenu', function () {
 // Staff
 Route::get('reservation_staff', function () {
     return test("reservation_staff");
+});
+
+Route::get('preparing', function () {
+    return test("preparing");
 });
 
 //testing

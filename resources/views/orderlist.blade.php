@@ -45,7 +45,7 @@
             <header class="flex fixed justify-center items-center bg-pigment-indigo-400 w-[80%] h-[120px]">
                 <div class="flex flex-row justify-center items-center px-[5px] gap-[5px] rounded-lg bg-pigment-indigo-600 w-[452px] h-[70px]">
                     <a href="#"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending">0</div></button></a>
-                    <a href="/orderlist/preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing">0</div></button></a>
+                    <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing">0</div></button></a>
                     <a href="/orderlist/completed"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed">0</div></button></a>
                 </div>
             </header>
