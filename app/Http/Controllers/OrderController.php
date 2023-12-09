@@ -24,9 +24,9 @@ class OrderController extends Controller
 
     public function complete(){
         $pending = OrderNo::where('status', 'pending')->get();
-        $orderno = OrderNo::where('status', 'preparing')->get();
-        $completed = OrderNo::where('status', 'completed')->get();
-        return view('completed', compact('orderno','pending','completed'));
+        $preparing = OrderNo::where('status', 'preparing')->get();
+        $orderno = OrderNo::where('status', 'completed')->get();
+        return view('completed', compact('orderno','pending','preparing'));
     }
         
     public function viewhistory(){
@@ -41,6 +41,7 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back();
     }
+    
 
     public function completed(Request $request){
         $id = $request->input('id');

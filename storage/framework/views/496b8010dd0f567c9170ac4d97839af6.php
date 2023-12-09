@@ -51,7 +51,7 @@
                     ?>
                     <a href="#"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending"><?php echo $pending;?></div></button></a>
                     <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing"><?php echo $preparing;?></div></button></a>
-                    <a href="/orderlist/completed"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed"><?php echo $completed;?></div></button></a>
+                    <a href="complete"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed"><?php echo $completed;?></div></button></a>
                 </div>
             </header>
 
