@@ -250,6 +250,7 @@ class MenuController extends Controller
         }else if($action="submit"){
             $table = session('table');
             $ordernumber=new OrderNo();
+            $ordernumber->status="pending";
             $ordernumber->save();
             $ordernumber = OrderNo::latest()->first();
             $foodorderno = FoodOrderNo::where('table_no', $table)->get();

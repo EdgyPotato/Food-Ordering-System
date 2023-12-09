@@ -68,7 +68,7 @@
                 <div class="flex flex-row items-start justify-between">
                     <div class="flex flex-row items-start align-middle text-center">
                         <div class="flex flex-col items-start">
-                            <h1 class="text-xl font-bold"><?php echo $var3->foodid.'. '.$var3->foodname ?></h1>
+                            <h1 class="text-xl font-bold"><?php echo $var3->foodid.'. '.$var3->foodname .'  x'.$orders->quantity;?></h1>
                             <?php
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
@@ -83,10 +83,12 @@
                                         ->where('id', '=', $description->choice_no)
                                         ->first();
                                         $price = $price+$temp->price;
-                                    } 
+                                    }
+                                    
                                 ?>
                             <p class="italic text-grey-700">+ <?php echo $temp->option ?></p>
-                            <?php } ?>
+                            <?php } $price*=$orders->quantity;
+                            ?>
                         </div>
                     </div>
                     <h2 class="text-base font-semibold leading-7"><?php echo 'RM '.number_format($price, 2) ?></h2>

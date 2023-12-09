@@ -44,9 +44,14 @@
         <div class="flex flex-col w-full h-full">
             <header class="flex fixed justify-center items-center bg-pigment-indigo-400 w-[80%] h-[120px]">
                 <div class="flex flex-row justify-center items-center px-[5px] gap-[5px] rounded-lg bg-pigment-indigo-600 w-[452px] h-[70px]">
-                    <a href="#"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending">0</div></button></a>
-                    <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing">0</div></button></a>
-                    <a href="/orderlist/completed"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed">0</div></button></a>
+                    <?php 
+                        $pending = count($orderno);
+                        $preparing = count($preparing);
+                        $completed = count($completed);
+                    ?>
+                    <a href="#"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending"><?php echo $pending;?></div></button></a>
+                    <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing"><?php echo $preparing;?></div></button></a>
+                    <a href="/orderlist/completed"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed"><?php echo $completed;?></div></button></a>
                 </div>
             </header>
 
@@ -88,7 +93,7 @@
                                 }
                             ?>
                             <div class="mb-4">
-                            <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid.'. '.$var3->foodname ?></h1>    
+                            <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid.'. '.$var3->foodname .'  x'.$orders->quantity; ?></h1>    
                             <?php
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
@@ -103,10 +108,12 @@
                                         ->where('id', '=', $description->choice_no)
                                         ->first();
                                     } 
-                                ?>
-                                
+                            ?>
                                 <p class="mx-2 italic text-grey-700">+ <?php echo $temp->option ?></p>
                                 <?php } ?>
+                                <?php if ($orders->request): ?>
+                                    <p class="mx-2 italic text-gray-700 text-left">Note: <?php echo $orders->request ?></p>
+                                <?php endif; ?>
                             </div>
                             <?php } ?>
                         </div>
@@ -114,8 +121,12 @@
 
                     <div class="flex flex-row justify-between items-center mt-6">
                         <a href="/orderlist/edit"><button class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-36">Edit</button></a>
-                        <button type="submit" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
-                    </div>
+                        <form id='form' method="get" action="approve" onclick="submitForm(<?php echo $orderno->id; ?>);">
+                            <input type="hidden" name='id' id='hidden'>
+                            <button type="button" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
+                            <input id="submitButton" type="submit" style="display: none;">
+                        </form>
+                    </div> 
                 </div>
             <?php    
                 }
@@ -123,5 +134,13 @@
             </main>
         </div>
     </div>
+    <script>
+        function submitForm(id) {
+            // Set the value of the hidden input field
+            document.getElementById('hidden').value = id;
+            // Allow the form submission to proceed
+            document.getElementById('form').submit();
+        }
+    </script>
 </body>
 </html>

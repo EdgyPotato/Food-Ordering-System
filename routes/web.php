@@ -29,7 +29,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'orderlist', 'preparing',);
+            $staffpath = array('reservation_staff',);
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -38,6 +38,16 @@ function test($path){
                 }
             }
             return redirect('reservation_staff',);
+        }else if(session('roles') == "chef"){
+            $chefpath = array('cheforderlist','notify');
+            foreach($chefpath as $chefpath)
+            {
+                if($chefpath == $path)
+                {
+                    return view($path);
+                }
+            }
+            return redirect('cheforderlist',);
         }
         
     }
@@ -120,10 +130,15 @@ Route::get('reservation_staff', function () {
     return test("reservation_staff");
 });
 
-Route::get('preparing', function () {
-    return test("preparing");
+
+//chef
+Route::get('cheforderlist', function () {
+    return test("cheforderlist");
 });
 
+Route::get('notify', function () {
+    return test("notify");
+});
 //testing
 
 
@@ -137,4 +152,7 @@ Route::get('addcart', [MenuController::class,'cart']);
 Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
 Route::get('orderlist', [OrderController::class,'view']);
+Route::get('preparing', [OrderController::class,'preparing']);
 Route::get('history', [OrderController::class,'viewhistory']);
+Route::get('approve', [OrderController::class,'approve']);
+Route::get('completed', [OrderController::class,'completed']);
