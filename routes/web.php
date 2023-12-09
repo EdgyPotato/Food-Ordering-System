@@ -153,6 +153,7 @@ Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
 Route::get('orderlist', [OrderController::class,'view']);
 Route::get('preparing', [OrderController::class,'preparing']);
+Route::get('complete', [OrderController::class,'complete']);
 Route::get('history', [OrderController::class,'viewhistory']);
 Route::get('approve', [OrderController::class,'approve']);
 Route::get('completed', [OrderController::class,'completed']);

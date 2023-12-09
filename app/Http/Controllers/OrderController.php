@@ -21,6 +21,13 @@ class OrderController extends Controller
         $completed = OrderNo::where('status', 'completed')->get();
         return view('preparing', compact('orderno','pending','completed'));
     }
+
+    public function complete(){
+        $pending = OrderNo::where('status', 'pending')->get();
+        $orderno = OrderNo::where('status', 'preparing')->get();
+        $completed = OrderNo::where('status', 'completed')->get();
+        return view('completed', compact('orderno','pending','completed'));
+    }
         
     public function viewhistory(){
         $orderno = OrderNo::all();
