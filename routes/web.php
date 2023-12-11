@@ -29,7 +29,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff',);
+            $staffpath = array('reservation_staff', 'editorder');
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -128,6 +128,10 @@ Route::get('addmenu', function () {
 // Staff
 Route::get('reservation_staff', function () {
     return test("reservation_staff");
+});
+
+Route::get('editorder', function () {
+    return test("editorder");
 });
 
 

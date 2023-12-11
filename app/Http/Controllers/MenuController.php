@@ -27,7 +27,7 @@ class MenuController extends Controller
         $price = $request->input('foodprice');
         $categories= $request->input('categories');
         $url = $request->file('my_image')->getClientOriginalName();
-        $request->file('my_image')->storeAs('public/image/', $url);
+        $request->file('my_image')->storeAs('public/image/image', $url);
         $menu = new Menu();
         $menu->foodid = $id;
         $menu->foodname = $foodname;
@@ -125,7 +125,7 @@ class MenuController extends Controller
     public function getTempOrder(Request $request){
         $count = 1;
         $radiostr = "radio" . $count;
-        $latestfoodid = tempOrder::max('food_no');
+        $latestfoodid = FoodOrderNo::max('id');
         if($latestfoodid){
             $latestfoodid = $latestfoodid+1;
         }else{

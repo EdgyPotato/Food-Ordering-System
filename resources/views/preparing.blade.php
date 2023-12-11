@@ -70,6 +70,8 @@
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
                                 ->first();
+                                
+                                if($toppingorder)
                                 if($toppingorder->top_or_add == "topping"){
                                     $var = DB::table('toptions')
                                     ->where('id', '=', $toppingorder->choice_no) 
@@ -98,6 +100,7 @@
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
                                 ->get();
+                                
                                 foreach($toppingorder as $description){
                                     if($description->top_or_add == "topping"){
                                         $temp = DB::table('toptions')

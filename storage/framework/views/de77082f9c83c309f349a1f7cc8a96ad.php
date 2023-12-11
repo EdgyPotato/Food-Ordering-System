@@ -70,6 +70,7 @@
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
                                 ->first();
+                                if($toppingorder)
                                 if($toppingorder->top_or_add == "topping"){
                                     $var = DB::table('toptions')
                                     ->where('id', '=', $toppingorder->choice_no) 

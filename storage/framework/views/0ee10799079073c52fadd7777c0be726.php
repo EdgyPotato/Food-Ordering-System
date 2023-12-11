@@ -30,6 +30,7 @@
                     ->where('food_no', '=', $food->id)
                     ->first();
 
+                    if($temporder)
                     if($temporder->top_or_add == "topping"){
                         $var = DB::table('toptions')
                         ->where('id', '=', $temporder->choice_no) 
@@ -66,6 +67,7 @@
                     $temporder = DB::table('temp_orders')
                     ->where('food_no', '=', $food->id)
                     ->get();
+            
                     foreach($temporder as $description){
                         if($description->top_or_add == "topping"){
                             $temp = DB::table('toptions')
@@ -79,6 +81,7 @@
                         }
                         echo '<p class="mx-2 italic text-gray-700">' . "+  " . $temp->option . '</p>';
                     }
+                    if ($food->request)
                     echo '<p class="mx-2 italic text-gray-700 text-clip overflow-hidden text-left">Note: ' . Str::limit($food->request, 14) . '</p>';
                     $price = $price*$food->quantity;
                     $totalprice = $price+$totalprice;

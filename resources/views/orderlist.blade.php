@@ -34,7 +34,7 @@
                 <div class="flex flex-col text-black h-3/4">
                     <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="staffmenu"><img class="mr-1" src="{{ asset('image/reservation.png')}}" width="35px" height="35px">Reservation</a>
                     <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="menulist"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px">Menu List</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-grey-200" href="#"><img src="{{ asset('image/order.png')}}" width="35px" height="35px">Order List</a>
+                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-grey-200" href="orderlist"><img src="{{ asset('image/order.png')}}" width="35px" height="35px">Order List</a>
                     <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="notification"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px">Notification</a>
                     <a class="flex flex-row w-full h-1/4 px-[15%] justify-center items-center font-bold text-[25px]" href="logout"><img class="mr-[10px]" src="{{ asset('image/logout.png')}}" width="35px" height="35px">LOGOUT</a>
                 </div>
@@ -49,7 +49,7 @@
                         $preparing = count($preparing);
                         $completed = count($completed);
                     ?>
-                    <a href="#"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending"><?php echo $pending;?></div></button></a>
+                    <a href="orderlist"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg bg-pigment-indigo-200 w-36 h-[60px]">Pending<div class="-mt-2 text-2xl text-pigment-indigo-600" id="pending"><?php echo $pending;?></div></button></a>
                     <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl text-pigment-indigo-200" id="preparing"><?php echo $preparing;?></div></button></a>
                     <a href="complete"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg text-white w-36 h-[60px]">Completed<div class="-mt-2 text-2xl text-pigment-indigo-200" id="completed"><?php echo $completed;?></div></button></a>
                 </div>
@@ -70,6 +70,7 @@
                                 $toppingorder = DB::table('orders')
                                 ->where('food_no', '=', $orders->id)
                                 ->first();
+                                if($toppingorder)
                                 if($toppingorder->top_or_add == "topping"){
                                     $var = DB::table('toptions')
                                     ->where('id', '=', $toppingorder->choice_no) 
@@ -118,15 +119,14 @@
                             <?php } ?>
                         </div>
                     </div>
-
-                    <div class="flex flex-row justify-between items-center mt-6">
-                        <a href="/orderlist/edit"><button class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-36">Edit</button></a>
-                        <form id='form' method="get" action="approve" onclick="submitForm(<?php echo $orderno->id; ?>);">
-                            <input type="hidden" name='id' id='hidden'>
-                            <button type="button" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
-                            <input id="submitButton" type="submit" style="display: none;">
-                        </form>
-                    </div> 
+                    <form id='form' method="get" action="approve">
+                        <input type="hidden" name='id' id='hidden'> 
+                        <input type="hidden" name='action' id='action'> <!-- Corrected the ID here -->
+                        <div class="flex flex-row justify-between items-center mt-6">
+                            <button type="button" name="action" value="edit" onclick="submitForm('<?php echo $orderno->id; ?>', 'edit')" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-36">Edit</button>
+                            <button type="button" name="action" value="approve" onclick="submitForm('<?php echo $orderno->id; ?>', 'approve')" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-36">Approve</button>
+                        </div> 
+                    </form>
                 </div>
             <?php    
                 }
@@ -135,9 +135,10 @@
         </div>
     </div>
     <script>
-        function submitForm(id) {
+        function submitForm(id, action) {
             // Set the value of the hidden input field
             document.getElementById('hidden').value = id;
+            document.getElementById('action').value = action;
             // Allow the form submission to proceed
             document.getElementById('form').submit();
         }

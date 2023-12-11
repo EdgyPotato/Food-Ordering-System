@@ -35,11 +35,18 @@ class OrderController extends Controller
     }
 
     public function approve(Request $request){
+        $action = $request->input('action');
         $id = $request->input('id');
-        $order = OrderNo::where('id', $id)->first();
-        $order->status = "preparing";
-        $order->save();
-        return redirect()->back();
+        if($action == "approve"){
+            $order = OrderNo::where('id', $id)->first();
+            $order->status = "preparing";
+            $order->save();
+            return redirect()->back();
+        }else{
+            $orderno = OrderNo::where('id', $id)->first();
+            return view('editorder', compact('orderno'));
+        }
+        
     }
     
 
@@ -50,8 +57,5 @@ class OrderController extends Controller
         $order->save();
         return redirect()->back();
     }
-
-    
-
     
 }
