@@ -321,4 +321,11 @@ class MenuController extends Controller
         }
         return redirect("addcart");
     }
+
+    public function deletemenu(Request $request){
+        $action = $request->input('action');
+        $foodid = $request->input('id');
+        
+    }
 }
+

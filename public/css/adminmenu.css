@@ -315,6 +315,20 @@ i{
     margin-right: 3%;
 }
 
+.secondrow{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.description { grid-area: 1 / 1 / 2 / 9; }
+.dustbin { 
+    grid-area: 1 / 9 / 2 / 10; 
+    padding-top: 30px;
+    padding-left: 60px;
+}
+
 
 
 

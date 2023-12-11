@@ -155,6 +155,7 @@ Route::get('topping', [MenuController::class,'getTempOrder']);
 Route::get('addcart', [MenuController::class,'cart']);
 Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
+Route::get('deletemenu', [MenuController::class,'deletemenu']);
 Route::get('orderlist', [OrderController::class,'view']);
 Route::get('preparing', [OrderController::class,'preparing']);
 Route::get('complete', [OrderController::class,'complete']);

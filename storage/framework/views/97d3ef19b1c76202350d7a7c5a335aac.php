@@ -36,6 +36,9 @@
                 </div>
             </div>
             <div class="white">
+            <form id='form' method="get" action="deletemenu">
+                <input type="hidden" name='id' id='hidden'> 
+                <input type="hidden" name='action' id='action'>
             <?php
                 $sql = DB::table('menus')
                 ->where('categories', '=', 'food')
@@ -51,9 +54,10 @@
                         echo "<div class='nopicture'>";
                             echo "<div class='foodandpricebox'>";
                                 echo "<div class='food'>" . $food->foodid . '. ' . $food->foodname ."</div>";
-                                echo "<div class='price'>". "RM " . $food->price."</div>";
+                                echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
-                            echo "<div class='description'>". $food->description ."</div>";
+                            echo "<div class='secondrow'><div class='description'>". $food->description ."</div>";
+                            echo "<img class='dustbin' src='" . asset('image/dustbin.png') . "' width='30px' height='30px' onclick='submitForm(\"$food->foodid\", \"delete\")'></div>";
                         echo "</div>";
                     echo "</div>";
                 }
@@ -69,7 +73,7 @@
                         echo "<div class='nopicture'>";
                             echo "<div class='foodandpricebox'>";
                                 echo "<div class='food'>" . $food->foodid . '. ' . $food->foodname ."</div>";
-                                echo "<div class='price'>". "RM " . $food->price."</div>";
+                                echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
                             echo "<div class='description'>". $food->description ."</div>";
                         echo "</div>";
@@ -88,17 +92,25 @@
                         echo "<div class='nopicture'>";
                             echo "<div class='foodandpricebox'>";
                                 echo "<div class='food'>" . $food->foodid . '. ' . $food->foodname ."</div>";
-                                echo "<div class='price'>". "RM " . $food->price."</div>";
+                                echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
                             echo "<div class='description'>". $food->description ."</div>";
                         echo "</div>";
                     echo "</div>";
                 }
             ?>
+            </form>
             </div>
     </div>
 
     <script>
+        function submitForm(id, action) {
+            // Set the value of the hidden input field
+            document.getElementById('hidden').value = id;
+            document.getElementById('action').value = action;
+            // Allow the form submission to proceed
+            document.getElementById('form').submit();
+        }
     </script>
 </body>
 </html><?php /**PATH C:\AD Project\AD-Project\resources\views/adminmenu.blade.php ENDPATH**/ ?>
