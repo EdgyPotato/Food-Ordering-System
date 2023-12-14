@@ -27,6 +27,7 @@
         <?php
             $sql = DB::table('menus')
             ->where('categories', '=', 'food')
+            ->where('status', '=', 'active')
             ->get();
             echo "<div id='food'>Food</div>"; //food subtitle
             foreach ($sql as $food){
@@ -45,6 +46,7 @@
             echo "</br>";
             $sql = DB::table('menus') //get the beverage list
             ->where('categories', '=', 'beverages')
+            ->where('status', '=', 'active')
             ->get();
             echo "<div id='beverage'>Beverages</div>"; //beverage subtitle
             foreach ($sql as $food){
@@ -66,6 +68,7 @@
             $sql = DB::table('menus') //get the beverage list
             ->where('categories', '!=', 'food')
             ->where('categories', '!=', 'beverages')
+            ->where('status', '=', 'active')
             ->get();
             echo "<div id='others'>Others</div>"; //Others subtitle
             foreach ($sql as $food){

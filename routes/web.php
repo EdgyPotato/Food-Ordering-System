@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
 
 /*
@@ -29,7 +30,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'editorder');
+            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist');
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -39,7 +40,7 @@ function test($path){
             }
             return redirect('reservation_staff',);
         }else if(session('roles') == "chef"){
-            $chefpath = array('cheforderlist','notify');
+            $chefpath = array('cheforderlist','notify', 'chefaddnotification');
             foreach($chefpath as $chefpath)
             {
                 if($chefpath == $path)
@@ -134,15 +135,33 @@ Route::get('editorder', function () {
     return test("editorder");
 });
 
+Route::get('notification', function () {
+    return test("notification");
+});
+
+Route::get('staffaddnotification', function () {
+    return test("staffaddnotification");
+});
+
+Route::get('menulist', function () {
+    return test("menulist");
+});
+
 
 //chef
 Route::get('cheforderlist', function () {
     return test("cheforderlist");
 });
 
+Route::get('chefaddnotification', function () {
+    return test("chefaddnotification");
+});
+
 Route::get('notify', function () {
     return test("notify");
 });
+
+
 //testing
 
 
@@ -156,9 +175,15 @@ Route::get('addcart', [MenuController::class,'cart']);
 Route::get('addminus', [MenuController::class,'addminus']);
 Route::get('cusedit', [MenuController::class,'cusedit']);
 Route::get('deletemenu', [MenuController::class,'deletemenu']);
+Route::get('invisible', [MenuController::class,'invisible']);
 Route::get('orderlist', [OrderController::class,'view']);
 Route::get('preparing', [OrderController::class,'preparing']);
 Route::get('complete', [OrderController::class,'complete']);
 Route::get('history', [OrderController::class,'viewhistory']);
 Route::get('approve', [OrderController::class,'approve']);
 Route::get('completed', [OrderController::class,'completed']);
+Route::get('addnotification', [NotificationController::class,'addnotification']);
+Route::get('addnotificationchef', [NotificationController::class,'addnotificationchef']);
+Route::get('details', [NotificationController::class,'subjectanddescription']);
+Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescription']);
+Route::get('solved', [NotificationController::class,'solved']);

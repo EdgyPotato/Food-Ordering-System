@@ -14,20 +14,26 @@ use App\Models\Topping;
 use App\Models\Toptions;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 use function Laravel\Prompts\alert;
 
 class MenuController extends Controller
 {
     public function save(Request $request)
-    {
-        $id= $request->input("id");
+    {   
+        $id = $request->input("id");
+        $validation = Menu::where("foodid", $id)->get();
+        if(count($validation)>0){
+            return redirect()->back()->withErrors($validation);
+        }
         $foodname = $request->input('foodname');
         $description = $request->input('description');
         $price = $request->input('foodprice');
         $categories= $request->input('categories');
         $url = $request->file('my_image')->getClientOriginalName();
-        $request->file('my_image')->storeAs('public/image/image', $url);
+        $request->file('my_image')->storeAs('public/image/', $url);
         $menu = new Menu();
         $menu->foodid = $id;
         $menu->foodname = $foodname;
@@ -35,6 +41,7 @@ class MenuController extends Controller
         $menu->price = $price;
         $menu->categories = $categories;
         $menu->image_url = $url;
+        $menu->status = "active";
         $menu->save();
 
         $toppinglist = $request->input("topping");
@@ -323,9 +330,19 @@ class MenuController extends Controller
     }
 
     public function deletemenu(Request $request){
+        $id = $request->input('id');
+    
+        // Update the status to 'deleted' directly
+        $affectedRows = Menu::where('foodid', $id)->update(['status' => 'deleted']);
+
+        return redirect()->back();
+    }
+
+    public function invisible(Request $request){
         $action = $request->input('action');
-        $foodid = $request->input('id');
-        
+        $id = $request->input('id');
+        $menu = Menu::where('foodid', $id)->update(['status' => $action]);
+        return redirect()->back();
     }
 }
 

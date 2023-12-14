@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('price', 10, 2);
             $table->string('categories', 20);
             $table->string('image_url');
+            $table->string('status');
             $table->timestamps();
         });
     }

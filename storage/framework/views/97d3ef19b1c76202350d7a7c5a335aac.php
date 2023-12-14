@@ -42,6 +42,7 @@
             <?php
                 $sql = DB::table('menus')
                 ->where('categories', '=', 'food')
+                ->where('status', '!=', 'deleted')
                 ->get();
                 echo "<div class='foodbox'>";
                     echo "<div id='food'>Food</div>"; //food subtitle?>
@@ -57,7 +58,8 @@
                                 echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
                             echo "<div class='secondrow'><div class='description'>". $food->description ."</div>";
-                            echo "<img class='dustbin' src='" . asset('image/dustbin.png') . "' width='30px' height='30px' onclick='submitForm(\"$food->foodid\", \"delete\")'></div>";
+                            echo "<img class='dustbin' src='" . asset('image/dustbin.png') . "' width='30px' height='30px' onclick='submitForm(\"$food->foodid\", \"delete\")'>";
+                            echo "</div>";
                         echo "</div>";
                     echo "</div>";
                 }
@@ -65,6 +67,7 @@
 
                 $sql = DB::table('menus') //get the beverage list
                 ->where('categories', '=', 'beverages')
+                ->where('status', '!=', 'deleted')
                 ->get();
                 echo "<div id='beverage'>Beverages</div>"; //beverage subtitle
                 foreach ($sql as $food){
@@ -75,7 +78,9 @@
                                 echo "<div class='food'>" . $food->foodid . '. ' . $food->foodname ."</div>";
                                 echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
-                            echo "<div class='description'>". $food->description ."</div>";
+                            echo "<div class='secondrow'><div class='description'>". $food->description ."</div>";
+                            echo "<img class='dustbin' src='" . asset('image/dustbin.png') . "' width='30px' height='30px' onclick='submitForm(\"$food->foodid\", \"delete\")'>";
+                            echo "</div>";
                         echo "</div>";
                     echo "</div>";
                 }
@@ -84,6 +89,7 @@
                 $sql = DB::table('menus') //get the beverage list
                 ->where('categories', '!=', 'food')
                 ->where('categories', '!=', 'beverages')
+                ->where('status', '!=', 'deleted')
                 ->get();
                 echo "<div id='others'>Others</div>"; //Others subtitle
                 foreach ($sql as $food){
@@ -94,7 +100,9 @@
                                 echo "<div class='food'>" . $food->foodid . '. ' . $food->foodname ."</div>";
                                 echo "<div class='price'>". "RM " . number_format($food->price, 2)."</div>";
                             echo "</div>";
-                            echo "<div class='description'>". $food->description ."</div>";
+                            echo "<div class='secondrow'><div class='description'>". $food->description ."</div>";
+                            echo "<img class='dustbin' src='" . asset('image/dustbin.png') . "' width='30px' height='30px' onclick='submitForm(\"$food->foodid\", \"delete\")'>";
+                            echo "</div>";
                         echo "</div>";
                     echo "</div>";
                 }
@@ -109,7 +117,8 @@
             document.getElementById('hidden').value = id;
             document.getElementById('action').value = action;
             // Allow the form submission to proceed
-            document.getElementById('form').submit();
+            if (confirm("Do you sure want to delete " + id + " food"))
+                document.getElementById('form').submit();
         }
     </script>
 </body>
