@@ -113,7 +113,15 @@
                             <label for="id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Food ID</label>
                             <input type="text" id="id" name="id" value="{{ old('id') }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="F01" required>
                             @if($errors->any())
-                                <div class="alert alert-danger italic text-red-600">The food id is exist.</div>
+                            <div class="flex items-center pl-2 pt-1 text-sm" role="alert">
+                                <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                                </svg>
+                                <span class="sr-only">Info</span>
+                                <div>
+                                    <span class="font-medium text-red-800">Food Id repeat! Change a new Food Id.</span> 
+                                </div>
+                            </div>
                             @enderror
                         </div>
                         <div>
