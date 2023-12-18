@@ -70,7 +70,7 @@
                         <div class='mt-3'>";
                         $choice = DB::table('toptions')
                             ->where('topping_id', '=', $topping->id)
-                            ->get();
+                            ->get(); 
                         $counter=1;
                         foreach ($choice as $choice) {
                             if($counter == "1"){

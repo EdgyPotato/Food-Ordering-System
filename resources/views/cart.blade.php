@@ -26,34 +26,11 @@
                 $totalprice = 0;
                 foreach ($food as $food) {
                     
-                    $temporder = DB::table('temp_orders')
-                    ->where('food_no', '=', $food->id)
+                    $menu = DB::table('menus')
+                    ->where('foodid', '=', $food->foodid)
                     ->first();
-
-                    if($temporder)
-                    if($temporder->top_or_add == "topping"){
-                        $var = DB::table('toptions')
-                        ->where('id', '=', $temporder->choice_no) 
-                        ->first();
-                        $var2 = DB::table('toppings')
-                        ->where('id', '=', $var->topping_id) 
-                        ->first();
-                        $var3 = DB::table('menus')
-                        ->where('foodid', '=', $var2->foodid) 
-                        ->first();
-                    }else{
-                        $var = DB::table('aoptions')
-                        ->where('id', '=', $temporder->choice_no) 
-                        ->first();
-                        $var2 = DB::table('addons')
-                        ->where('id', '=', $var->addon_id) 
-                        ->first();
-                        $var3 = DB::table('menus')
-                        ->where('foodid', '=', $var2->foodid) 
-                        ->first();
-                    }
                     
-                    $price = $var3->price;
+                    $price = $menu->price;
 
                     echo '<div class="flex flex-row items-start justify-between">';
                     echo '<div class="flex flex-row items-start align-middle text-center">';
@@ -63,7 +40,7 @@
                     echo '<button class="text-pigment-indigo-400" onclick="add1()" name="action" value="add_' .$food->id. '"><img id="add" src="' . asset('image/add.png') . '" width="12px" height="12px"></button>';
                     echo '</div>';
                     echo '<div class="flex flex-col items-start w-40">';
-                    echo '<h1 class="text-xl mx-2 font-bold text-left" >' . $var3->foodid . '. ' . $var3->foodname . '</h1>';
+                    echo '<h1 class="text-xl mx-2 font-bold text-left" >' . $menu->foodid . '. ' . $menu->foodname . '</h1>';
                     $temporder = DB::table('temp_orders')
                     ->where('food_no', '=', $food->id)
                     ->get();

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer("table_no");
             $table->integer("quantity");
             $table->string("request")->nullable();
+            $table->string('foodid');
             $table->timestamps();
         });
     }

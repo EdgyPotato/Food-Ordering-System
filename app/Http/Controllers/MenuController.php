@@ -132,15 +132,9 @@ class MenuController extends Controller
     public function getTempOrder(Request $request){
         $count = 1;
         $radiostr = "radio" . $count;
-        $latestfoodid = FoodOrderNo::max('id');
-        if($latestfoodid){
-            $latestfoodid = $latestfoodid+1;
-        }else{
-            $latestfoodid = 1;
-        }
+        $foodid = $request->input('foodid');
 
         $food_no = new FoodOrderNo(); //change to take the largest number
-        $food_no->id = $latestfoodid;
         $food_no->table_no = session('table');
         $food_no->quantity = $request->input("quantity");
         $requestinput = $request->input("request");
@@ -148,9 +142,9 @@ class MenuController extends Controller
             $food_no->request = $requestinput;
         else
             $food_no->request = null;
-
+        $food_no->foodid = $foodid;
         $food_no->save();
-
+        $latestfoodid = FoodOrderNo::max('id');
         while ($request->has($radiostr)) {
             $id = $request->input($radiostr);
             $tempOrder = new tempOrder();
@@ -225,28 +219,8 @@ class MenuController extends Controller
                     ->where('food_no', '=', $editfood->id)
                     ->first();
 
-                    if($temporder->top_or_add == "topping"){
-                        $var = DB::table('toptions')
-                        ->where('id', '=', $temporder->choice_no) 
-                        ->first();
-                        $var2 = DB::table('toppings')
-                        ->where('id', '=', $var->topping_id) 
-                        ->first();
-                        $var3 = DB::table('menus')
-                        ->where('foodid', '=', $var2->foodid) 
-                        ->first();
-                    }else{
-                        $var = DB::table('aoptions')
-                        ->where('id', '=', $temporder->choice_no) 
-                        ->first();
-                        $var2 = DB::table('addons')
-                        ->where('id', '=', $var->addon_id) 
-                        ->first();
-                        $var3 = DB::table('menus')
-                        ->where('foodid', '=', $var2->foodid) 
-                        ->first();
-                    }
-            $id = $var3->foodid;
+
+            $id = $editfood->foodid;
             $food = Menu::where('foodid', $id)->first();
             $topping = Topping::where('foodid', $food->foodid)->get();
             $addon = Addon::where('foodid', $food->foodid)->get();
@@ -269,6 +243,7 @@ class MenuController extends Controller
                     $orderno->quantity = $foodordernos->quantity;
                     $orderno->request = $foodordernos->request;
                     $orderno->order_no = $ordernumber->id;
+                    $orderno->foodid = $foodordernos->foodid;
                     $orderno->save();
                     $tempOrder = tempOrder::where('food_no',$foodordernos->id)->get();
                     

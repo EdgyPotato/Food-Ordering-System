@@ -54,35 +54,13 @@
                         <div class="px-4 pt-4 w-full">
                             <?php 
                             foreach($order as $orders){ 
-                                $toppingorder = DB::table('orders')
-                                ->where('food_no', '=', $orders->id)
-                                ->first();
-                                if($toppingorder)
-                                if($toppingorder->top_or_add == "topping"){
-                                    $var = DB::table('toptions')
-                                    ->where('id', '=', $toppingorder->choice_no) 
-                                    ->first();
-                                    $var2 = DB::table('toppings')
-                                    ->where('id', '=', $var->topping_id) 
-                                    ->first();
-                                    $var3 = DB::table('menus')
-                                    ->where('foodid', '=', $var2->foodid) 
-                                    ->first();
-                                }else{
-                                    $var = DB::table('aoptions')
-                                    ->where('id', '=', $toppingorder->choice_no) 
-                                    ->first();
-                                    $var2 = DB::table('addons')
-                                    ->where('id', '=', $var->addon_id) 
-                                    ->first();
-                                    $var3 = DB::table('menus')
-                                    ->where('foodid', '=', $var2->foodid) 
-                                    ->first();
-                                }
+                                $menu = DB::table('menus')
+                                        ->where('foodid', '=', $orders->foodid)
+                                        ->first();
                             ?>
                             <div class="mb-4">
                                 <div class="flex justify-between items-center w-full">
-                                    <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid.'. '.$var3->foodname ?></h1>
+                                    <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid.'. '.$menu->foodname ?></h1>
                                     <input id="green-checkbox" type="checkbox" name="<?php echo 'checkbox'.$orderno->id.'[]' ?>" value="" class="green-checkbox w-6 h-6 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                                 </div>
                             <?php

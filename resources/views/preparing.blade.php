@@ -64,97 +64,75 @@
 <body class="bg-grey-200">
     <div class="flex flex-row">
         <div class="flex flex-row justify-start w-[328px]">
-            
+
         </div>
 
         <div class="flex flex-col w-full h-full">
             <header class="flex fixed justify-center items-center w-[80%] h-[120px]">
-                    <?php 
-                        $pending = count($pending);
-                        $preparing = count($orderno);
-                        $completed = count($completed);
-                    ?>
+                <?php
+                $pending = count($pending);
+                $preparing = count($orderno);
+                $completed = count($completed);
+                ?>
                 <div class="flex flex-row justify-center items-center px-[5px] gap-[5px] rounded-lg bg-aqua-green-400 w-[452px] h-[70px] border-black border-solid border-2">
-                    <a href="orderlist"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg w-36 h-[60px]">Pending<div class="-mt-2 text-2xl" id="pending"><?php echo $pending;?></div></button></a>
-                    <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold text-white rounded-lg bg-aqua-green-600 w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl" id="preparing"><?php echo $preparing;?></div></button></a>
-                    <a href="complete"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg w-36 h-[60px]">Completed<div class="-mt-2 text-2xl" id="completed"><?php echo $completed;?></div></button></a>
+                    <a href="orderlist"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg w-36 h-[60px]">Pending<div class="-mt-2 text-2xl" id="pending"><?php echo $pending; ?></div></button></a>
+                    <a href="preparing"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold text-white rounded-lg bg-aqua-green-600 w-36 h-[60px]">Preparing<div class="-mt-2 text-2xl" id="preparing"><?php echo $preparing; ?></div></button></a>
+                    <a href="complete"><button type="button" class="flex flex-col justify-center items-center text-lg font-bold rounded-lg w-36 h-[60px]">Completed<div class="-mt-2 text-2xl" id="completed"><?php echo $completed; ?></div></button></a>
                 </div>
             </header>
 
             <main class="grid grid-cols-2 justify-between items-start my-12 px-12 pt-[120px] gap-x-12 gap-y-12 w-full h-full">
-            <?php foreach($orderno as $orderno){ 
-                $order = DB::table('order_food_nos')
-                ->where('order_no', '=', $orderno->id)
-                ->get();
-            ?>
-                <div class="flex flex-col px-6 py-6 bg-aqua-green-500 shadow-md rounded-3xl">
-                    <h1 class="text-3xl font-bold">Table <?php if(isset($order[0])) echo $order[0]->table_no; ?></h1>
-                    <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
-                        <div class="px-4 pt-4">
-                            <?php 
-                            foreach($order as $orders){ 
-                                $toppingorder = DB::table('orders')
-                                ->where('food_no', '=', $orders->id)
-                                ->first();
-                                
-                                if($toppingorder)
-                                if($toppingorder->top_or_add == "topping"){
-                                    $var = DB::table('toptions')
-                                    ->where('id', '=', $toppingorder->choice_no) 
-                                    ->first();
-                                    $var2 = DB::table('toppings')
-                                    ->where('id', '=', $var->topping_id) 
-                                    ->first();
-                                    $var3 = DB::table('menus')
-                                    ->where('foodid', '=', $var2->foodid) 
-                                    ->first();
-                                }else{
-                                    $var = DB::table('aoptions')
-                                    ->where('id', '=', $toppingorder->choice_no) 
-                                    ->first();
-                                    $var2 = DB::table('addons')
-                                    ->where('id', '=', $var->addon_id) 
-                                    ->first();
-                                    $var3 = DB::table('menus')
-                                    ->where('foodid', '=', $var2->foodid) 
-                                    ->first();
-                                }
-                            ?>
-                            <div class="mb-4">
-                            <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid.'. '.$var3->foodname ?></h1>    
-                            <?php
-                                $toppingorder = DB::table('orders')
-                                ->where('food_no', '=', $orders->id)
-                                ->get();
-                                
-                                foreach($toppingorder as $description){
-                                    if($description->top_or_add == "topping"){
-                                        $temp = DB::table('toptions')
-                                        ->where('id', '=', $description->choice_no)
+                <?php foreach ($orderno as $orderno) {
+                    $order = DB::table('order_food_nos')
+                        ->where('order_no', '=', $orderno->id)
+                        ->get();
+                ?>
+                    <div class="flex flex-col px-6 py-6 bg-aqua-green-500 shadow-md rounded-3xl">
+                        <h1 class="text-3xl font-bold">Table <?php if (isset($order[0])) echo $order[0]->table_no; ?></h1>
+                        <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
+                            <div class="px-4 pt-4">
+                                <?php
+                                foreach ($order as $orders) {
+                                    $menu = DB::table('menus')
+                                        ->where('foodid', '=', $orders->foodid)
                                         ->first();
-                                    }else{
-                                        $temp = DB::table('aoptions')
-                                        ->where('id', '=', $description->choice_no)
-                                        ->first();
-                                    } 
                                 ?>
-                                
-                                <p class="mx-2 italic text-grey-700">+ <?php echo $temp->option ?></p>
+                                    <div class="mb-4">
+                                        <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid . '. ' . $menu->foodname ?></h1>
+                                        <?php
+                                        $toppingorder = DB::table('orders')
+                                            ->where('food_no', '=', $orders->id)
+                                            ->get();
+
+                                        foreach ($toppingorder as $description) {
+                                            if ($description->top_or_add == "topping") {
+                                                $temp = DB::table('toptions')
+                                                    ->where('id', '=', $description->choice_no)
+                                                    ->first();
+                                            } else {
+                                                $temp = DB::table('aoptions')
+                                                    ->where('id', '=', $description->choice_no)
+                                                    ->first();
+                                            }
+                                        ?>
+
+                                            <p class="mx-2 italic text-grey-700">+ <?php echo $temp->option ?></p>
+                                        <?php } ?>
+                                        <?php if ($orders->request) : ?>
+                                            <p class="mx-2 italic text-gray-700 text-left">Note: <?php echo $orders->request ?></p>
+                                        <?php endif; ?>
+
+                                    </div>
                                 <?php } ?>
-                                <?php if ($orders->request): ?>
-                                    <p class="mx-2 italic text-gray-700 text-left">Note: <?php echo $orders->request ?></p>
-                                <?php endif; ?>
-                              
                             </div>
-                            <?php } ?>
                         </div>
                     </div>
-                </div>
-            <?php    
+                <?php
                 }
-            ?>
+                ?>
             </main>
         </div>
     </div>
 </body>
+
 </html>

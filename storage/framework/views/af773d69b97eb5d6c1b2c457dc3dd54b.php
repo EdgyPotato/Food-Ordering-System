@@ -152,6 +152,7 @@
                     <button type="button" class="text-5xl text-pigment-indigo-400" onclick="minus1()"><img id="minus" src="<?php echo e(asset('image/minus.png')); ?>" width="20px" height="20px"></button>
                     <p class="inline-block w-10 h-10 text-3xl font-bold mx-3 bg-pigment-indigo-100 border-2 border-pigment-indigo-500 rounded-lg shadow-md" id="count">1</p>
                     <input type="hidden" id="quantity" name="quantity" value=1>  
+                    <input type="hidden" id="foodid" name="foodid" value=<?php echo $_GET['id'] ?>>
                     <button type="button" class="text-5xl text-pigment-indigo-400" onclick="add1()"><img id="add" src="<?php echo e(asset('image/add.png')); ?>" width="20px" height="20px"></button>
                 </div>
                 <input type="submit" value="Add to Cart" class="inline-block px-4 py-2 text-center text-xl font-bold bg-pigment-indigo-400 border-4 border-pigment-indigo-500 text-white rounded-lg shadow-md">

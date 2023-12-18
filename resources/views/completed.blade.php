@@ -93,34 +93,12 @@
                             <div class="px-4 pt-4">
                                 <?php
                                 foreach ($order as $orders) {
-                                    $toppingorder = DB::table('orders')
-                                        ->where('food_no', '=', $orders->id)
+                                    $menu = DB::table('menus')
+                                        ->where('foodid', '=', $orders->foodid)
                                         ->first();
-                                    if ($toppingorder)
-                                        if ($toppingorder->top_or_add == "topping") {
-                                            $var = DB::table('toptions')
-                                                ->where('id', '=', $toppingorder->choice_no)
-                                                ->first();
-                                            $var2 = DB::table('toppings')
-                                                ->where('id', '=', $var->topping_id)
-                                                ->first();
-                                            $var3 = DB::table('menus')
-                                                ->where('foodid', '=', $var2->foodid)
-                                                ->first();
-                                        } else {
-                                            $var = DB::table('aoptions')
-                                                ->where('id', '=', $toppingorder->choice_no)
-                                                ->first();
-                                            $var2 = DB::table('addons')
-                                                ->where('id', '=', $var->addon_id)
-                                                ->first();
-                                            $var3 = DB::table('menus')
-                                                ->where('foodid', '=', $var2->foodid)
-                                                ->first();
-                                        }
                                 ?>
                                     <div class="mb-4">
-                                        <h1 class="text-xl mx-2 font-bold"><?php echo $var3->foodid . '. ' . $var3->foodname ?></h1>
+                                        <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid . '. ' . $menu->foodname ?></h1>
                                         <?php
                                         $toppingorder = DB::table('orders')
                                             ->where('food_no', '=', $orders->id)
