@@ -27,88 +27,136 @@
     <title>Add Menu</title>
 </head>
 
+<!-- Component Start -->
+<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl">
+    <a class="flex items-center w-full px-3 mt-3" href="#">
+        <img class="w-8 h-8 fill-current" src="{{ asset('image/logo.png')}}" width="32px" height="32px">
+        <span class="ml-2 text-xl font-bold">Molek Cafe</span>
+    </a>
+    <div class="w-full px-2">
+        <div class="flex flex-col items-center w-full mt-3 border-t border-gray-300">
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="orderlist">
+                <img class="w-6 h-6 stroke-current" src="{{ asset('image/order.png')}}" width="24px" height="24px">
+                <span class="ml-2 font-medium">Order</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="menulist">
+                <img class="w-6 h-6 stroke-current" src="{{ asset('image/menu.png')}}" width="24px" height="24px">
+                <span class="ml-2 font-medium">Menu</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 hover:bg-gray-300 rounded" href="reservation_staff">
+                <img class="w-6 h-6 stroke-current" src="{{ asset('image/reservation.png')}}" width="24px" height="24px">
+                <span class="ml-2 font-medium">Reservation</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded" href="notification">
+                <img class="w-6 h-6 stroke-current" src="{{ asset('image/notification.png')}}" width="24px" height="24px">
+                <span class="ml-2 font-medium">Notification</span>
+            </a>
+        </div>
+
+    </div>
+    <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-100 hover:bg-gray-300" href="logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+        <span class="ml-2 font-medium">Logout</span>
+    </a>
+</div>
+<!-- Component End  -->
+
 <body class="bg-gray-200">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[25%]">
-            <div class="w-[2%] h-full fixed bg-gradient-to-b from-pigment-indigo-500 to-pigment-indigo-400" id="purplearea"></div>
-            <div class="flex flex-col w-[18%] ml-[2%] h-full fixed bg-white">
-                <div class="flex justify-center items-center font-script text-[40px] text-pigment-indigo-500 text-center h-1/4" id="molekcafe">Molek</br>Cafe</div>
-                <div class="flex flex-col text-black h-3/4">
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="reservation_staff"><img class="mr-1" src="{{ asset('image/reservation.png')}}" width="35px" height="35px">Reservation</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="menulist"><img src="{{ asset('image/menu.png')}}" width="35px" height="35px">Menu List</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="orderlist"><img src="{{ asset('image/order.png')}}" width="35px" height="35px">Order List</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-grey-200" href="notification"><img src="{{ asset('image/notification.png')}}" width="35px" height="35px">Notification</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] justify-center items-center font-bold text-[25px]" href="logout"><img class="mr-[10px]" src="{{ asset('image/logout.png')}}" width="35px" height="35px">LOGOUT</a>
-                </div>
-            </div>
+        <div class="flex flex-row justify-start w-[328px]">
+
         </div>
 
         <main class="flex flex-col w-full h-full">
-            <div class="w-full px-6 py-[15px] shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
-                <div class="flex justify-end">
-                    <a class="flex justify-end" href="staffaddnotification">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-8 h-8 stroke-white stroke-[3px]">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="notification" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Notification
+                        </a>
+                    </li>
+                </ol>
+            </nav>
+            <div class="flex items-center justify-end flex-column flex-wrap md:flex-row space-y-4 md:space-y-0 px-12 py-4 dark:bg-gray-900">
+                <div>
+                    <button id="dropdownActionButton" data-dropdown-toggle="dropdownAction" class="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700" type="button">
+                        <span class="sr-only">Action button</span>
+                        Action
+                        <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                         </svg>
-                    </a>
+                    </button>
+                    <!-- Dropdown menu -->
+                    <div id="dropdownAction" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                        <ul class="py-1 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownActionButton">
+                            <li>
+                                <a href="staffaddnotification" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Add Notification</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
             <form id="form" action="details" method="get">
-            <input type="hidden" id="hidden" name="id">
-            <div class="grid grid-cols-2 justify-between items-start my-12 px-12 pt-[10px] gap-x-12 gap-y-8 w-full">
-                <?php
+                <input type="hidden" id="hidden" name="id">
+                <div class="grid grid-cols-2 justify-between items-start px-12 py-2 pb-10 gap-x-12 gap-y-8 w-full">
+                    <?php
 
-                use Illuminate\Support\Carbon;
+                    use Illuminate\Support\Carbon;
 
-                $notifications = DB::table('notifications')->orderBy('updated_at', 'desc')->get();
+                    $notifications = DB::table('notifications')->orderBy('updated_at', 'desc')->get();
 
-                if (count($notifications) > 0) {
-                    $currentDate = null;
+                    if (count($notifications) > 0) {
+                        $currentDate = null;
 
-                    foreach ($notifications as $notificationItem) {
-                        $temp = Carbon::parse($notificationItem->updated_at);
-                        $temp->setTime(12, 0, 0);
-                        if ($currentDate) {
-                            $currentDate = Carbon::parse($currentDate);
-                            $currentDate->setTime(12, 0, 0);
-                        }
-
-
-                        // Check if the dates are different
-                        if ($temp != $currentDate) {
-                            // Close the previous date container if it exists
-                            if (!is_null($currentDate)) {
-                                echo '</ul></div></div>';
+                        foreach ($notifications as $notificationItem) {
+                            $temp = Carbon::parse($notificationItem->updated_at);
+                            $temp->setTime(12, 0, 0);
+                            if ($currentDate) {
+                                $currentDate = Carbon::parse($currentDate);
+                                $currentDate->setTime(12, 0, 0);
                             }
 
-                            // Start a new date container
-                            echo '<div class="area-date-container">';
-                            echo '<label for="date" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">' . $temp->format('d M Y') . '</label>';
-                            echo '<div class="flex flex-col container max-w-md mx-auto w-full items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow">';
-                            echo '<ul class="flex flex-col divide-y w-full">';
+
+                            // Check if the dates are different
+                            if ($temp != $currentDate) {
+                                // Close the previous date container if it exists
+                                if (!is_null($currentDate)) {
+                                    echo '</ul></div></div>';
+                                }
+
+                                // Start a new date container
+                                echo '<div class="area-date-container">';
+                                echo '<label for="date" class="block mb-2 text-2xl font-medium text-gray-900 dark:text-white">' . $temp->format('d M Y') . '</label>';
+                                echo '<div class="flex flex-col container max-w-md mx-auto w-full items-center justify-center bg-white dark:bg-gray-800 rounded-lg shadow">';
+                                echo '<ul class="flex flex-col divide-y w-full">';
+                            }
+
+                            // Display individual notifications
+                            echo '<li class="flex flex-row" onclick="submitForm(\'' . $notificationItem->id . '\')">';
+                            echo '<div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 justify-between items-center p-4 w-full">';
+                            echo '<div>';
+                            echo '<div class="text-xl font-medium text-gray-900">' . $notificationItem->subject . '</div>';
+                            echo '<div class="italic">Status: ' . $notificationItem->status . '</div>';
+                            echo '<div class="mt-2 text-m font-medium italic">From: ' . $notificationItem->roles . '</div>';
+                            echo '</div>';
+                            echo '</div>';
+                            echo '</li>';
+
+                            // Update the current date
+                            $currentDate = $temp;
                         }
 
-                        // Display individual notifications
-                        echo '<li class="flex flex-row" onclick="submitForm(\'' . $notificationItem->id . '\')">';
-                        echo '<div class="select-none cursor-pointer hover:bg-gray-50 flex flex-1 justify-between items-center p-4 w-full">';
-                        echo '<div>';
-                        echo '<div class="text-xl font-medium text-gray-900">' . $notificationItem->subject . '</div>';
-                        echo '<div class="italic">Status: ' . $notificationItem->status . '</div>';
-                        echo '<div class="mt-2 text-m font-medium italic">From: ' . $notificationItem->roles . '</div>';
-                        echo '</div>';
-                        echo '</div>';
-                        echo '</li>';
-
-                        // Update the current date
-                        $currentDate = $temp;
+                        // Close the last date container
+                        echo '</ul></div></div>';
+                    } else {
+                        echo 'No notifications found.';
                     }
-
-                    // Close the last date container
-                    echo '</ul></div></div>';
-                } else {
-                    echo 'No notifications found.';
-                }
-                ?>
+                    ?>
             </form>
         </main>
     </div>
