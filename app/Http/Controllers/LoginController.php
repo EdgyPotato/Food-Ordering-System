@@ -23,7 +23,7 @@ class LoginController extends Controller
                 if($user->roles == "admin")
                     return redirect('dashboard');
                 else if($user->roles == "staff")
-                    return redirect('reservation_staff');
+                    return redirect('orderlist');
                 else if($user->roles == "chef");
                     return redirect('dashboard');
             }

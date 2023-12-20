@@ -305,12 +305,25 @@ class MenuController extends Controller
     }
 
     public function deletemenu(Request $request){
+        $action = $request->input("action");
         $id = $request->input('id');
-    
-        // Update the status to 'deleted' directly
-        $affectedRows = Menu::where('foodid', $id)->update(['status' => 'deleted']);
 
-        return redirect()->back();
+        if($action == "delete"){
+            $affectedRows = Menu::where('foodid', $id)->update(['status' => 'deleted']);
+            return redirect()->back();
+        }else if($action == "preview"){
+            $food = Menu::where('foodid', $id)->first();
+            $topping = Topping::where('foodid', $food->foodid)->get();
+            $addon = Addon::where('foodid', $food->foodid)->get();
+            if ($food) {
+                return view('preview', compact('food', 'topping', 'addon'));
+            } else {
+                // Handle the case where the record with the given ID was not found
+                return response()->view('error', ['message' => 'Record not found'], 404);
+            }
+        }
+        // Update the status to 'deleted' directly
+
     }
 
     public function invisible(Request $request){

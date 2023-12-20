@@ -25,67 +25,88 @@
     <title>Chef Order List</title>
 </head>
 
+<!-- Component Start -->
+<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl">
+    <a class="flex items-center w-full px-3 mt-3" href="#">
+        <img class="w-8 h-8 fill-current" src="<?php echo e(asset('image/logo.png')); ?>" width="32px" height="32px">
+        <span class="ml-2 text-xl font-bold">Molek Cafe</span>
+    </a>
+    <div class="w-full px-2">
+        <div class="flex flex-col items-center w-full mt-3 border-t border-gray-300">
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded bg-gray-300 " href="cheforderlist">
+                <img class="w-6 h-6 stroke-current" src="<?php echo e(asset('image/order.png')); ?>" width="24px" height="24px">
+                <span class="ml-2 font-medium">Order</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 hover:bg-gray-300 rounded" href="notify">
+                <img class="w-6 h-6 stroke-current" src="<?php echo e(asset('image/notification.png')); ?>" width="24px" height="24px">
+                <span class="ml-2 font-medium">Notification</span>
+            </a>
+        </div>
+
+    </div>
+    <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-100 hover:bg-gray-300" href="logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+        <span class="ml-2 font-medium">Logout</span>
+    </a>
+</div>
+<!-- Component End  -->
+
 <body class="bg-grey-200">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[25%]">
-            <div class="w-[2%] h-full fixed bg-gradient-to-b from-aqua-green-500 to-aqua-green-400" id="purplearea"></div>
-            <div class="flex flex-col w-[18%] ml-[2%] h-full fixed bg-white">
-                <div class="flex justify-center items-center font-script text-[40px] text-pigment-indigo-500 text-center h-1/4" id="molekcafe">Molek</br>Cafe</div>
-                <div class="flex flex-col text-black h-3/4">
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-grey-200" href="cheforderlist"><img src="<?php echo e(asset('image/order.png')); ?>" width="35px" height="35px">Order List</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="notify"><img src="<?php echo e(asset('image/notification.png')); ?>" width="35px" height="35px">Notify</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] justify-center items-center font-bold text-[25px]" href="logout"><img class="mr-[10px]" src="<?php echo e(asset('image/logout.png')); ?>" width="35px" height="35px">LOGOUT</a>
-                </div>
-            </div>
+        <div class="flex flex-row justify-start w-[328px]">
+
         </div>
-        <?php 
-            $orderno = DB::table('order_nos')->where('status', 'preparing')->get();
+
+        <?php
+        $orderno = DB::table('order_nos')->where('status', 'preparing')->get();
         ?>
 
         <main class="grid grid-cols-2 justify-between items-start my-12 px-12 pt-[10px] gap-x-12 gap-y-12 w-full h-full">
-            <?php foreach($orderno as $orderno){ 
+            <?php foreach ($orderno as $orderno) {
                 $order = DB::table('order_food_nos')
-                ->where('order_no', '=', $orderno->id)
-                ->get();
+                    ->where('order_no', '=', $orderno->id)
+                    ->get();
             ?>
                 <div class="flex flex-col px-6 py-6 bg-aqua-green-500 shadow-md rounded-3xl">
-                    <h1 class="text-3xl font-bold">Table <?php if(isset($order[0])) echo $order[0]->table_no; ?></h1>
+                    <h1 class="text-3xl font-bold">Table <?php if (isset($order[0])) echo $order[0]->table_no; ?></h1>
                     <div class="flex flex-col justify-center items-start mt-6 bg-white rounded-xl w-full">
                         <div class="px-4 pt-4 w-full">
-                            <?php 
-                            foreach($order as $orders){ 
-                                $menu = DB::table('menus')
-                                        ->where('foodid', '=', $orders->foodid)
-                                        ->first();
-                            ?>
-                            <div class="mb-4">
-                                <div class="flex justify-between items-center w-full">
-                                    <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid.'. '.$menu->foodname ?></h1>
-                                    <input id="green-checkbox" type="checkbox" name="<?php echo 'checkbox'.$orderno->id.'[]' ?>" value="" class="green-checkbox w-6 h-6 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                                </div>
                             <?php
-                                $toppingorder = DB::table('orders')
-                                ->where('food_no', '=', $orders->id)
-                                ->get();
-                                foreach($toppingorder as $description){
-                                    if($description->top_or_add == "topping"){
-                                        $temp = DB::table('toptions')
-                                        ->where('id', '=', $description->choice_no)
-                                        ->first();
-                                    }else{
-                                        $temp = DB::table('aoptions')
-                                        ->where('id', '=', $description->choice_no)
-                                        ->first();
-                                    } 
-                                ?>
-                                
-                                <p class="mx-2 italic text-grey-700 overflow-hidden whitespace-nowrap text-ellipsis">+ <?php echo $temp->option ?></p>
-                                <?php } ?>
-                                <?php if ($orders->request): ?>
-                                    <p class="mx-2 italic text-gray-700 text-left overflow-hidden whitespace-nowrap text-ellipsis">Note: <?php echo $orders->request ?></p>
-                                <?php endif; ?>
-                              
-                            </div>
+                            foreach ($order as $orders) {
+                                $menu = DB::table('menus')
+                                    ->where('foodid', '=', $orders->foodid)
+                                    ->first();
+                            ?>
+                                <div class="mb-4">
+                                    <div class="flex justify-between items-center w-full">
+                                        <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid . '. ' . $menu->foodname ?></h1>
+                                        <input id="green-checkbox" type="checkbox" name="<?php echo 'checkbox' . $orderno->id . '[]' ?>" value="" class="green-checkbox w-6 h-6 text-green-600 bg-gray-100 border-gray-300 rounded focus:ring-green-500 dark:focus:ring-green-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                    </div>
+                                    <?php
+                                    $toppingorder = DB::table('orders')
+                                        ->where('food_no', '=', $orders->id)
+                                        ->get();
+                                    foreach ($toppingorder as $description) {
+                                        if ($description->top_or_add == "topping") {
+                                            $temp = DB::table('toptions')
+                                                ->where('id', '=', $description->choice_no)
+                                                ->first();
+                                        } else {
+                                            $temp = DB::table('aoptions')
+                                                ->where('id', '=', $description->choice_no)
+                                                ->first();
+                                        }
+                                    ?>
+
+                                        <p class="mx-2 italic text-grey-700 overflow-hidden whitespace-nowrap text-ellipsis">+ <?php echo $temp->option ?></p>
+                                    <?php } ?>
+                                    <?php if ($orders->request) : ?>
+                                        <p class="mx-2 italic text-gray-700 text-left overflow-hidden whitespace-nowrap text-ellipsis">Note: <?php echo $orders->request ?></p>
+                                    <?php endif; ?>
+
+                                </div>
                             <?php } ?>
                         </div>
                     </div>
@@ -95,10 +116,10 @@
                             <button id="button" type="button" class="inline-block py-2 text-center text-xl font-bold bg-grey-600 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-64" onclick="submitForm(<?php echo $orderno->id; ?>);">Complete</button>
                             <input id="submitButton" type="submit" style="display: none;">
                         </form>
-                    </div> 
+                    </div>
                 </div>
-            <?php    
-                }
+            <?php
+            }
             ?>
         </main>
     </div>
@@ -114,7 +135,7 @@
         var submitButton = document.getElementById('button'); // Get the submit button by its ID
 
         for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function () {
+            checkboxes[i].addEventListener('change', function() {
                 var status = true;
                 for (var j = 0; j < checkboxes.length; j++) {
                     if (!checkboxes[j].checked) {

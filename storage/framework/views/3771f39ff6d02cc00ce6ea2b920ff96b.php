@@ -27,26 +27,61 @@
     <title>Add Menu</title>
 </head>
 
+<!-- Component Start -->
+<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl">
+    <a class="flex items-center w-full px-3 mt-3" href="#">
+        <img class="w-8 h-8 fill-current" src="<?php echo e(asset('image/logo.png')); ?>" width="32px" height="32px">
+        <span class="ml-2 text-xl font-bold">Molek Cafe</span>
+    </a>
+    <div class="w-full px-2">
+        <div class="flex flex-col items-center w-full mt-3 border-t hover:bg-gray-300 border-gray-300">
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded " href="cheforderlist">
+                <img class="w-6 h-6 stroke-current" src="<?php echo e(asset('image/order.png')); ?>" width="24px" height="24px">
+                <span class="ml-2 font-medium">Order</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 bg-gray-300 rounded" href="notify">
+                <img class="w-6 h-6 stroke-current" src="<?php echo e(asset('image/notification.png')); ?>" width="24px" height="24px">
+                <span class="ml-2 font-medium">Notification</span>
+            </a>
+        </div>
+
+    </div>
+    <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-100 hover:bg-gray-300" href="logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+        <span class="ml-2 font-medium">Logout</span>
+    </a>
+</div>
+<!-- Component End  -->
+
 <body class="bg-grey-200">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[25%]">
-            <div class="w-[2%] h-full fixed bg-gradient-to-b from-aqua-green-500 to-aqua-green-400" id="purplearea"></div>
-            <div class="flex flex-col w-[18%] ml-[2%] h-full fixed bg-white">
-                <div class="flex justify-center items-center font-script text-[40px] text-pigment-indigo-500 text-center h-1/4" id="molekcafe">Molek</br>Cafe</div>
-                <div class="flex flex-col text-black h-3/4">
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="cheforderlist"><img src="<?php echo e(asset('image/order.png')); ?>" width="35px" height="35px">Order List</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-grey-200" href="notify"><img src="<?php echo e(asset('image/notification.png')); ?>" width="35px" height="35px">Notify</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] justify-center items-center font-bold text-[25px]" href="logout"><img class="mr-[10px]" src="<?php echo e(asset('image/logout.png')); ?>" width="35px" height="35px">LOGOUT</a>
-                </div>
-            </div>
+        <div class="flex flex-row justify-start w-[328px]">
+
         </div>
 
         <main class="flex flex-col w-full h-full">
-            <div class="w-full px-6 py-4 shadow-md bg-gradient-to-r from-aqua-green-500 to-aqua-green-400">
-                <div class="flex justify-start">
-                    <a class="flex justify-end" href="notify"><img src="<?php echo e(asset('image/return.png')); ?>" width="30px" height="30px"></a>
-                </div>
-            </div>
+        <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="notify" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Notification
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <a href="chefaddnotification" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Add Notification</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
 
             <div class="m-16 mb-0 p-4 border-solid rounded-2xl shadow-lg bg-white min-w-screen transition-all">
                 <form class="w-full p-8" action="addnotification" method="get">

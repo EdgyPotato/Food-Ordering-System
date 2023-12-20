@@ -98,7 +98,7 @@
                                         ->first();
                                 ?>
                                     <div class="mb-4">
-                                        <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid . '. ' . $menu->foodname ?></h1>
+                                        <h1 class="text-xl mx-2 font-bold"><?php echo $menu->foodid . '. ' . $menu->foodname . '  x' . $orders->quantity; ?></h1>
                                         <?php
                                         $toppingorder = DB::table('orders')
                                             ->where('food_no', '=', $orders->id)
