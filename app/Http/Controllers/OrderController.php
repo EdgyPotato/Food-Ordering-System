@@ -116,7 +116,7 @@ class OrderController extends Controller
                             }
                     }
                 }
-            #return redirect("orderlist");
+            return redirect("orderlist");
         }
     }
 }
