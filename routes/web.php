@@ -20,7 +20,7 @@ use App\Http\Controllers\OrderController;
 function test($path){
     if(Session::has("username")){
         if(session('roles') == "admin"){
-            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu');
+            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview');
             foreach($adminpath as $adminpath)
             {
                 if($adminpath == $path)
@@ -38,7 +38,7 @@ function test($path){
                     return view($path);
                 }
             }
-            return redirect('reservation_staff',);
+            return redirect('orderlist');
         }else if(session('roles') == "chef"){
             $chefpath = array('cheforderlist','notify', 'chefaddnotification');
             foreach($chefpath as $chefpath)
@@ -62,7 +62,7 @@ Route::get('login', function () {
         if(session("roles") == "admin")
             return redirect('dashboard');
         else if(session("roles") == "staff")
-            return redirect('reservation_staff');
+            return redirect('orderlist');
         else if(session("roles") == "chef");
             return redirect('dashboard');
     }    
@@ -126,6 +126,10 @@ Route::get('addmenu', function () {
     return test("addmenu");
 });
 
+Route::get('preview', function () {
+    return test("preview");
+});
+
 // Staff
 Route::get('reservation_staff', function () {
     return test("reservation_staff");
@@ -182,6 +186,7 @@ Route::get('complete', [OrderController::class,'complete']);
 Route::get('history', [OrderController::class,'viewhistory']);
 Route::get('approve', [OrderController::class,'approve']);
 Route::get('completed', [OrderController::class,'completed']);
+Route::get('staffedit', [OrderController::class,'edit']);
 Route::get('addnotification', [NotificationController::class,'addnotification']);
 Route::get('addnotificationchef', [NotificationController::class,'addnotificationchef']);
 Route::get('details', [NotificationController::class,'subjectanddescription']);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -60,7 +61,7 @@
                         echo "<div class='w-full'>
                         <div class='flex flex-row justify-between'>
                             <div>
-                                <h2 class='text-xl font-bold'>".$topping->title."</h1>
+                                <h2 class='text-xl font-bold'>" . $topping->title . "</h1>
                                     <p class='text-sm text-gray-600'>Select one of the options</p>
                             </div>
                             <div class='w-20 my-auto bg-pigment-indigo-500 shadow-md max-w-md rounded-2xl'>
@@ -73,13 +74,13 @@
                             ->get();
                         $counter = 1;
                         foreach ($choice as $choice) {
-                            if($counter == "1"){
+                            if ($counter == "1") {
                                 echo "<div class='flex items-center'>
                                     <input class='w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-400 border-pigment-indigo-400 border-2 rounded focus:outline focus:ring focus:ring-pigment-indigo-500' type='radio' id='$counter' name=$radioname value=$choice->id checked>
                                     <label class='ml-2 text-lg align-middle' for='topping1'>" . $choice->option . "</label>
                                 </div>";
                                 $counter++;
-                            }else{
+                            } else {
                                 echo "<div class='flex items-center'>
                                     <input class='w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-400 border-pigment-indigo-400 border-2 rounded focus:outline focus:ring focus:ring-pigment-indigo-500' type='radio' id='$counter' name=$radioname value=$choice->id>
                                     <label class='ml-2 text-lg align-middle' for='topping1'>" . $choice->option . "</label>
@@ -94,13 +95,13 @@
                 ?>
 
                 <?php
-                
+
                 if ($addon) {
                     $countbox = 1;
                     foreach ($addon as $addonItem) {
                         $count = 1;
-                        $checkbox = 'checkbox'.$countbox;
-                        $checkboxname = $checkbox . '['.$count.']';
+                        $checkbox = 'checkbox' . $countbox;
+                        $checkboxname = $checkbox . '[' . $count . ']';
                         echo '<hr class="w-full mx-auto my-3 h-1 bg-gray-200 border-0 rounded">';
                         echo '<div class="w-full">
                         <div class="flex flex-row justify-between">
@@ -109,7 +110,7 @@
                                 <p class="text-center text-white text-sm my-1">Optional</p>
                             </div>
                         </div>';
-                    
+
                         $choices = DB::table('aoptions')
                             ->where('addon_id', '=', $addonItem->id)
                             ->get();
@@ -117,7 +118,7 @@
                         foreach ($choices as $choice) {
                             echo '<div class="flex flex-row justify-between">
                             <div class="flex items-center">
-                                <input class="w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-400 border-pigment-indigo-400 border-2 rounded focus:outline focus:ring focus:ring-pigment-indigo-500" type="checkbox" name= ' . $checkboxname . ' value= '. $choice->id .'>
+                                <input class="w-5 h-5 bg-pigment-indigo-100 text-pigment-indigo-400 border-pigment-indigo-400 border-2 rounded focus:outline focus:ring focus:ring-pigment-indigo-500" type="checkbox" name= ' . $checkboxname . ' value= ' . $choice->id . '>
                                 <label class="ml-2 text-lg align-middle" for="addon1">' . $choice->option . '</label>
                             </div>
                             <div class="flex items-center">
@@ -127,7 +128,7 @@
                             </div>
                             </div>';
                             $count++;
-                            $checkboxname = $checkbox . '['.$count.']';
+                            $checkboxname = $checkbox . '[' . $count . ']';
                         }
                         echo '</div>';
                         $countbox++;
@@ -151,7 +152,7 @@
                 <div class="flex flex-row justify-center items-center text-center">
                     <button type="button" class="text-5xl text-pigment-indigo-400" onclick="minus1()"><img id="minus" src="<?php echo e(asset('image/minus.png')); ?>" width="20px" height="20px"></button>
                     <p class="inline-block w-10 h-10 text-3xl font-bold mx-3 bg-pigment-indigo-100 border-2 border-pigment-indigo-500 rounded-lg shadow-md" id="count">1</p>
-                    <input type="hidden" id="quantity" name="quantity" value=1>  
+                    <input type="hidden" id="quantity" name="quantity" value=1>
                     <input type="hidden" id="foodid" name="foodid" value=<?php echo $_GET['id'] ?>>
                     <button type="button" class="text-5xl text-pigment-indigo-400" onclick="add1()"><img id="add" src="<?php echo e(asset('image/add.png')); ?>" width="20px" height="20px"></button>
                 </div>

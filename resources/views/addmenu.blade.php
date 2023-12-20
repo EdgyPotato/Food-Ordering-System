@@ -257,16 +257,16 @@
             countAddon.appendChild(toppingContainer);
 
             //image node
-            var imgSrc = "{{ asset('image/dustbin.png') }}";
-            var imgNode = document.createElement("img");
-            imgNode.src = imgSrc;
-            imgNode.style.width = "16px";
-            imgNode.style.height = "16px";
-            imgNode.style.marginLeft = "8px";
-            imgNode.id = "image" + count2;
-            imgNode.onclick = function() {
-                deleteTopping(this.parentNode.parentNode);
-            };
+            // var imgSrc = "{{ asset('image/dustbin.png') }}";
+            // var imgNode = document.createElement("img");
+            // imgNode.src = imgSrc;
+            // imgNode.style.width = "16px";
+            // imgNode.style.height = "16px";
+            // imgNode.style.marginLeft = "8px";
+            // imgNode.id = "image" + count2;
+            // imgNode.onclick = function() {
+            //     deleteTopping(this.parentNode.parentNode);
+            // };
 
             // Create a new input element for the topping
             var toppingNode = document.createElement('input');
@@ -288,7 +288,7 @@
             toppingContainer.appendChild(containerTopping);
             // Append the topping input to the container
             containerTopping.appendChild(toppingNode); //topping title append in div
-            containerTopping.appendChild(imgNode);
+            //containerTopping.appendChild(imgNode);
 
             //create the choice container
             var optionContainer = document.createElement("div");

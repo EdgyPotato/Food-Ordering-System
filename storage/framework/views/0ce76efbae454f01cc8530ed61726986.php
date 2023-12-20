@@ -68,14 +68,15 @@
         <div class="flex flex-row justify-start w-[328px]">
 
         </div>
-        
-        <?php 
+
+        <?php
+
         use Illuminate\Support\Carbon;
 
         $notificationDate = Carbon::parse($notification->updated_at)->format('d M Y H:i A');
         ?>
         <main class="flex flex-col w-full h-full">
-        <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
+            <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="notification" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -90,7 +91,7 @@
                             <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
                             </svg>
-                                <a href="" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Add Notification</a>
+                            <a href="" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Notification Details</a>
                         </div>
                     </li>
                 </ol>
@@ -107,13 +108,13 @@
                 </div>
                 <label for="id" class="block mt-8 mb-3 text-2xl font-medium text-gray-900 dark:text-white">Description:</label>
                 <div class="block w-full h-64 py-2 px-3 bg-pigment-indigo-100 opacity-80 border-solid border-2 border-black rounded-md"><?php echo $notification->description; ?></div>
-                <?php if($notification->roles == "Chef" && $notification->status == "In Progress"){?>
-                <form action="solved" class="flex justify-center">
-                    <input type="hidden" name="id" value="<?php echo $notification->id ?>"> 
-                    <input type="submit" name="submit" value="Solve" class="inline-block py-3 mt-3 text-center text-xl font-bold bg-pigment-indigo-500 text-white rounded-lg shadow-md w-36">
-                </form>
+                <?php if ($notification->roles == "Chef" && $notification->status == "In Progress") { ?>
+                    <form action="solved" class="flex justify-center">
+                        <input type="hidden" name="id" value="<?php echo $notification->id ?>">
+                        <input type="submit" name="submit" value="Solve" class="inline-block py-3 mt-3 text-center text-xl font-bold bg-pigment-indigo-500 text-white rounded-lg shadow-md w-36">
+                    </form>
                 <?php } ?>
-            </div> 
+            </div>
         </main>
     </div>
     <script>
