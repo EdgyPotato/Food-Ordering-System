@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
@@ -30,7 +31,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist');
+            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice');
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -147,8 +148,20 @@ Route::get('staffaddnotification', function () {
     return test("staffaddnotification");
 });
 
+Route::get('payment', function () {
+    return test("payment");
+});
+
+Route::get('completepayment', function () {
+    return test("completepayment");
+});
+
 Route::get('menulist', function () {
     return test("menulist");
+});
+
+Route::get('invoice', function () {
+    return test("invoice");
 });
 
 
@@ -192,3 +205,5 @@ Route::get('addnotificationchef', [NotificationController::class,'addnotificatio
 Route::get('details', [NotificationController::class,'subjectanddescription']);
 Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescription']);
 Route::get('solved', [NotificationController::class,'solved']);
+Route::get('tocompletepayment', [PaymentController::class,'viewpayment']);
+Route::get('deletepayment', [PaymentController::class,'deletepayment']);
