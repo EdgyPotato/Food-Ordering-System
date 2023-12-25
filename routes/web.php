@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\OrderController;
 function test($path){
     if(Session::has("username")){
         if(session('roles') == "admin"){
-            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview');
+            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales');
             foreach($adminpath as $adminpath)
             {
                 if($adminpath == $path)
@@ -31,7 +32,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice');
+            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice', 'reservationhistory', 'invoicehistory');
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -77,7 +78,6 @@ Route::get('/logout', function () {
 
 //Customer (Not Need User Level) need table session
 Route::get('/', function () {
-    
     $table = $_GET['table'];
     if(isset($table)){
 
@@ -105,10 +105,21 @@ Route::get('carthistory', function () {
     return view('carthistory');
 });
 
+Route::get('reserve', function () {
+    return view('reserve');
+});
+
+Route::get('reservedcompleted', function () {
+    return view('reservedcompleted');
+});
 
 //Admin
 Route::get('dashboard', function () {
     return test("dashboard");
+});
+
+Route::get('sales', function () {
+    return test("sales");
 });
 
 Route::get("account", function () {
@@ -164,6 +175,14 @@ Route::get('invoice', function () {
     return test("invoice");
 });
 
+Route::get('invoicehistory', function () {
+    return test("invoicehistory");
+});
+
+Route::get('reservationhistory', function () {
+    return test("reservationhistory");
+});
+
 
 //chef
 Route::get('cheforderlist', function () {
@@ -207,3 +226,6 @@ Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescri
 Route::get('solved', [NotificationController::class,'solved']);
 Route::get('tocompletepayment', [PaymentController::class,'viewpayment']);
 Route::get('deletepayment', [PaymentController::class,'deletepayment']);
+Route::get('reserved', [ReservationController::class,'savereservation']);
+Route::get('cancelreservation', [ReservationController::class,'cancel']);
+Route::get('solvereservation', [ReservationController::class,'solve']);
