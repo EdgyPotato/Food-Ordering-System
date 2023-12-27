@@ -32,7 +32,7 @@ function test($path){
             }
             return redirect('dashboard');
         }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice', 'reservationhistory', 'invoicehistory');
+            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice', 'reservationhistory', 'invoicehistory', 'invoicedetails');
             foreach($staffpath as $staffpath)
             {
                 if($staffpath == $path)
@@ -179,9 +179,14 @@ Route::get('invoicehistory', function () {
     return test("invoicehistory");
 });
 
+Route::get('invoicedetails', function () {
+    return test("invoicedetails");
+});
+
 Route::get('reservationhistory', function () {
     return test("reservationhistory");
 });
+
 
 
 //chef

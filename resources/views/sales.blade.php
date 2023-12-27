@@ -28,7 +28,7 @@
 </head>
 
 <!-- Component Start -->
-<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl">
+<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl print:hidden">
     <a class="flex items-center w-full px-3 mt-3" href="#">
         <img class="w-8 h-8 fill-current" src="{{ asset('image/logo.png')}}" width="32px" height="32px">
         <span class="ml-2 text-xl font-bold">Molek Cafe</span>
@@ -52,7 +52,6 @@
                 <span class="ml-2 font-medium">Account</span>
             </a>
         </div>
-
     </div>
     <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-100 hover:bg-gray-300" href="logout">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -70,7 +69,7 @@
         </div>
 
         <main class="flex flex-col w-full h-full">
-            <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
+            <nav class="flex pt-4 pl-4 print:hidden" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
                     <li class="inline-flex items-center">
                         <a href="dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
@@ -87,7 +86,7 @@
                     <h1 class="px-4 text-3xl font-bold">Sales</h1>
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
-                            <form class="flex items-center">
+                            <form class="flex items-center" action="sales">
                                 <label for="simple-search" class="sr-only">Search</label>
                                 <div class="relative w-full">
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -95,7 +94,7 @@
                                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search" required="">
+                                    <input type="text" id="simple-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search by food id">
                                 </div>
                             </form>
                         </div>
@@ -133,6 +132,24 @@
                             </div>
                         </div>
                     </div>
+
+                    <?php
+
+                    use App\Models\Aoptions;
+                    use App\Models\Menu;
+                    use App\Models\Payment;
+                    use App\Models\PaymentFoodNo;
+                    use App\Models\PaymentFoodTopping;
+                    use Carbon\Carbon;
+
+                    $currentMonth = Carbon::now()->month;
+                    $search = '';
+
+                    if (request()->has('search')) {
+                        $search = request('search');
+                    }
+                    ?>
+
                     <div class="overflow-x-auto px-4">
                         <table class="w-full text-sm text-left text-gray-500">
                             <thead class="text-xs text-gray-700 uppercase rounded-t-xl bg-gray-300">
@@ -141,91 +158,39 @@
                                     <th scope="col" class="px-4 py-3">Product Name</th>
                                     <th scope="col" class="px-4 py-3">Category</th>
                                     <th scope="col" class="px-4 py-3">Quantity</th>
-                                    <th scope="col" class="px-4 py-3">Value</th>
-                                    <th scope="col" class="px-4 py-3 rounded-tr-xl">Date</th>
+                                    <th scope="col" class="px-4 py-3 rounded-tr-xl">Price</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-gray-50">
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F01</th>
-                                    <td class="px-4 py-3">Food 1</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">300</td>
-                                    <td class="px-4 py-3">RM 890</td>
-                                    <td class="px-4 py-3">01/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F02</th>
-                                    <td class="px-4 py-3">Food 2</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">200</td>
-                                    <td class="px-4 py-3">RM 1099</td>
-                                    <td class="px-4 py-3">15/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F03</th>
-                                    <td class="px-4 py-3">Food 3</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">123</td>
-                                    <td class="px-4 py-3">RM 999</td>
-                                    <td class="px-4 py-3">28/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F04</th>
-                                    <td class="px-4 py-3">Food 4</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">457</td>
-                                    <td class="px-4 py-3">RM 1109</td>
-                                    <td class="px-4 py-3">07/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F05</th>
-                                    <td class="px-4 py-3">Food 5</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">56</td>
-                                    <td class="px-4 py-3">RM 299</td>
-                                    <td class="px-4 py-3">21/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F06</th>
-                                    <td class="px-4 py-3">Food 6</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">78</td>
-                                    <td class="px-4 py-3">RM 799</td>
-                                    <td class="px-4 py-3">03/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">F07</th>
-                                    <td class="px-4 py-3">Food 7</td>
-                                    <td class="px-4 py-3">Food</td>
-                                    <td class="px-4 py-3">200</td>
-                                    <td class="px-4 py-3">RM 699</td>
-                                    <td class="px-4 py-3">14/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">B01</th>
-                                    <td class="px-4 py-3">Beverage 1</td>
-                                    <td class="px-4 py-3">Beverage</td>
-                                    <td class="px-4 py-3">550</td>
-                                    <td class="px-4 py-3">RM 399</td>
-                                    <td class="px-4 py-3">25/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">B02</th>
-                                    <td class="px-4 py-3">Beverages 2</td>
-                                    <td class="px-4 py-3">Beverage</td>
-                                    <td class="px-4 py-3">665</td>
-                                    <td class="px-4 py-3">RM 699</td>
-                                    <td class="px-4 py-3">09/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">O01</th>
-                                    <td class="px-4 py-3">Others 1</td>
-                                    <td class="px-4 py-3">Other</td>
-                                    <td class="px-4 py-3">354</td>
-                                    <td class="px-4 py-3">RM 499</td>
-                                    <td class="px-4 py-3">18/05/2023</td>
-                                </tr>
+                                <?php
+                                $menu = Menu::where('foodid', 'LIKE', '%' . $search . '%')->get();
+                                foreach ($menu as $menus) {
+                                    $quantity = 0;
+                                    $totalprice = 0;
+                                    $paymentfoodno = PaymentFoodNo::where("foodid", $menus->foodid)->whereMonth('created_at', $currentMonth)->get();
+                                    foreach ($paymentfoodno as $paymentfoodnos) {
+                                        $price = 0;
+                                        $price = $menus->price;
+                                        $quantity += $paymentfoodnos->quantity;
+                                        $paymentaddon = PaymentFoodTopping::where('top_or_add', 'addon')->where('food_no', $paymentfoodnos->id)->get();
+                                        foreach ($paymentaddon as $paymentaddons) {
+                                            $aoption = Aoptions::where('id', $paymentaddons->choice_no)->first();
+                                            $price += $aoption->price;
+                                        }
+                                        $price *= $paymentfoodnos->quantity;
+                                        $totalprice += $price;
+                                    }
+
+
+                                ?>
+                                    <tr class="border-b border-gray-300">
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"><?php echo $menus->foodid ?></th>
+                                        <td class="px-4 py-3"><?php echo $menus->foodname ?></td>
+                                        <td class="px-4 py-3"><?php echo ucwords($menus->categories) ?></td>
+                                        <td class="px-4 py-3"><?php echo $quantity ?></td>
+                                        <td class="px-4 py-3"><?php echo number_format($totalprice, 2) ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

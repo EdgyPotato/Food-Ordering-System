@@ -125,6 +125,7 @@
 
             <?php
 
+            use App\Models\Payment;
             use App\Models\PaymentFoodNo;
             use Carbon\Carbon;
 
@@ -133,6 +134,7 @@
             $payment = $_GET['invoice_no'];
 
             $paymentfoodno = PaymentFoodNo::where('payment_id', $payment)->get();
+            $paymenttime = Payment::where('id', $payment)->first();
             ?>
             <div class="flex justify-center items-center p-8 h-full" id="print">
                 <div class="bg-gray-100 border rounded-lg px-6 py-8 w-96">
@@ -141,7 +143,7 @@
                     <div class="flex justify-between mb-6">
                         <h1 class="text-lg font-bold">Invoice</h1>
                         <div class="text-gray-700">
-                            <div>Date: <?php echo $time->toDateTimeString() ?></div>
+                            <div>Date: <?php echo $paymenttime->created_at?></div>
                             <div>Invoice: INV100<?php echo $payment ?></div>
                         </div>
                     </div>
@@ -235,7 +237,7 @@
                                 <div>
                                     <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@email.com" required>
-                                </div> 
+                                </div>
                                 <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Send</button>
                             </form>
                         </div>
