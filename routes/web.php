@@ -20,7 +20,7 @@ use App\Http\Controllers\OrderController;
 function test($path){
     if(Session::has("username")){
         if(session('roles') == "admin"){
-            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview');
+            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'expense');
             foreach($adminpath as $adminpath)
             {
                 if($adminpath == $path)
@@ -128,6 +128,10 @@ Route::get('addmenu', function () {
 
 Route::get('preview', function () {
     return test("preview");
+});
+
+Route::get('expense', function () {
+    return test("expense");
 });
 
 // Staff
