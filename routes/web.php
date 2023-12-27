@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -22,7 +23,7 @@ use App\Http\Controllers\ReservationController;
 function test($path){
     if(Session::has("username")){
         if(session('roles') == "admin"){
-            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales', 'expense');
+            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales', 'expense', 'profit', 'addexpense');
             foreach($adminpath as $adminpath)
             {
                 if($adminpath == $path)
@@ -146,6 +147,14 @@ Route::get('expense', function () {
     return test("expense");
 });
 
+Route::get('profit', function () {
+    return test("profit");
+});
+
+Route::get('addexpense', function () {
+    return test("addexpense");
+});
+
 // Staff
 Route::get('reservation_staff', function () {
     return test("reservation_staff");
@@ -238,3 +247,4 @@ Route::get('deletepayment', [PaymentController::class,'deletepayment']);
 Route::get('reserved', [ReservationController::class,'savereservation']);
 Route::get('cancelreservation', [ReservationController::class,'cancel']);
 Route::get('solvereservation', [ReservationController::class,'solve']);
+Route::get('addexpenses', [ExpenseController::class,'addexpense']);

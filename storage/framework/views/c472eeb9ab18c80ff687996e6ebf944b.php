@@ -79,8 +79,36 @@
                             Dashboard
                         </a>
                     </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <a href="sales" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Sales</a>
+                        </div>
+                    </li>
                 </ol>
             </nav>
+            <?php
+
+            use App\Models\Aoptions;
+            use App\Models\Menu;
+            use App\Models\PaymentFoodNo;
+            use App\Models\PaymentFoodTopping;
+            use Carbon\Carbon;
+
+            $currentMonth = Carbon::now()->month;
+            $search = '';
+
+            if (request()->has('search')) {
+                $search = request('search');
+            }
+
+            $filter = '';
+            if (request()->has('filter')) {
+                $filter = request('filter');
+            }
+            ?>
             <main class="flex px-6 pt-16 pb-6 print:pt-0 print:pb-0" id="sales">
                 <div class="flex flex-col px-6 py-6 bg-white shadow-md w-full rounded-xl print:shadow-none">
                     <h1 class="px-4 text-3xl font-bold">Sales</h1>
@@ -114,41 +142,26 @@
                                 </button>
                                 <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow">
                                     <h6 class="mb-3 text-sm font-medium text-gray-900">Choose category</h6>
-                                    <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                        <li class="flex items-center">
-                                            <input id="food" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="food" class="ml-2 text-sm font-medium text-gray-900">Food</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="beverage" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="beverage" class="ml-2 text-sm font-medium text-gray-900">Beverage</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="other" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="other" class="ml-2 text-sm font-medium text-gray-900">Other</label>
-                                        </li>
-                                    </ul>
+                                    <form action="sales" onchange="getFilter()" id="filterform">
+                                        <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                            <li class="flex items-center">
+                                                <input id="food" type="radio" value="food" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "food") { ?> checked <?php } ?>>
+                                                <label for="food" class="ml-2 text-sm font-medium text-gray-900">Food</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="beverage" type="radio" value="beverage" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "beverage") { ?> checked <?php } ?>>
+                                                <label for="beverage" class="ml-2 text-sm font-medium text-gray-900">Beverage</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="other" type="radio" value="other" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "other") { ?> checked <?php } ?>>
+                                                <label for="other" class="ml-2 text-sm font-medium text-gray-900">Other</label>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <?php
-
-                    use App\Models\Aoptions;
-                    use App\Models\Menu;
-                    use App\Models\Payment;
-                    use App\Models\PaymentFoodNo;
-                    use App\Models\PaymentFoodTopping;
-                    use Carbon\Carbon;
-
-                    $currentMonth = Carbon::now()->month;
-                    $search = '';
-
-                    if (request()->has('search')) {
-                        $search = request('search');
-                    }
-                    ?>
 
                     <div class="overflow-x-auto px-4">
                         <table class="w-full text-sm text-left text-gray-500">
@@ -163,7 +176,7 @@
                             </thead>
                             <tbody class="bg-gray-50">
                                 <?php
-                                $menu = Menu::where('foodid', 'LIKE', '%' . $search . '%')->get();
+                                $menu = Menu::where('foodid', 'LIKE', '%' . $search . '%')->where('categories', 'LIKE', '%' . $filter . '%')->whereMonth('created_at', $currentMonth)->get();
                                 foreach ($menu as $menus) {
                                     $quantity = 0;
                                     $totalprice = 0;
@@ -194,47 +207,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-                        <span class="text-sm font-normal text-gray-500">
-                            Showing
-                            <span class="font-semibold text-gray-900">1-10</span>
-                            of
-                            <span class="font-semibold text-gray-900">50</span>
-                        </span>
-                        <ul class="inline-flex items-stretch -space-x-px">
-                            <li>
-                                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                                    <span class="sr-only">Previous</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">4</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">5</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                                    <span class="sr-only">Next</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </main>
         </main>
@@ -242,7 +214,10 @@
 
 </html>
 <script>
+    function getFilter() {
+        document.getElementById('filterform').submit();
 
+    }
 </script>
 </body>
 

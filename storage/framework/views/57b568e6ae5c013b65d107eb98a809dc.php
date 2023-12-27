@@ -86,6 +86,7 @@
             <?php
 
             use App\Models\Aoptions;
+            use App\Models\Expense;
             use App\Models\Menu;
             use App\Models\Payment;
             use App\Models\PaymentFoodNo;
@@ -113,6 +114,12 @@
                 $sales += $price;
             }
 
+            $expense = Expense::whereMonth('created_at', $currentMonth)->get();
+            $totalexpense = 0;
+            foreach ($expense as $expenses) {
+                $totalexpense += $expenses->expense;
+            }
+
             ?>
             <main class="flex flex-col w-full h-full">
                 <div class="flex" id="top-3">
@@ -137,20 +144,29 @@
 
                         <div class="flex flex-col px-6 py-6 bg-white shadow-md w-1/2 rounded-xl">
                             <div class="w-full flex justify-between items-center">
-                                <h1 class="text-2xl font-bold">Profit</h1>
-                                <button type="button" id="profitButton" data-dropdown-toggle="dropdownProfit">
+                                <h1 class="text-2xl font-bold">Expense</h1>
+                                <button type="button" id="saleButton" data-dropdown-toggle="dropdownExpense">
                                     <svg class="w-8 h-8 fill-grey-400" viewBox="0 0 32 32">
                                         <circle cx="16" cy="16" r="2"></circle>
                                         <circle cx="10" cy="16" r="2"></circle>
                                         <circle cx="22" cy="16" r="2"></circle>
                                     </svg>
                                 </button>
-                                <div id="dropdownProfit" class="z-10 hidden bg-grey-100 rounded-lg shadow">
-                                    <a href="/dashboard/profit" class="block px-4 py-2 hover:bg-grey-200 hover:rounded-lg ">View More</a>
+                                <div id="dropdownExpense" class="z-10 hidden bg-grey-100 rounded-lg shadow">
+                                    <a href="expense" class="block px-4 py-2 hover:bg-grey-200 hover:rounded-lg ">View More</a>
                                 </div>
                             </div>
+                            <p class="text-base text-grey-600">Total expense of this month</p>
+                            <h1 class="text-3xl mt-2 font-bold"><?php echo "RM " . number_format($totalexpense, 2) ?></h1>
+                        </div>
+
+                        <div class="flex flex-col px-6 py-6 bg-white shadow-md w-1/2 rounded-xl">
+                            <div class="w-full flex justify-between items-center">
+                                <h1 class="text-2xl font-bold">Profit</h1>
+                                </button>
+                            </div>
                             <p class="text-base text-grey-600">Total profit of this month</p>
-                            <h1 class="text-3xl mt-2 font-bold">$6000.00</h1>
+                            <h1 class="text-3xl mt-2 font-bold"><?php echo "RM " . number_format($sales - $totalexpense, 2) ?></h1>
                         </div>
                     </div>
                 </div>
@@ -158,7 +174,7 @@
                 <div class="flex px-6 mt-12" id="chart">
                     <div class="flex flex-col px-6 py-6 bg-white shadow-md w-full rounded-xl">
                         <div class="w-full flex justify-between items-center">
-                            <h1 class="text-2xl font-bold">Profit of Months</h1>
+                            <h1 class="text-2xl font-bold">Sales of Days</h1>
                             <button type="button" id="profitMonthButton" data-dropdown-toggle="dropdownProfitMonth">
                                 <svg class="w-8 h-8 fill-grey-400" viewBox="0 0 50 50">
                                     <circle cx="20" cy="20" r="5"></circle>
