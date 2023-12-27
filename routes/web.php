@@ -17,55 +17,51 @@ use App\Http\Controllers\OrderController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-function test($path){
-    if(Session::has("username")){
-        if(session('roles') == "admin"){
-            $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu');
-            foreach($adminpath as $adminpath)
-            {
-                if($adminpath == $path)
-                {
-                    return view($path);
+
+if (!function_exists('test')) {
+    function test($path)
+    {
+        if (Session::has("username")) {
+            if (session('roles') == "admin") {
+                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu');
+                foreach ($adminpath as $adminpath) {
+                    if ($adminpath == $path) {
+                        return view($path);
+                    }
                 }
-            }
-            return redirect('dashboard');
-        }else if(session('roles') == "staff"){
-            $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist');
-            foreach($staffpath as $staffpath)
-            {
-                if($staffpath == $path)
-                {
-                    return view($path);
+                return redirect('dashboard');
+            } else if (session('roles') == "staff") {
+                $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist');
+                foreach ($staffpath as $staffpath) {
+                    if ($staffpath == $path) {
+                        return view($path);
+                    }
                 }
-            }
-            return redirect('reservation_staff',);
-        }else if(session('roles') == "chef"){
-            $chefpath = array('cheforderlist','notify', 'chefaddnotification');
-            foreach($chefpath as $chefpath)
-            {
-                if($chefpath == $path)
-                {
-                    return view($path);
+                return redirect('reservation_staff',);
+            } else if (session('roles') == "chef") {
+                $chefpath = array('cheforderlist', 'notify', 'chefaddnotification');
+                foreach ($chefpath as $chefpath) {
+                    if ($chefpath == $path) {
+                        return view($path);
+                    }
                 }
+                return redirect('cheforderlist',);
             }
-            return redirect('cheforderlist',);
+        } else {
+            return redirect('login');
         }
-        
-    }
-    else{
-        return redirect('login');
     }
 }
 
 Route::get('login', function () {
-    if(Session::has('username')){
-        if(session("roles") == "admin")
+    if (Session::has('username')) {
+        if (session("roles") == "admin")
             return redirect('dashboard');
-        else if(session("roles") == "staff")
+        else if (session("roles") == "staff")
             return redirect('reservation_staff');
-        else if(session("roles") == "chef");
-            return redirect('dashboard');
-    }    
+        else if (session("roles") == "chef");
+        return redirect('dashboard');
+    }
     return view('login');
 });
 
@@ -76,11 +72,10 @@ Route::get('/logout', function () {
 
 //Customer (Not Need User Level) need table session
 Route::get('/', function () {
-    
-    $table = $_GET['table'];
-    if(isset($table)){
 
-    }else{
+    $table = $_GET['table'];
+    if (isset($table)) {
+    } else {
         return view("login");
     }
     Session::put('table', $table);
@@ -163,27 +158,38 @@ Route::get('notify', function () {
 
 
 //testing
+Route::get('testing', function () {
+    return view("testingcss");
+});
 
+Route::get('/test-database', function () {
+    try {
+        DB::connection()->getPdo();
+        print_r("Connected successfully to: " . DB::connection()->getDatabaseName());
+    } catch (\Exception $e) {
+        die("Could not connect to the database.  Please check your configuration. Error:" . $e);
+    }
+});
 
-Route::post('auth', [LoginController::class,'authenticate'] );
-Route::post('register', [UserController::class,'register'] );
-Route::post('delete', [UserController::class,'delete'] );
-Route::post('menu', [MenuController::class,'save']);
-Route::get('tofood', [MenuController::class,'index']);
-Route::get('topping', [MenuController::class,'getTempOrder']);
-Route::get('addcart', [MenuController::class,'cart']);
-Route::get('addminus', [MenuController::class,'addminus']);
-Route::get('cusedit', [MenuController::class,'cusedit']);
-Route::get('deletemenu', [MenuController::class,'deletemenu']);
-Route::get('invisible', [MenuController::class,'invisible']);
-Route::get('orderlist', [OrderController::class,'view']);
-Route::get('preparing', [OrderController::class,'preparing']);
-Route::get('complete', [OrderController::class,'complete']);
-Route::get('history', [OrderController::class,'viewhistory']);
-Route::get('approve', [OrderController::class,'approve']);
-Route::get('completed', [OrderController::class,'completed']);
-Route::get('addnotification', [NotificationController::class,'addnotification']);
-Route::get('addnotificationchef', [NotificationController::class,'addnotificationchef']);
-Route::get('details', [NotificationController::class,'subjectanddescription']);
-Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescription']);
-Route::get('solved', [NotificationController::class,'solved']);
+Route::post('auth', [LoginController::class, 'authenticate']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('delete', [UserController::class, 'delete']);
+Route::post('menu', [MenuController::class, 'save']);
+Route::get('tofood', [MenuController::class, 'index']);
+Route::get('topping', [MenuController::class, 'getTempOrder']);
+Route::get('addcart', [MenuController::class, 'cart']);
+Route::get('addminus', [MenuController::class, 'addminus']);
+Route::get('cusedit', [MenuController::class, 'cusedit']);
+Route::get('deletemenu', [MenuController::class, 'deletemenu']);
+Route::get('invisible', [MenuController::class, 'invisible']);
+Route::get('orderlist', [OrderController::class, 'view']);
+Route::get('preparing', [OrderController::class, 'preparing']);
+Route::get('complete', [OrderController::class, 'complete']);
+Route::get('history', [OrderController::class, 'viewhistory']);
+Route::get('approve', [OrderController::class, 'approve']);
+Route::get('completed', [OrderController::class, 'completed']);
+Route::get('addnotification', [NotificationController::class, 'addnotification']);
+Route::get('addnotificationchef', [NotificationController::class, 'addnotificationchef']);
+Route::get('details', [NotificationController::class, 'subjectanddescription']);
+Route::get('notifydetails', [NotificationController::class, 'chefsubjectanddescription']);
+Route::get('solved', [NotificationController::class, 'solved']);

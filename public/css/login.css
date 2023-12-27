@@ -1,0 +1,127 @@
+html{
+    height: 100%;
+}
+body{
+    margin: 0px;
+    height: 100%;
+}
+
+.topbar{
+    height:8%;
+    background: linear-gradient(90deg, #4F007D 0%, #9930C8 100%);
+    display:flex;
+    align-items: center;
+}
+
+.return{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin:2%
+}
+
+.content{
+    height:92%;
+    background-color: #EFECF0;
+}
+
+.empp{
+    height:10%;
+}
+
+p{
+    margin:0px;
+    margin-left: 9.7%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#login{
+    font-weight: bold;
+    font-size: 39px;
+}
+
+#signin{
+    font-weight:normal;
+    font-size: 15;
+    color: #858282;
+}
+
+.empty2{
+    height:5%;
+}
+
+.form{
+    margin-left: 9.7%;
+}
+
+p2{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight:450;
+    font-size: 15;
+    color: #707070;
+    margin-left: 45px;;
+}
+
+input{
+    height:40px;
+    width: 240px;
+    margin-left: 10px;
+}
+
+.username{
+    display:flex;
+}
+
+.password{
+    display:flex;
+}
+
+input[type="submit"]{
+    height:40px;
+    width: 100px;
+    margin-left: 10px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #4F007D 0%, #9930C8 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+input[type="submit"]:hover{
+    height:40px;
+    width: 100px;
+    margin-left: 10px;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #4f007ddd 0%, #9830c8bb 100%);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.submit{
+    margin-top: 30px;
+    margin-left: 180px;
+}
+
+.prompt{
+    display: flex;
+    justify-content: center;
+    margin-top: 15%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 450;
+    color: #707070;
+}
+
+.back{
+    display:flex;
+    justify-content: center;
+    color: #4F007D;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 15px;
+    font-weight: 450;
+    color: #707070;
+}
+
+.back a:hover{
+    color: #17E89B;
+}
+
