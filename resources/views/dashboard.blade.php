@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
     <style>
         @media screen and (orientation: portrait) {
             html {
@@ -120,6 +122,7 @@
                 $totalexpense += $expenses->expense;
             }
 
+
             ?>
             <main class="flex flex-col w-full h-full">
                 <div class="flex" id="top-3">
@@ -171,24 +174,140 @@
                     </div>
                 </div>
 
+                <?php
+                $dailySales = [];
+                for ($day = 1; $day <= Carbon::now()->day; $day++) {
+                    $sales = 0;
+
+                    $payment = Payment::whereDay('created_at', $day)->get();
+                    foreach ($payment as $payments) {
+                        $price = 0;
+                        $paymentfoodno = PaymentFoodNo::where('payment_id', $payments->id)->get();
+                        foreach ($paymentfoodno as $paymentfoodnos) {
+                            $menu = Menu::where('foodid', $paymentfoodnos->foodid)->first();
+                            $price += $menu->price;
+                            $paymentaddon = PaymentFoodTopping::where('top_or_add', "addon")->where('food_no', $paymentfoodnos->id)->get();
+                            foreach ($paymentaddon as $paymentaddons) {
+                                $aoption = Aoptions::where('id', $paymentaddons->choice_no)->first();
+                                $price += $aoption->price;
+                            }
+
+                            $price *= $paymentfoodnos->quantity;
+                        }
+                        $sales += $price;
+                    }
+                    $dailySales[] = $sales;
+                }
+
+                ?>
+
                 <div class="flex px-6 mt-12" id="chart">
-                    <div class="flex flex-col px-6 py-6 bg-white shadow-md w-full rounded-xl">
-                        <div class="w-full flex justify-between items-center">
-                            <h1 class="text-2xl font-bold">Sales of Days</h1>
-                            <button type="button" id="profitMonthButton" data-dropdown-toggle="dropdownProfitMonth">
-                                <svg class="w-8 h-8 fill-grey-400" viewBox="0 0 50 50">
-                                    <circle cx="20" cy="20" r="5"></circle>
-                                    <circle cx="5" cy="20" r="5"></circle>
-                                    <circle cx="35" cy="20" r="5"></circle>
-                                </svg>
-                            </button>
-                            <div id="dropdownProfitMonth" class="z-10 hidden bg-grey-100 rounded-lg shadow">
-                                <a href="#" class="block px-4 py-2 hover:bg-grey-200 hover:rounded-lg ">View More</a>
-                            </div>
+                    <div class="flex flex-col px-6 pt-3 py-6 bg-white shadow-md w-full rounded-xl">
+                        <div class="w-full flex justify-center items-center">
+                            <h1 class="text-2xl font-bold">Sales By Days</h1>
                         </div>
-                        <p class="mb-2 text-base text-grey-600">Total profit of the months</p>
+                        <hr class="w-full h-1 mx-auto my-4 bg-gray-200 border-0 rounded dark:bg-gray-700">
                         <div class="flex-grow">
-                            <canvas id="dashboard-card-01" width="848" height="400"></canvas>
+                            <div class="flex justify-between">
+                                <div>
+                                    <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-2">Today Sales: <?php echo "RM " . number_format($sales, 2) ?></h5>
+                                </div>
+                            </div>
+                            <div id="area-chart" style="height: 400px;"></div>
+
+                            <script>
+                                // ApexCharts options and config
+                                window.addEventListener("load", function() {
+                                    // Get the current date
+                                    let currentDate = new Date();
+
+                                    // Get the total number of days in the current month
+                                    let lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+
+                                    // Generate an array of days from 1 to the last day of the month
+                                    let daysArray = Array.from({
+                                        length: lastDayOfMonth
+                                    }, (_, i) => i + 1);
+
+                                    // Generate an array of corresponding data (replace this with your actual data)
+                                    var dataArray = <?php echo json_encode($dailySales); ?>;
+                                    dataArray = dataArray.map(value => parseFloat(value).toFixed(2));
+                                    
+                                    let options = {
+                                        chart: {
+                                            height: "100%",
+                                            maxWidth: "100%",
+                                            type: "area",
+                                            fontFamily: "Inter, sans-serif",
+                                            dropShadow: {
+                                                enabled: false,
+                                            },
+                                            toolbar: {
+                                                show: false,
+                                            },
+                                        },
+                                        tooltip: {
+                                            enabled: true,
+                                            x: {
+                                                show: false,
+                                            },
+                                        },
+                                        fill: {
+                                            type: "gradient",
+                                            gradient: {
+                                                opacityFrom: 0.55,
+                                                opacityTo: 0,
+                                                shade: "#1C64F2",
+                                                gradientToColors: ["#1C64F2"],
+                                            },
+                                        },
+                                        dataLabels: {
+                                            enabled: false,
+                                        },
+                                        stroke: {
+                                            width: 6,
+                                        },
+                                        grid: {
+                                            show: false,
+                                            strokeDashArray: 4,
+                                            padding: {
+                                                left: 2,
+                                                right: 2,
+                                                top: 0,
+                                            },
+                                        },
+                                        series: [{
+                                            name: "Sales",
+                                            data: dataArray,
+                                            color: "#1A56DB",
+                                        }],
+                                        xaxis: {
+                                            categories: daysArray.map(day => day + ' ' + currentDate.toLocaleString('default', {
+                                                month: 'short'
+                                            })),
+                                            labels: {
+                                                show: false,
+                                            },
+                                            axisBorder: {
+                                                show: false,
+                                            },
+                                            axisTicks: {
+                                                show: false,
+                                            },
+                                        },
+                                        yaxis: {
+                                            show: false,
+                                        },
+                                    };
+
+                                    if (document.getElementById("area-chart") && typeof ApexCharts !== 'undefined') {
+                                        const chart = new ApexCharts(document.getElementById("area-chart"), options);
+                                        chart.render();
+                                    }
+                                });
+                            </script>
+
+
                         </div>
                     </div>
                 </div>

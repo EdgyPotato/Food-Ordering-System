@@ -112,15 +112,13 @@
             <?php
             $search = '';
 
-            $search = '';
-
             if (request()->has('date')) {
                 $search = request('date');
             }
 
             $sql = DB::table('payments')
                 ->orderByDesc('created_at')
-                ->whereDate('created_at', '=', $search)
+                ->where('created_at', 'LIKE', '%' . $search . '%')
                 ->get();
             ?>
 

@@ -176,12 +176,14 @@
                                     <th scope="col" class="px-4 py-3 rounded-tr-xl">Date</th>
                                 </tr>
                             </thead>
+                            <form action="expensedetails" method="get" id="form">
+                                <input type="hidden" id="hidden" name="id">
                             <tbody class="bg-gray-50">
                                 <?php
                                 $expense = Expense::whereMonth("created_at", $currentMonth)->where('id', 'LIKE', '%' . $search . '%')->where('categories', 'LIKE', '%' . $filter . '%')->whereMonth('created_at', $currentMonth)->orderBy('created_at', 'desc')->get();
                                 foreach ($expense as $expenses) {
                                 ?>
-                                    <tr class="border-b border-gray-300">
+                                    <tr class="border-b border-gray-300 hover:bg-gray-100" onclick="submitForm('<?php echo $expenses->id ?>')">
                                         <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"><?php echo "E0" . $expenses->id ?></th>
                                         <td class="px-4 py-3"><?php echo $expenses->subject ?></td>
                                         <td class="px-4 py-3"><?php echo ucwords($expenses->categories) ?></td>
@@ -190,6 +192,7 @@
                                     </tr>
                                 <?php } ?>
                             </tbody>
+                            </form>
                         </table>
                     </div>
                 </div>
@@ -202,6 +205,12 @@
     function getFilter() {
         document.getElementById('filterform').submit();
 
+    }
+
+    function submitForm(id) {
+        // Set the value of the hidden input field
+        document.getElementById('hidden').value = id;
+        document.getElementById('form').submit();
     }
 </script>
 </body>

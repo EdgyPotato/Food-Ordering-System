@@ -113,7 +113,7 @@
                     <div class="flex flex-row justify-center items-center mt-6">
                         <form id='form' method="get" action="completed">
                             <input type="hidden" name='id' id='hidden'>
-                            <button id="button" type="button" class="inline-block py-2 text-center text-xl font-bold bg-grey-600 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-64" onclick="submitForm(<?php echo $orderno->id; ?>);">Complete</button>
+                            <button id="button" type="button" class="inline-block py-2 text-center text-xl font-bold bg-aqua-green-700 hover:bg-aqua-green-800 text-white rounded-lg shadow-lg w-64" onclick="return submitForm(<?php echo $orderno->id; ?>);">Complete</button>
                             <input id="submitButton" type="submit" style="display: none;">
                         </form>
                     </div>
@@ -125,37 +125,14 @@
     </div>
     <script>
         function submitForm(id) {
+            if(!confirm("Are you sure want to complete?")){
+                return false; 
+            }
+            
             // Set the value of the hidden input field
             document.getElementById('hidden').value = id;
             // Allow the form submission to proceed
             document.getElementById('form').submit();
-        }
-
-        var checkboxes = document.querySelectorAll('[name^="checkbox"]'); // Use the attribute selector to get all checkboxes
-        var submitButton = document.getElementById('button'); // Get the submit button by its ID
-
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].addEventListener('change', function() {
-                var status = true;
-                for (var j = 0; j < checkboxes.length; j++) {
-                    if (!checkboxes[j].checked) {
-                        status = false;
-                        break; // No need to check further once one checkbox is unchecked
-                    }
-                }
-
-                // Update the disabled state of the submit button based on the checkbox state
-                submitButton.disabled = !status;
-
-                // Update the button class based on the overall status
-                if (!status) {
-                    submitButton.classList.remove("bg-green-500");
-                    submitButton.classList.add("bg-grey-600");
-                } else {
-                    submitButton.classList.remove("bg-grey-600");
-                    submitButton.classList.add("bg-green-500");
-                }
-            });
         }
     </script>
 </body>

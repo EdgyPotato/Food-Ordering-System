@@ -12,7 +12,7 @@
 </head>
 
 <body class="bg-grey-200">
-    <div class="w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
+    <div class="w-full px-6 py-4 bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400 rounded-b-3xl shadow-xl">
         <div class="return">
             <a href=addcart><img src="<?php echo e(asset('image/return.png')); ?>" width="30px" height="30px"></a>
         </div>

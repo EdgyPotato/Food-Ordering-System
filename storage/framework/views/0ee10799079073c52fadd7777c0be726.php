@@ -12,9 +12,9 @@
 </head>
 
 <body class="bg-gray-200">
-    <div class="flex justify-between items-center w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
+    <div class="flex justify-between items-center w-full px-6 py-4 bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400 rounded-b-3xl shadow-xl">
         <a href="/?table=<?php echo e(session('table')); ?>"><img src="<?php echo e(asset('image/return.png')); ?>" width="30px" height="30px"></a>
-        <a href="history">History</a>
+        <a href="history" class="text-white text-lg font-semibold hover:text-grey-200">History</a>
     </div>
 
     <form method="GET" action="addminus">
@@ -24,6 +24,10 @@
                 <?php
                 $totalquantity = 0;
                 $totalprice = 0;
+                $check = $food;
+                if(!count($food)){
+                    echo "<div class='font-bold text-xl text-grey-700'>No Items In Cart</div>";
+                }
                 foreach ($food as $food) {
                     
                     $menu = DB::table('menus')
@@ -96,7 +100,7 @@
                         ?>
                     </div>
                 </div>
-                <button type="button" data-modal-target="confirmation-modal" data-modal-toggle="confirmation-modal" class="w-full py-4 text-center text-xl font-bold bg-pigment-indigo-400 active:bg-pigment-indigo-500 text-white shadow-inner" name="checkout">Checkout</button>
+                <button type="button" data-modal-target="<?php if(count($check)) echo "confirmation-modal"; else echo "reject-modal"; ?>" data-modal-toggle="<?php if(count($check)) echo "confirmation-modal"; else echo "reject-modal"; ?>" class="w-full py-4 text-center text-xl font-bold bg-pigment-indigo-400 active:bg-pigment-indigo-500 text-white shadow-inner" name="checkout">Checkout</button>
             </div>
         </div>
 
@@ -119,6 +123,24 @@
             </div>
         </div>
 
+        <div id="reject-modal" data-modal-backdrop="static" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-11/12 max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button" class="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="reject-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-6 text-center">
+                        <img class="mx-auto mb-4 w-12 h-12" src="<?php echo e(asset('image/warning.png')); ?>" width="50px" height="50px">
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">There is no order in your cart!</h3>
+                        <button data-modal-hide="reject-modal" type="button" class="text-white bg-pigment-indigo-400 active:bg-pigment-indigo-500 focus:ring-4 focus:outline-none focus:ring-pigment-indigo-300 dark:focus:ring-pigment-indigo-700 font-semibold rounded-lg inline-flex items-center px-10 py-2.5 text-center">Back</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="complete-modal" data-modal-backdrop="static" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative w-11/12 max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -130,6 +152,7 @@
                 </div>
             </div>
         </div>
+        
     </form>
 </body>
 

@@ -101,7 +101,7 @@
 
 
             ?>
-            <div class=" bg-white m-12 p-12 pb-4  rounded-md shadow-md">
+            <div class=" bg-white m-12 p-12  rounded-md shadow-md">
                 <form action="deletepayment">
                     <div class="bg-gray-100 border rounded-lg px-6 py-8">
                         <h1 class="font-bold text-2xl my-4 text-center text-black">ORDER LIST <br> Table <?php if(count($order)) echo $order[0]->table_no; ?></h1>
@@ -166,7 +166,7 @@
                         </table>
                     </div>
                     <div>
-                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-30 shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-2xl px-5 py-2.5 text-center w-full h-24 mt-4" onclick="return confirm('Are you sure want to complete this order?')">Confirm Payment</button>
+                        <button type="submit" class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-30 shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-2xl px-5 py-2.5 text-center w-full h-24 mt-12" onclick="return confirm('Are you sure want to complete this order?')">Confirm Payment</button>
                     </div>
                 </form>
             </div>

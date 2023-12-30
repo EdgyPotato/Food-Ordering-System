@@ -22,4 +22,16 @@ class ExpenseController extends Controller
         
         return redirect('expense');
     }
+
+    function details(Request $request){
+        $id = $request->input('id');
+        $expense = Expense::where('id', $id)->first();
+        return view('expensedetails', compact('expense'));
+    }
+
+    function delete(Request $request){
+        $id=$request->input('id');
+        $delete = Expense::find($id)->delete();
+        return redirect('expense');
+    }
 }

@@ -72,6 +72,7 @@ class OrderController extends Controller
         $orderid = $request->input("orderid");
         $tcounter = $request->input("tcounter");
         $acounter = $request->input("acounter");
+        $note = $request->input("request");
         if ($action == "deleteorder") {
             $deletedtopping = Order::where('food_no', $id)->delete();
             $deletefoodno = OrderFoodNo::where('id', $id)->first();
@@ -83,24 +84,33 @@ class OrderController extends Controller
                 return redirect("orderlist");
             }
             return redirect()->back();
+        } else if ($action == "delete") {
+            $deletefoodno = OrderFoodNo::where("id", $orderid[0])->first();
+            $deleteorderno = Orderno::where('id', $deletefoodno->order_no)->first(); //delete
+            $deletefoodno = OrderFoodNo::where("order_no", $deleteorderno->id)->get(); //delete
+            foreach($deletefoodno as $deletefoodnos){
+                $deletetopping = Order::where('food_no', $deletefoodnos->id)->delete();
+            }
+            $deletefoodno = OrderFoodNo::where("order_no", $deleteorderno->id)->delete(); 
+            $deleteorderno->delete();
+            return redirect("orderlist");
         } else {
             if ($orderid)
                 foreach ($orderid as $count => $orderid) {
-                    echo $orderid;
                     $deletetopping = Order::where('food_no', $orderid)->where("top_or_add", "topping")->delete();
-                    
-                        for ($i = 1; $i <= $tcounter[$count]; $i++) {
-                            $toppingstring = "topping" . $orderid . $i;
-                            $topping = $request->input($toppingstring);
-                            if ($topping) {
-                                $newTopping = new Order();
-                                $newTopping->choice_no = $topping;
-                                $newTopping->top_or_add = "topping";
-                                $newTopping->food_no = $orderid;
-                                $newTopping->save();
-                            }
+                    $update = OrderFoodNo::where('id', $orderid)->update(['request' => $note[$count]]);
+                    for ($i = 1; $i <= $tcounter[$count]; $i++) {
+                        $toppingstring = "topping" . $orderid . $i;
+                        $topping = $request->input($toppingstring);
+                        if ($topping) {
+                            $newTopping = new Order();
+                            $newTopping->choice_no = $topping;
+                            $newTopping->top_or_add = "topping";
+                            $newTopping->food_no = $orderid;
+                            $newTopping->save();
                         }
-                    
+                    }
+
 
                     $deleteaddon = Order::where('food_no', $orderid)->where("top_or_add", "addon")->delete();
                     for ($i = 1; $i <= $acounter; $i++) {
