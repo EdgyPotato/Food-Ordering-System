@@ -250,3 +250,4 @@ Route::get('solvereservation', [ReservationController::class,'solve']);
 Route::get('addexpenses', [ExpenseController::class,'addexpense']);
 Route::get('expensedetails', [ExpenseController::class,'details']);
 Route::get('deleteexpense', [ExpenseController::class,'delete']);
+Route::get('/send-mail', [PaymentController::class,'sendEmail']);

@@ -9,6 +9,8 @@ use App\Models\Payment;
 use App\Models\PaymentFoodNo;
 use App\Models\PaymentFoodTopping;
 use Illuminate\Http\Request;
+use App\Mail\MyEmail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -52,5 +54,13 @@ class PaymentController extends Controller
             }
         }
         return redirect("invoice/?invoice_no=$payment");
+    }
+
+    public function sendEmail(Request $request)
+    {
+        $email = $request->input("email");
+        Mail::to($email)->send(new MyEmail("Invoice"));
+
+        return redirect()->back();
     }
 }
