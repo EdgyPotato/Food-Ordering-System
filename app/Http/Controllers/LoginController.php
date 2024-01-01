@@ -30,7 +30,7 @@ class LoginController extends Controller
         } else {
             // Authentication failed
             return redirect()
-            ->back();
+            ->back()->withErrors(['error' => 'Invalid username or password. Please try again.']);
         }
     }
 }

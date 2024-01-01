@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <style>
         @media screen and (orientation: portrait) {
             html {
@@ -23,37 +24,96 @@
     </style>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <!-- Load icon library -->
-    <title>Expense</title>
+    <title>Add Menu</title>
 </head>
 
-<body class="bg-gray-200 print:bg-white">
+<!-- Component Start -->
+<div class="fixed flex flex-col items-center w-[262px] h-full overflow-hidden text-gray-700 bg-white rounded-r-3xl print:hidden">
+    <a class="flex items-center w-full px-3 mt-3" href="#">
+        <img class="w-8 h-8 fill-current" src="{{ asset('image/logo.png')}}" width="32px" height="32px">
+        <span class="ml-2 text-xl font-bold">Molek Cafe</span>
+    </a>
+    <div class="w-full px-2">
+        <div class="flex flex-col items-center w-full mt-3 border-t border-gray-300">
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded bg-gray-300" href="dashboard">
+                <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                <span class="ml-2 font-medium">Dashboard</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-300" href="adminmenu">
+                <img class="w-6 h-6 stroke-current" src="{{ asset('image/menu.png')}}" width="24px" height="24px">
+                <span class="ml-2 font-medium">Menu</span>
+            </a>
+            <a class="flex items-center w-full h-12 px-3 mt-2 hover:bg-gray-300 rounded" href="account">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span class="ml-2 font-medium">Account</span>
+            </a>
+        </div>
+    </div>
+    <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-100 hover:bg-gray-300" href="logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+        </svg>
+        <span class="ml-2 font-medium">Logout</span>
+    </a>
+</div>
+<!-- Component End  -->
+
+<body class="bg-gray-200 h-full w-full overflow-x-hidden">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[25%] print:hidden">
-            <div class="w-[2%] h-full fixed bg-gradient-to-b from-pigment-indigo-500 to-pigment-indigo-400" id="purplearea"></div>
-            <div class="flex flex-col w-[18%] ml-[2%] h-full fixed bg-white">
-                <div class="flex justify-center items-center font-script text-[40px] text-pigment-indigo-500 text-center h-1/4" id="molekcafe">Molek</br>Cafe</div>
-                <div class="flex flex-col text-black h-3/4">
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl bg-gray-200" href="#"><img class="mr-[10px]" src="{{ asset('image/dashboard.png')}}" width="35px" height="35px">Dashboard</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="adminmenu"><img class="mr-[10px]" src="{{ asset('image/menu.png')}}" width="35px" height="35px">Menu</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] items-center font-bold text-xl" href="account"><img class="mr-[10px]" src="{{ asset('image/account.png')}}" width="35px" height="35px">Account</a>
-                    <a class="flex flex-row w-full h-1/4 px-[15%] justify-center items-center font-bold text-[25px]" href="logout"><img class="mr-[10px]" src="{{ asset('image/logout.png')}}" width="35px" height="35px">LOGOUT</a>
-                </div>
-            </div>
+        <div class="flex flex-row justify-start w-[328px]">
+
         </div>
 
-        <div class="flex flex-col w-full h-full">
-            <header class="fixed w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400 print:hidden">
-                <div class="flex">
-                    <a href="/dashboard"><img src="{{ asset('image/return.png')}}" width="30px" height="30px"></a>
-                </div>
-            </header>
+        <main class="flex flex-col w-full h-full">
+            <nav class="flex pt-4 pl-4 print:hidden" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li class="inline-flex items-center">
+                        <a href="dashboard" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                            <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </li>
+                    <li>
+                        <div class="flex items-center">
+                            <svg class="rtl:rotate-180 w-3 h-3 text-gray-400 mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
+                            </svg>
+                            <a href="expense" class="ms-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white">Expense</a>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+            <?php
 
-            <main class="flex px-6 pt-24 pb-6 print:pt-0 print:pb-0" id="sales">
+            use App\Models\Expense;
+            use Carbon\Carbon;
+
+            $currentMonth = Carbon::now()->month;
+            $search = '';
+
+            if (request()->has('search')) {
+                $search = request('search');
+            }
+
+            $filter = '';
+            if (request()->has('filter')) {
+                $filter = request('filter');
+            }
+            ?>
+            <main class="flex px-6 pt-16 pb-6 print:pt-0 print:pb-0" id="sales">
                 <div class="flex flex-col px-6 py-6 bg-white shadow-md w-full rounded-xl print:shadow-none">
-                    <h1 class="px-4 text-3xl font-bold">Expense</h1>
+                    <div class="flex justify-between items-center">
+                        <h1 class="px-4 text-3xl font-bold">Expense</h1>
+                    </div>
                     <div class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0 md:space-x-4 p-4">
                         <div class="w-full md:w-1/2">
-                            <form class="flex items-center">
+                            <form class="flex items-center" action="expense">
                                 <label for="simple-search" class="sr-only">Search</label>
                                 <div class="relative w-full">
                                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -61,12 +121,15 @@
                                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                                         </svg>
                                     </div>
-                                    <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search" required="">
+                                    <input type="text" id="simple-search" name="search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full pl-10 p-2" placeholder="Search by id">
                                 </div>
                             </form>
                         </div>
                         <div class="w-full md:w-auto flex flex-col md:flex-row space-y-2 md:space-y-0 items-stretch md:items-center justify-end md:space-x-3 flex-shrink-0">
                             <div class="flex items-center space-x-3 w-full md:w-auto">
+                                <a href="addexpense"><button class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-grey-100 rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button">
+                                        Add Expense
+                                    </button></a>
                                 <button id="generatePDF" class="w-full md:w-auto flex items-center justify-center py-2 px-4 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-primary-700 focus:z-10 focus:ring-4 focus:ring-gray-200" type="button" onclick="print();">
                                     Generate PDF
                                 </button>
@@ -81,20 +144,22 @@
                                 </button>
                                 <div id="filterDropdown" class="z-10 hidden w-48 p-3 bg-white rounded-lg shadow">
                                     <h6 class="mb-3 text-sm font-medium text-gray-900">Choose category</h6>
-                                    <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
-                                        <li class="flex items-center">
-                                            <input id="food" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="food" class="ml-2 text-sm font-medium text-gray-900">Salary</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="beverage" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="beverage" class="ml-2 text-sm font-medium text-gray-900">Ingredient</label>
-                                        </li>
-                                        <li class="flex items-center">
-                                            <input id="other" type="checkbox" value="" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2">
-                                            <label for="other" class="ml-2 text-sm font-medium text-gray-900">Utility</label>
-                                        </li>
-                                    </ul>
+                                    <form action="expense" onchange="getFilter()" id="filterform">
+                                        <ul class="space-y-2 text-sm" aria-labelledby="filterDropdownButton">
+                                            <li class="flex items-center">
+                                                <input id="food" type="radio" value="utility" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "utility") { ?> checked <?php } ?>>
+                                                <label for="food" class="ml-2 text-sm font-medium text-gray-900">Utility</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="beverage" type="radio" value="salary" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "salary") { ?> checked <?php } ?>>
+                                                <label for="beverage" class="ml-2 text-sm font-medium text-gray-900">Salary</label>
+                                            </li>
+                                            <li class="flex items-center">
+                                                <input id="other" type="radio" value="ingredient" name="filter" class="w-4 h-4 bg-gray-100 border-gray-300 rounded text-primary-600 focus:ring-primary-500 focus:ring-2" <?php if ($filter == "ingredient") { ?> checked <?php } ?>>
+                                                <label for="other" class="ml-2 text-sm font-medium text-gray-900">Ingredient</label>
+                                            </li>
+                                        </ul>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -104,142 +169,49 @@
                             <thead class="text-xs text-gray-700 uppercase rounded-t-xl bg-gray-300">
                                 <tr>
                                     <th scope="col" class="px-4 py-3 rounded-tl-xl">ID</th>
-                                    <th scope="col" class="px-4 py-3">Name</th>
+                                    <th scope="col" class="px-4 py-3">Subject</th>
                                     <th scope="col" class="px-4 py-3">Category</th>
-                                    <th scope="col" class="px-4 py-3">Quantity</th>
-                                    <th scope="col" class="px-4 py-3">Value</th>
+                                    <th scope="col" class="px-4 py-3">Expense (RM)</th>
                                     <th scope="col" class="px-4 py-3 rounded-tr-xl">Date</th>
                                 </tr>
                             </thead>
+                            <form action="expensedetails" method="get" id="form">
+                                <input type="hidden" id="hidden" name="id">
                             <tbody class="bg-gray-50">
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">S01</th>
-                                    <td class="px-4 py-3">Name 1</td>
-                                    <td class="px-4 py-3">Salary</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 1900</td>
-                                    <td class="px-4 py-3">01/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">S02</th>
-                                    <td class="px-4 py-3">Name 2</td>
-                                    <td class="px-4 py-3">Salary</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 2000</td>
-                                    <td class="px-4 py-3">15/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">S03</th>
-                                    <td class="px-4 py-3">Name 3</td>
-                                    <td class="px-4 py-3">Salary</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 2000</td>
-                                    <td class="px-4 py-3">28/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">I11</th>
-                                    <td class="px-4 py-3">Ingredient 1</td>
-                                    <td class="px-4 py-3">Ingredient</td>
-                                    <td class="px-4 py-3">100</td>
-                                    <td class="px-4 py-3">RM 1800</td>
-                                    <td class="px-4 py-3">07/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">I12</th>
-                                    <td class="px-4 py-3">Ingredient 2</td>
-                                    <td class="px-4 py-3">Ingredient</td>
-                                    <td class="px-4 py-3">100</td>
-                                    <td class="px-4 py-3">RM 599</td>
-                                    <td class="px-4 py-3">21/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">I13</th>
-                                    <td class="px-4 py-3">Ingredient 3</td>
-                                    <td class="px-4 py-3">Ingredient</td>
-                                    <td class="px-4 py-3">120</td>
-                                    <td class="px-4 py-3">RM 799</td>
-                                    <td class="px-4 py-3">03/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">I14</th>
-                                    <td class="px-4 py-3">Ingredient 4</td>
-                                    <td class="px-4 py-3">Ingredient</td>
-                                    <td class="px-4 py-3">300</td>
-                                    <td class="px-4 py-3">RM 900</td>
-                                    <td class="px-4 py-3">14/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">U01</th>
-                                    <td class="px-4 py-3">Utility 1</td>
-                                    <td class="px-4 py-3">Utility</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 399</td>
-                                    <td class="px-4 py-3">25/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">U02</th>
-                                    <td class="px-4 py-3">Utility 2</td>
-                                    <td class="px-4 py-3">Utility</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 50</td>
-                                    <td class="px-4 py-3">09/05/2023</td>
-                                </tr>
-                                <tr class="border-b border-gray-300">
-                                    <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap">U03</th>
-                                    <td class="px-4 py-3">Utility 3</td>
-                                    <td class="px-4 py-3">Utility</td>
-                                    <td class="px-4 py-3">1</td>
-                                    <td class="px-4 py-3">RM 500</td>
-                                    <td class="px-4 py-3">18/05/2023</td>
-                                </tr>
+                                <?php
+                                $expense = Expense::whereMonth("created_at", $currentMonth)->where('id', 'LIKE', '%' . $search . '%')->where('categories', 'LIKE', '%' . $filter . '%')->whereMonth('created_at', $currentMonth)->orderBy('created_at', 'desc')->get();
+                                foreach ($expense as $expenses) {
+                                ?>
+                                    <tr class="border-b border-gray-300 hover:bg-gray-100" onclick="submitForm('<?php echo $expenses->id ?>')">
+                                        <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"><?php echo "E0" . $expenses->id ?></th>
+                                        <td class="px-4 py-3"><?php echo $expenses->subject ?></td>
+                                        <td class="px-4 py-3"><?php echo ucwords($expenses->categories) ?></td>
+                                        <td class="px-4 py-3"><?php echo number_format($expenses->expense, 2) ?></td>
+                                        <td class="px-4 py-3"><?php echo $expenses->created_at ?></td>
+                                    </tr>
+                                <?php } ?>
                             </tbody>
+                            </form>
                         </table>
                     </div>
-                    <nav class="flex flex-col md:flex-row justify-between items-start md:items-center space-y-3 md:space-y-0 p-4" aria-label="Table navigation">
-                        <span class="text-sm font-normal text-gray-500">
-                            Showing
-                            <span class="font-semibold text-gray-900">1-10</span>
-                            of
-                            <span class="font-semibold text-gray-900">50</span>
-                        </span>
-                        <ul class="inline-flex items-stretch -space-x-px">
-                            <li>
-                                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 ml-0 text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                                    <span class="sr-only">Previous</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">1</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">2</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">3</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">4</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center text-sm py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">5</a>
-                            </li>
-                            <li>
-                                <a href="#" class="flex items-center justify-center h-full py-1.5 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700">
-                                    <span class="sr-only">Next</span>
-                                    <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
-                                    </svg>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
                 </div>
             </main>
-        </div>
-    </div>
+        </main>
+</body>
+
+</html>
+<script>
+    function getFilter() {
+        document.getElementById('filterform').submit();
+
+    }
+
+    function submitForm(id) {
+        // Set the value of the hidden input field
+        document.getElementById('hidden').value = id;
+        document.getElementById('form').submit();
+    }
+</script>
 </body>
 
 </html>

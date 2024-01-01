@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReservationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +26,7 @@ if (!function_exists('test')) {
     {
         if (Session::has("username")) {
             if (session('roles') == "admin") {
-                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'expense');
+                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'expense','profit', 'addexpense');
                 foreach ($adminpath as $adminpath) {
                     if ($adminpath == $path) {
                         return view($path);
@@ -31,7 +34,7 @@ if (!function_exists('test')) {
                 }
                 return redirect('dashboard');
             } else if (session('roles') == "staff") {
-                $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist');
+                $staffpath = array('reservation_staff', 'editorder', 'notification', 'staffaddnotification', 'menulist', 'payment', 'completepayment', 'invoice', 'reservationhistory', 'invoicehistory', 'invoicedetails');
                 foreach ($staffpath as $staffpath) {
                     if ($staffpath == $path) {
                         return view($path);
@@ -101,10 +104,21 @@ Route::get('carthistory', function () {
     return view('carthistory');
 });
 
+Route::get('reserve', function () {
+    return view('reserve');
+});
+
+Route::get('reservedcompleted', function () {
+    return view('reservedcompleted');
+});
 
 //Admin
 Route::get('dashboard', function () {
     return test("dashboard");
+});
+
+Route::get('sales', function () {
+    return test("sales");
 });
 
 Route::get("account", function () {
@@ -131,6 +145,14 @@ Route::get('expense', function () {
     return test("expense");
 });
 
+Route::get('profit', function () {
+    return test("profit");
+});
+
+Route::get('addexpense', function () {
+    return test("addexpense");
+});
+
 // Staff
 Route::get('reservation_staff', function () {
     return test("reservation_staff");
@@ -148,9 +170,34 @@ Route::get('staffaddnotification', function () {
     return test("staffaddnotification");
 });
 
+Route::get('payment', function () {
+    return test("payment");
+});
+
+Route::get('completepayment', function () {
+    return test("completepayment");
+});
+
 Route::get('menulist', function () {
     return test("menulist");
 });
+
+Route::get('invoice', function () {
+    return test("invoice");
+});
+
+Route::get('invoicehistory', function () {
+    return test("invoicehistory");
+});
+
+Route::get('invoicedetails', function () {
+    return test("invoicedetails");
+});
+
+Route::get('reservationhistory', function () {
+    return test("reservationhistory");
+});
+
 
 
 //chef
@@ -204,3 +251,12 @@ Route::get('addnotificationchef', [NotificationController::class,'addnotificatio
 Route::get('details', [NotificationController::class,'subjectanddescription']);
 Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescription']);
 Route::get('solved', [NotificationController::class,'solved']);
+Route::get('tocompletepayment', [PaymentController::class,'viewpayment']);
+Route::get('deletepayment', [PaymentController::class,'deletepayment']);
+Route::get('reserved', [ReservationController::class,'savereservation']);
+Route::get('cancelreservation', [ReservationController::class,'cancel']);
+Route::get('solvereservation', [ReservationController::class,'solve']);
+Route::get('addexpenses', [ExpenseController::class,'addexpense']);
+Route::get('expensedetails', [ExpenseController::class,'details']);
+Route::get('deleteexpense', [ExpenseController::class,'delete']);
+Route::get('/send-mail', [PaymentController::class,'sendEmail']);

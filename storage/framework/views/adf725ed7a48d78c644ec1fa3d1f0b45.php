@@ -84,7 +84,7 @@
                         ?>
                             <div class="flex flex-col px-5 py-5 bg-white shadow-md max-w-md rounded-xl w-full">
                                 <div class="flex justify-end">
-                                    <button type="button" class="px-1 py-1" onclick="submitForm('<?php echo $foodno->id; ?>', 'deleteorder')">
+                                    <button type="button" class="px-1 py-1" onclick="if(confirm('Are you sure want to delete')) submitForm('<?php echo $foodno->id; ?>', 'deleteorder')">
                                         <svg class="fill-none stroke-pigment-indigo-400 stroke-[3px]" xmlns="http://www.w3.org/2000/svg" width="23.335" height="23.335" viewBox="0 0 23.335 23.335">
                                             <g transform="translate(-302.995 -562.503) rotate(45)">
                                                 <line class="a" x2="30" transform="translate(613.5 183.5)" />
@@ -207,7 +207,7 @@
                                     <h2 class="text-xl font-bold">Special Request</h1>
                                         <p class="text-sm text-grey-600">Please let us know if you are allergic to any anything or require us to avoid anything.</p>
                                         <div class="mt-3">
-                                            <textarea class="w-full h-20 p-2 border-2 border-pigment-indigo-400 rounded-md focus:border-pigment-indigo-500" name="request" placeholder="e.g. No peanut"></textarea>
+                                            <textarea class="w-full h-20 p-2 border-2 border-pigment-indigo-400 rounded-md focus:border-pigment-indigo-500" name="request[]" placeholder="e.g. No peanut"><?php echo $foodno->request; ?></textarea>
                                         </div>
                                 </div>
                             </div>
@@ -220,7 +220,7 @@
                         <button type="submit" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-100 border-4 border-pigment-indigo-500 text-pigment-indigo-500 rounded-lg shadow-md w-40">Confirm</button>
                         <a href="#" onclick="location.reload();"><button type="button" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-200 border-4 border-pigment-indigo-700 text-pigment-indigo-700 rounded-lg shadow-md w-40">Reset</button></a>
                         <a href="/orderlist"><button type="button" class="inline-block py-2 text-center text-xl font-bold bg-pigment-indigo-500 border-4 border-pigment-indigo-800 text-white rounded-lg shadow-md w-40">Cancel</button></a>
-                        <button type="button" class="inline-block py-2 text-center text-xl font-bold bg-red-600 border-4 border-pigment-indigo-900 text-red-900 rounded-lg shadow-md w-40">Delete</button>
+                        <button type="button" class="inline-block py-2 text-center text-xl font-bold bg-red-600 border-4 border-pigment-indigo-900 text-red-900 rounded-lg shadow-md w-40" onclick="if(confirm('Are you sure want to delete')) submitForm('<?php echo $foodno->id; ?>', 'delete')">Delete</button>
                     </div>
                 </div>
             </form>

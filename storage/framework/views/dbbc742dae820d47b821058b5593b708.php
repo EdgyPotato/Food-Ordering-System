@@ -148,7 +148,7 @@
                                     <?php echo $user->password ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $user->roles ?>
+                                    <?php echo ucfirst($user->roles) ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <form method='POST' action='delete' onsubmit='return confirmation()'>
