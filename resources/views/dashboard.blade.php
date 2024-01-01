@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/datepicker.min.js"></script>
     <style>
         @media screen and (orientation: portrait) {
             html {
@@ -95,9 +96,14 @@
             use App\Models\PaymentFoodTopping;
             use Carbon\Carbon;
 
+            $currentMonth = Carbon::now()->month;
+
+            if (isset($_GET['date'])) {
+                $currentMonth = $_GET['date'];
+            }
+
             $sales = 0;
 
-            $currentMonth = Carbon::now()->month;
             $payment = Payment::whereMonth('created_at', $currentMonth)->get();
             foreach ($payment as $payments) {
                 $price = 0;
@@ -203,14 +209,21 @@
 
                 <div class="flex px-6 mt-12" id="chart">
                     <div class="flex flex-col px-6 pt-3 py-6 bg-white shadow-md w-full rounded-xl">
-                        <div class="w-full flex justify-center items-center">
-                            <h1 class="text-2xl font-bold">Sales By Days</h1>
+                        <div class="flex">
+                            <div class="w-full flex justify-start items-center">
+                                <h1 class="text-2xl font-bold">Sales By Days</h1>
+                            </div>
+                            <form id="form" action="dashboard" method="get">
+                                <div class="relative max-w-sm">
+                                    <input type="month" id="month" name="date" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Select date" value="<?php echo date($currentMonth); ?>" onchange="submitForm()">
+                                </div>
+                            </form>
                         </div>
                         <hr class="w-full h-1 mx-auto my-4 bg-gray-200 border-0 rounded dark:bg-gray-700">
                         <div class="flex-grow">
                             <div class="flex justify-between">
                                 <div>
-                                    <h5 class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-2">Today Sales: <?php echo "RM " . number_format($sales, 2) ?></h5>
+                                    <h5 class="leading-none text-xl font-bold text-gray-600 dark:text-white pb-2">Today Sales: <?php echo "RM " . number_format($sales, 2) ?></h5>
                                 </div>
                             </div>
                             <div id="area-chart" style="height: 400px;"></div>
@@ -232,7 +245,7 @@
                                     // Generate an array of corresponding data (replace this with your actual data)
                                     var dataArray = <?php echo json_encode($dailySales); ?>;
                                     dataArray = dataArray.map(value => parseFloat(value).toFixed(2));
-                                    
+
                                     let options = {
                                         chart: {
                                             height: "100%",
@@ -313,12 +326,13 @@
                 </div>
             </main>
         </main>
-</body>
-
-</html>
-<script>
-
-</script>
+        <script>
+            function submitForm() {
+                // Set the value of the hidden input field
+                // Trigger the form submission
+                document.getElementById('form').submit();
+            }
+        </script>
 </body>
 
 </html>

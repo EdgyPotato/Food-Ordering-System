@@ -35,7 +35,7 @@
 </head>
 
 <body class="bg-gray-200 ">
-    <div class="w-full px-6 py-4 shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
+    <div class="w-full px-6 py-4 bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400 rounded-b-3xl shadow-xl">
         <div class="return">
             <a href="/?table=<?php echo session('table'); ?>"><img src="<?php echo e(asset('image/return.png')); ?>" width="30px" height="30px"></a>
         </div>
@@ -48,9 +48,10 @@
 
             <div class="flex flex-col w-11/12 px-5 py-5 -mt-8 mb-28 bg-white shadow-md max-w-md rounded-xl">
                 <div class="w-full flex justify-between items-center">
-                    <h1 class="text-2xl font-bold"><?php echo $food->foodid . '. ' . $food->foodname ?></h1>
+                    <h1 class="text-xl font-bold"><?php echo $food->foodid . '. ' . $food->foodname ?></h1>
                     <h2 class="text-sm font-bold">RM<?php echo e(number_format($food->price, 2)); ?></h2>
                 </div>
+                <div class="text-gray-500 text-justify"><?php echo $food->description ?></div>
 
                 <?php
                 if ($topping) {

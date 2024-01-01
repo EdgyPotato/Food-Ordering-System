@@ -26,7 +26,7 @@ if (!function_exists('test')) {
     {
         if (Session::has("username")) {
             if (session('roles') == "admin") {
-                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'expense','profit', 'addexpense');
+                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales', 'expense','profit', 'addexpense');
                 foreach ($adminpath as $adminpath) {
                     if ($adminpath == $path) {
                         return view($path);
