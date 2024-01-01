@@ -131,6 +131,7 @@
                                             $price = $price + $topvar->price;
                                         }
                                     }
+                                    $price*=$orders->quantity;
                                     $totalprice += $price;
                                 ?>
                                     <input type="hidden" name="foodno[]" value="<?php echo $orders->id ?>">

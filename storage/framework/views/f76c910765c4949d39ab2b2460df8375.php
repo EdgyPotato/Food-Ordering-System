@@ -151,9 +151,9 @@
                     <table class="w-full mb-8 mt-8">
                         <thead>
                             <tr>
-                                <th class="text-left font-bold text-xl text-gray-700 pb-2">Items</th>
-                                <th class="text-right font-bold text-xl text-gray-700 pb-2">Quantity</th>
-                                <th class="text-right font-bold text-xl text-gray-700 pb-2">Amount</th>
+                            <th class="text-left font-bold text-xl text-gray-700 pb-2 w-2/5">Items</th>
+                                <th class="font-bold text-xl text-gray-700 pb-2 w-1/4 text-center">QTY.</th>
+                                <th class="text-right font-bold text-xl text-gray-700 pb-2 w-2/5">Amount</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -172,11 +172,12 @@
                                         $price = $price + $topvar->price;
                                     }
                                 }
+                                $price*=$paymentfoodnos->quantity;
                                 $totalprice += $price;
                             ?>
                                 <tr>
                                     <td class="text-left font-medium text-black opacity-80"><?php echo $paymentfoodnos->foodid . ". " . $menu->foodname ?></td>
-                                    <td class="text-right font-medium text-black opacity-80"><?php echo $paymentfoodnos->quantity ?></td>
+                                    <td class="text-center font-medium text-black opacity-80"><?php echo $paymentfoodnos->quantity ?></td>
                                     <td class="text-right font-medium text-black opacity-80">RM <?php echo number_format($price, 2) ?></td>
                                 </tr>
                                 <?php

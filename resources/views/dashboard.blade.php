@@ -96,19 +96,20 @@
             use App\Models\PaymentFoodTopping;
             use Carbon\Carbon;
 
-            $currentMonth = Carbon::now()->month;
+            $currentMonth = Carbon::now()->format('Y-m');
 
             if (isset($_GET['date'])) {
                 $currentMonth = $_GET['date'];
             }
-
+            list($year, $month) = explode('-', $currentMonth);
             $sales = 0;
-
-            $payment = Payment::whereMonth('created_at', $currentMonth)->get();
+            $payment = Payment::whereYear('created_at', $year)
+                ->whereMonth('created_at', $month)
+                ->get();
             foreach ($payment as $payments) {
-                $price = 0;
                 $paymentfoodno = PaymentFoodNo::where('payment_id', $payments->id)->get();
                 foreach ($paymentfoodno as $paymentfoodnos) {
+                    $price = 0;
                     $menu = Menu::where('foodid', $paymentfoodnos->foodid)->first();
                     $price += $menu->price;
                     $paymentaddon = PaymentFoodTopping::where('top_or_add', "addon")->where('food_no', $paymentfoodnos->id)->get();
@@ -116,10 +117,9 @@
                         $aoption = Aoptions::where('id', $paymentaddons->choice_no)->first();
                         $price += $aoption->price;
                     }
-
                     $price *= $paymentfoodnos->quantity;
+                    $sales += $price;
                 }
-                $sales += $price;
             }
 
             $expense = Expense::whereMonth('created_at', $currentMonth)->get();
@@ -187,9 +187,10 @@
 
                     $payment = Payment::whereDay('created_at', $day)->get();
                     foreach ($payment as $payments) {
-                        $price = 0;
+
                         $paymentfoodno = PaymentFoodNo::where('payment_id', $payments->id)->get();
                         foreach ($paymentfoodno as $paymentfoodnos) {
+                            $price = 0;
                             $menu = Menu::where('foodid', $paymentfoodnos->foodid)->first();
                             $price += $menu->price;
                             $paymentaddon = PaymentFoodTopping::where('top_or_add', "addon")->where('food_no', $paymentfoodnos->id)->get();
@@ -197,10 +198,9 @@
                                 $aoption = Aoptions::where('id', $paymentaddons->choice_no)->first();
                                 $price += $aoption->price;
                             }
-
                             $price *= $paymentfoodnos->quantity;
+                            $sales += $price;
                         }
-                        $sales += $price;
                     }
                     $dailySales[] = $sales;
                 }
@@ -227,7 +227,7 @@
                                 </div>
                             </div>
                             <div id="area-chart" style="height: 400px;"></div>
-
+                            
                             <script>
                                 // ApexCharts options and config
                                 window.addEventListener("load", function() {
