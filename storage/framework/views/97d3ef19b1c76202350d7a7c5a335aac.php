@@ -168,7 +168,7 @@
                             <?php foreach ($sql as $food) { ?>
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td class="p-4">
-                                        <img src="storage/image/<?php echo $food->image_url; ?>" class="w-20 h-20 rounded-md shadow-lg" alt="Apple Watch">
+                                        <img src="storage/image/<?php echo $food->image_url; ?>" class="w-20 h-20 rounded-md shadow-lg" alt="Food Image">
                                     </td>
                                     <td class="px-6 py-4 font-semibold text-gray-900 dark:text-white">
                                         <?php echo $food->foodid; ?>

@@ -219,6 +219,10 @@ Route::get('testing', function () {
     return view("testingcss");
 });
 
+Route::get('test', function () {
+    return view('test');
+});
+
 Route::get('/test-database', function () {
     try {
         DB::connection()->getPdo();
