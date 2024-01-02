@@ -87,7 +87,7 @@
                 <?php foreach ($menufood as $menus) { ?>
                     <div class="relative z-1 h-28 w-11/12 border-2 mb-2 p-1 pr-2 border-pigment-indigo-200 hover:bg-grey-200 rounded-xl bg-white" onclick='submitForm("<?php echo $menus->foodid ?>")'>
                         <div class="grid grid-cols-5 grid-rows-2 h-full">
-                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src='storage/image/<?php echo $menus->image_url ?>'></div>
+                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src="data:image/jpeg;base64,<?php echo e($menus->image_url); ?>"></div>
                             <div class="font-bold text-sm col-span-2 -ml-4 mt-1 pr-3"><?php echo $menus->foodid . '. ' . $menus->foodname ?></div>
                             <div class="font-bold -ml-3 text-sm mt-1 text-right"><?php echo 'RM ' . number_format($menus->price, 2) ?></div>
                             <div class="col-span-3 text-gray-500 text-sm -ml-4 -mt-2"><?php echo  Illuminate\Support\Str::limit($menus->description, $limit = 58, $end = '...') ?></div>
@@ -100,7 +100,7 @@
                 <?php foreach ($menubeverage as $menus) { ?>
                     <div class="relative z-1 h-28 w-11/12 border-2 mb-2 p-1 pr-2 border-pigment-indigo-200 hover:bg-grey-200 rounded-xl bg-white" onclick='submitForm("<?php echo $menus->foodid ?>")'>
                         <div class="grid grid-cols-5 grid-rows-2 h-full">
-                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src='storage/image/<?php echo $menus->image_url ?>'></div>
+                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src="data:image/jpeg;base64,<?php echo e($menus->image_url); ?>"></div>
                             <div class="font-bold col-span-2 text-sm -ml-4 mt-1 pr-3"><?php echo $menus->foodid . '. ' . $menus->foodname ?></div>
                             <div class="font-bold -ml-3 mt-1 text-sm text-right"><?php echo 'RM ' . number_format($menus->price, 2) ?></div>
                             <div class="col-span-3 text-gray-500 text-sm -ml-4 -mt-2"><?php echo  Illuminate\Support\Str::limit($menus->description, $limit = 58, $end = '...') ?></div>
@@ -113,7 +113,7 @@
                 <?php foreach ($menuother as $menus) { ?>
                     <div class="h-28 w-11/12 border-2 mb-2 p-1 pr-2 border-pigment-indigo-200 hover:bg-grey-200 rounded-xl bg-white" onclick='submitForm("<?php echo $menus->foodid ?>")'>
                         <div class="grid grid-cols-5 grid-rows-2 h-full">
-                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src='storage/image/<?php echo $menus->image_url ?>'></div>
+                            <div class="row-span-2 col-span-2 p-1 flex justify-start items-center"><img class="w-24 h-24 rounded-lg" src="data:image/jpeg;base64,<?php echo e($menus->image_url); ?>"></div>
                             <div class="font-bold col-span-2 text-sm -ml-4 mt-1 pr-3"><?php echo $menus->foodid . '. ' . $menus->foodname ?></div>
                             <div class="font-bold -ml-3 mt-1 text-sm text-right"><?php echo 'RM ' . number_format($menus->price, 2) ?></div>
                             <div class="col-span-3 text-gray-500 text-sm -ml-4 -mt-2"><?php echo  Illuminate\Support\Str::limit($menus->description, $limit = 58, $end = '...') ?></div>

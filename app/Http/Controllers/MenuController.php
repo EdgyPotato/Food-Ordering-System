@@ -32,15 +32,15 @@ class MenuController extends Controller
         $description = $request->input('description');
         $price = $request->input('foodprice');
         $categories= $request->input('categories');
-        $url = $request->file('my_image')->getClientOriginalName();
-        $request->file('my_image')->storeAs('public/image/', $url);
+        $url = $request->file('my_image');
+        $binaryData = base64_encode(file_get_contents($url->path()));
         $menu = new Menu();
         $menu->foodid = $id;
         $menu->foodname = $foodname;
         $menu->description = $description;
         $menu->price = $price;
         $menu->categories = $categories;
-        $menu->image_url = $url;
+        $menu->image_url = $binaryData;
         $menu->status = "active";
         $menu->save();
 

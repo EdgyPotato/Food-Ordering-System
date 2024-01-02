@@ -92,7 +92,7 @@
             </nav>
             <div class="flex flex-col items-center">
                 <div class="w-11/12 mt-8 bg-white shadow-md max-w-md rounded-xl">
-                    <img class="rounded-xl w-full" src='storage/image/<?php echo $food->image_url ?>'>
+                    <img class="rounded-xl w-full" src="data:image/jpeg;base64,{{ $food->image_url }}">
                 </div>
 
                 <div class="flex flex-col w-11/12 px-5 py-5 -mt-8 bg-white shadow-md max-w-md rounded-xl">

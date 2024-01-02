@@ -17,7 +17,7 @@ return new class extends Migration
             $table->tinyText('description');
             $table->float('price', 10, 2);
             $table->string('categories', 20);
-            $table->string('image_url');
+            $table->text('image_url');
             $table->string('status');
             $table->timestamps();
         });
