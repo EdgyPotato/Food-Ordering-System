@@ -122,7 +122,9 @@
                 }
             }
 
-            $expense = Expense::whereMonth('created_at', $currentMonth)->get();
+            $expense = Expense::whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->get();
             $totalexpense = 0;
             foreach ($expense as $expenses) {
                 $totalexpense += $expenses->expense;

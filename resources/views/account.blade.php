@@ -24,7 +24,7 @@
     </style>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <!-- Load icon library -->
-    <title>Add Menu</title>
+    <title>Dashboard</title>
 </head>
 
 <!-- Component Start -->
