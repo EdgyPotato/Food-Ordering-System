@@ -9,7 +9,6 @@
     "outputDirectory": "public",
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
-        { "src": "/css/(.*)", "dest": "/public/css/" },
         { "src": "/image/(.*)", "dest": "/public/image/" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
