@@ -31,7 +31,8 @@
             document.getElementById("count").innerHTML = count;
         }
     </script>
-    <title>Menu</title>
+    <title>Food</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
 </head>
 
 <body class="bg-gray-200 ">

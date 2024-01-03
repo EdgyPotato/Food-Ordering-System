@@ -25,6 +25,7 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     <!-- Load icon library -->
     <title>Invoice</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
 </head>
 
 <!-- Component Start -->

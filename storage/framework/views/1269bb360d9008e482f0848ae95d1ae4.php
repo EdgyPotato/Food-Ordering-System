@@ -22,7 +22,8 @@
         }
     </style>
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
-    <title>Staff Order List</title>
+    <title>Order List</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('logo.ico')); ?>">
 </head>
 
 <!-- Component Start -->

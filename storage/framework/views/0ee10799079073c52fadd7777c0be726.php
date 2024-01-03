@@ -8,7 +8,8 @@
     <style>
         @media screen and (max-width: 720px) {}
     </style>
-    <title>Menu</title>
+    <title>Cart</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200">

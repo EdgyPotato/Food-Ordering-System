@@ -10,6 +10,7 @@
     </style>
 
     <title>Menu</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200 flex flex-col items-center justify-center h-full">

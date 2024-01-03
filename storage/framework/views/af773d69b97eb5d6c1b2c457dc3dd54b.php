@@ -32,6 +32,7 @@
         }
     </script>
     <title>Menu</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>">
 </head>
 
 <body class="bg-gray-200 ">

@@ -23,6 +23,7 @@
     </style>
     @vite(['resources/css/app.css','resources/js/app.js'])
     <title>Chef Order List</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
 </head>
 
 <!-- Component Start -->
