@@ -26,7 +26,7 @@
     @vite(['resources/css/app.css','resources/js/app.js'])
     <!-- Load icon library -->
     <title>Expense</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon/logo.ico')}}">
 </head>
 
 <!-- Component Start -->

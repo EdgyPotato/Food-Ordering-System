@@ -32,7 +32,7 @@
     }
   </script>
   <title>Login</title>
-  <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('favicon/logo.ico')}}">
 </head>
 
 <body class="bg-gray-200 flex flex-col items-center justify-center h-full">

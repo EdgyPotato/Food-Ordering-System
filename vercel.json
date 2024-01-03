@@ -10,6 +10,7 @@
     "routes": [
         { "src": "/build/(.*)", "dest": "/public/build/" },
         { "src": "/image/(.*)", "dest": "/public/image/" },
+        { "src": "/favicon/(.*)", "dest": "/public/favicon/" },
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {

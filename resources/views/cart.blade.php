@@ -9,7 +9,7 @@
         @media screen and (max-width: 720px) {}
     </style>
     <title>Cart</title>
-    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico')}}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon/logo.ico')}}">
 </head>
 
 <body class="bg-gray-200">
