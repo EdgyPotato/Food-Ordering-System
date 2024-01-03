@@ -9,7 +9,7 @@
         @media screen and (max-width: 720px) {}
     </style>
     <title>Cart</title>
-    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('logo.ico')); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200">

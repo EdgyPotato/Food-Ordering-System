@@ -31,11 +31,12 @@
             document.getElementById("count").innerHTML = count;
         }
     </script>
-    <title>Menu</title>
+    <title>Reserve</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200 flex flex-col items-center justify-center">
-    <div class="w-full px-6 py-4 h-[62px] shadow-md bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400">
+    <div class="w-full px-6 py-4 h-[62px] bg-gradient-to-r from-pigment-indigo-500 to-pigment-indigo-400 rounded-b-3xl shadow-xl">
         <a class="flex" href="#">
             <img class="w-8 h-8 fill-current rounded-full" src="<?php echo e(asset('image/logo.png')); ?>" width="32px" height="32px">
             <span class="ml-2 text-xl font-bold text-white">Molek Cafe</span>

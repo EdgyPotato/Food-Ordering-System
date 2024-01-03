@@ -31,7 +31,8 @@
             document.getElementById("count").innerHTML = count;
         }
     </script>
-    <title>Menu</title>
+    <title>Reservation</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200 flex flex-col items-center justify-center">
@@ -53,7 +54,7 @@
         $reservationno = count($reservationbig);
     ?>
 
-    <div class="flex flex-col items-center w-11/12 px-5 py-5 mt-8 bg-white shadow-md max-w-md rounded-xl">
+    <div class="flex flex-col items-center w-11/12 px-5 py-5 mt-8 bg-white max-w-md rounded-xl rounded-b-3xl shadow-xl">
         <div class="flex justify-center items-center">
             <h1 class="text-xl text-gray-900 font-bold p-4">Booking Successful</h1>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="green" class="w-10 h-10">

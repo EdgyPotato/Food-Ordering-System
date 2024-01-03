@@ -31,8 +31,8 @@
             document.getElementById("count").innerHTML = count;
         }
     </script>
-    <title>Menu</title>
-    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>">
+    <title>Food</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <body class="bg-gray-200 ">

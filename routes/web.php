@@ -77,14 +77,17 @@ Route::get('/logout', function () {
 
 //Customer (Not Need User Level) need table session
 Route::get('/', function () {
+    $table = request()->get('table');
 
-    $table = $_GET['table'];
-    if (isset($table)) {
+    if ($table) {
+        // Perform any necessary validation or processing on $table
+
+        Session::put('table', $table);
+        return view('cusmenu');
     } else {
-        return view("login");
+        // Redirect to login if 'table' parameter is not present
+        return redirect('scanqr');
     }
-    Session::put('table', $table);
-    return view('cusmenu');
 });
 
 
@@ -110,6 +113,10 @@ Route::get('reserve', function () {
 
 Route::get('reservedcompleted', function () {
     return view('reservedcompleted');
+});
+
+Route::get('scanqr', function () {
+    return view('scanqr');
 });
 
 //Admin
