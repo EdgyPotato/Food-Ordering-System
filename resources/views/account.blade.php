@@ -66,7 +66,7 @@
 
 <body class="bg-gray-200 h-full w-full overflow-x-hidden">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[328px]">
+        <div class="flex flex-row justify-start w-rem-20">
         </div>
 
         <main class="flex flex-col w-full h-full">

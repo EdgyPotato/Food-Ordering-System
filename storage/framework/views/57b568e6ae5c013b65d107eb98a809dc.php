@@ -27,7 +27,8 @@
     </style>
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
     <!-- Load icon library -->
-    <title>Add Menu</title>
+    <title>Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <!-- Component Start -->
@@ -122,7 +123,9 @@
                 }
             }
 
-            $expense = Expense::whereMonth('created_at', $currentMonth)->get();
+            $expense = Expense::whereYear('created_at', $year)
+            ->whereMonth('created_at', $month)
+            ->get();
             $totalexpense = 0;
             foreach ($expense as $expenses) {
                 $totalexpense += $expenses->expense;

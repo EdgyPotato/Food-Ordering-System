@@ -24,7 +24,8 @@
     </style>
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
     <!-- Load icon library -->
-    <title>Add Menu</title>
+    <title>Account</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <!-- Component Start -->
@@ -65,7 +66,7 @@
 
 <body class="bg-gray-200 h-full w-full overflow-x-hidden">
     <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-[328px]">
+        <div class="flex flex-row justify-start w-rem-20">
         </div>
 
         <main class="flex flex-col w-full h-full">

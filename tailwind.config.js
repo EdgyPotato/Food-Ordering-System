@@ -15,6 +15,10 @@ export default {
                 sans: ["Figtree", ...defaultTheme.fontFamily.sans],
                 script: ["Segoe Script", ...defaultTheme.fontFamily.sans],
             },
+            spacing: {
+                'rem-20': '20.5rem',
+                // Add more rem values as needed
+            },
         },
         colors: {
             "pigment-indigo": {
@@ -54,5 +58,5 @@ export default {
         },
     },
 
-    plugins: [require("flowbite/plugin")({charts: true,}), forms],
+    plugins: [require("flowbite/plugin")({ charts: true, }), forms],
 };
