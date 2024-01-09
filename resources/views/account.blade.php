@@ -164,12 +164,13 @@
                 </table>
             </div>
         </main>
+    </div>
 
-        <script>
-            function confirmation() {
-                return confirm("Are you sure want to delete?");
-            }
-        </script>
+    <script>
+        function confirmation() {
+            return confirm("Are you sure want to delete?");
+        }
+    </script>
 </body>
 
 </html>

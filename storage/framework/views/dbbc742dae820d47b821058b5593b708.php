@@ -164,12 +164,13 @@
                 </table>
             </div>
         </main>
+    </div>
 
-        <script>
-            function confirmation() {
-                return confirm("Are you sure want to delete?");
-            }
-        </script>
+    <script>
+        function confirmation() {
+            return confirm("Are you sure want to delete?");
+        }
+    </script>
 </body>
 
 </html><?php /**PATH C:\AD Project\AD-Project\resources\views/account.blade.php ENDPATH**/ ?>

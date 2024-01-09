@@ -235,6 +235,7 @@
                 }
             }
         </script>
+    </div>
 </body>
 
 </html><?php /**PATH C:\AD Project\AD-Project\resources\views/adminmenu.blade.php ENDPATH**/ ?>
