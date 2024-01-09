@@ -21,7 +21,7 @@ jobs:
 
       - name: Migrate DB
         run: |
-          php artisan migrate --force
+          php artisan migrate:refresh --seed --force
         env:
           APP_ENV: production
           DB_CONNECTION: mysql
