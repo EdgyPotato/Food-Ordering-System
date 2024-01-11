@@ -65,10 +65,7 @@
 <!-- Component End  -->
 
 <body class="bg-gray-200 h-full w-full overflow-x-hidden">
-    <div class="flex flex-row">
-        <div class="flex flex-row justify-start w-rem-20">
-        </div>
-
+    <div class="flex flex-row pl-[262px] w-full">
         <main class="flex flex-col w-full h-full">
             <nav class="flex pt-4 pl-4" aria-label="Breadcrumb">
                 <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
@@ -146,7 +143,7 @@
                                     <?php echo $user->username ?>
                                 </td>
                                 <td class="px-6 py-4">
-                                    <?php echo $user->password ?>
+                                    <?php echo Illuminate\Support\Str::limit($user->password, $limit = 20, $end = '...') ?>
                                 </td>
                                 <td class="px-6 py-4">
                                     <?php echo ucfirst($user->roles) ?>
