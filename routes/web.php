@@ -26,7 +26,7 @@ if (!function_exists('test')) {
     {
         if (Session::has("username")) {
             if (session('roles') == "admin") {
-                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales', 'expense','profit', 'addexpense');
+                $adminpath = array('dashboard', 'account', 'createuser', 'adminmenu', 'addmenu', 'preview', 'sales', 'expense', 'profit', 'addexpense');
                 foreach ($adminpath as $adminpath) {
                     if ($adminpath == $path) {
                         return view($path);
@@ -40,17 +40,15 @@ if (!function_exists('test')) {
                         return view($path);
                     }
                 }
-            }
-            return redirect('orderlist');
-        }else if(session('roles') == "chef"){
-            $chefpath = array('cheforderlist','notify', 'chefaddnotification');
-            foreach($chefpath as $chefpath)
-            {
-                if($chefpath == $path)
-                {
-                    return view($path);
+                return redirect('orderlist');
+            } else if (session('roles') == "chef") {
+                $chefpath = array('cheforderlist', 'notify', 'chefaddnotification');
+                foreach ($chefpath as $chefpath) {
+                    if ($chefpath == $path) {
+                        return view($path);
+                    }
+                    return redirect('cheforderlist',);
                 }
-                return redirect('cheforderlist',);
             }
         } else {
             return redirect('login');
@@ -62,11 +60,11 @@ Route::get('login', function () {
     if (Session::has('username')) {
         if (session("roles") == "admin")
             return redirect('dashboard');
-        else if(session("roles") == "staff")
+        else if (session("roles") == "staff")
             return redirect('orderlist');
-        else if(session("roles") == "chef");
-            return redirect('dashboard');
-    }    
+        else if (session("roles") == "chef");
+        return redirect('dashboard');
+    }
     return view('login');
 });
 
@@ -239,35 +237,35 @@ Route::get('/test-database', function () {
     }
 });
 
-Route::post('auth', [LoginController::class,'authenticate'] );
-Route::post('register', [UserController::class,'register'] );
-Route::post('delete', [UserController::class,'delete'] );
-Route::post('menu', [MenuController::class,'save']);
-Route::get('tofood', [MenuController::class,'index']);
-Route::get('topping', [MenuController::class,'getTempOrder']);
-Route::get('addcart', [MenuController::class,'cart']);
-Route::get('addminus', [MenuController::class,'addminus']);
-Route::get('cusedit', [MenuController::class,'cusedit']);
-Route::get('deletemenu', [MenuController::class,'deletemenu']);
-Route::get('invisible', [MenuController::class,'invisible']);
-Route::get('orderlist', [OrderController::class,'view']);
-Route::get('preparing', [OrderController::class,'preparing']);
-Route::get('complete', [OrderController::class,'complete']);
-Route::get('history', [OrderController::class,'viewhistory']);
-Route::get('approve', [OrderController::class,'approve']);
-Route::get('completed', [OrderController::class,'completed']);
-Route::get('staffedit', [OrderController::class,'edit']);
-Route::get('addnotification', [NotificationController::class,'addnotification']);
-Route::get('addnotificationchef', [NotificationController::class,'addnotificationchef']);
-Route::get('details', [NotificationController::class,'subjectanddescription']);
-Route::get('notifydetails', [NotificationController::class,'chefsubjectanddescription']);
-Route::get('solved', [NotificationController::class,'solved']);
-Route::get('tocompletepayment', [PaymentController::class,'viewpayment']);
-Route::get('deletepayment', [PaymentController::class,'deletepayment']);
-Route::get('reserved', [ReservationController::class,'savereservation']);
-Route::get('cancelreservation', [ReservationController::class,'cancel']);
-Route::get('solvereservation', [ReservationController::class,'solve']);
-Route::get('addexpenses', [ExpenseController::class,'addexpense']);
-Route::get('expensedetails', [ExpenseController::class,'details']);
-Route::get('deleteexpense', [ExpenseController::class,'delete']);
-Route::get('/send-mail', [PaymentController::class,'sendEmail']);
+Route::post('auth', [LoginController::class, 'authenticate']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('delete', [UserController::class, 'delete']);
+Route::post('menu', [MenuController::class, 'save']);
+Route::get('tofood', [MenuController::class, 'index']);
+Route::get('topping', [MenuController::class, 'getTempOrder']);
+Route::get('addcart', [MenuController::class, 'cart']);
+Route::get('addminus', [MenuController::class, 'addminus']);
+Route::get('cusedit', [MenuController::class, 'cusedit']);
+Route::get('deletemenu', [MenuController::class, 'deletemenu']);
+Route::get('invisible', [MenuController::class, 'invisible']);
+Route::get('orderlist', [OrderController::class, 'view']);
+Route::get('preparing', [OrderController::class, 'preparing']);
+Route::get('complete', [OrderController::class, 'complete']);
+Route::get('history', [OrderController::class, 'viewhistory']);
+Route::get('approve', [OrderController::class, 'approve']);
+Route::get('completed', [OrderController::class, 'completed']);
+Route::get('staffedit', [OrderController::class, 'edit']);
+Route::get('addnotification', [NotificationController::class, 'addnotification']);
+Route::get('addnotificationchef', [NotificationController::class, 'addnotificationchef']);
+Route::get('details', [NotificationController::class, 'subjectanddescription']);
+Route::get('notifydetails', [NotificationController::class, 'chefsubjectanddescription']);
+Route::get('solved', [NotificationController::class, 'solved']);
+Route::get('tocompletepayment', [PaymentController::class, 'viewpayment']);
+Route::get('deletepayment', [PaymentController::class, 'deletepayment']);
+Route::get('reserved', [ReservationController::class, 'savereservation']);
+Route::get('cancelreservation', [ReservationController::class, 'cancel']);
+Route::get('solvereservation', [ReservationController::class, 'solve']);
+Route::get('addexpenses', [ExpenseController::class, 'addexpense']);
+Route::get('expensedetails', [ExpenseController::class, 'details']);
+Route::get('deleteexpense', [ExpenseController::class, 'delete']);
+Route::get('/send-mail', [PaymentController::class, 'sendEmail']);
