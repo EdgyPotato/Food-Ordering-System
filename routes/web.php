@@ -48,7 +48,7 @@ if (!function_exists('test')) {
                         return view($path);
                     }    
                 }
-                return redirect('cheforderlist',);
+                return redirect('cheforderlist');
             }
         } else {
             return redirect('login');
