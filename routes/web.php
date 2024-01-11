@@ -46,9 +46,9 @@ if (!function_exists('test')) {
                 foreach ($chefpath as $chefpath) {
                     if ($chefpath == $path) {
                         return view($path);
-                    }
-                    return redirect('cheforderlist',);
+                    }    
                 }
+                return redirect('cheforderlist',);
             }
         } else {
             return redirect('login');
