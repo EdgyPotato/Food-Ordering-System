@@ -24,7 +24,8 @@
     </style>
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
     <!-- Load icon library -->
-    <title>Invoice</title>
+    <title>Invoice Details</title>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <!-- Component Start -->
@@ -133,7 +134,7 @@
             $paymentfoodno = PaymentFoodNo::where('payment_id', $payment)->get();
             $paymenttime = Payment::where('id', $payment)->first();
             ?>
-            <div class="flex justify-center items-center p-8 h-full" id="print">
+            <div class="flex justify-center items-center p-8 h-full print:pr-[170px]" id="print">
                 <div class="bg-gray-100 border rounded-lg px-6 py-8 w-96">
                     <h1 class="font-bold text-2xl my-4 text-center text-black">MOLEK CAFE</h1>
                     <hr class="mb-2">
@@ -249,11 +250,7 @@
 
     <script>
         function printPageArea(areaID) {
-            var printContent = document.getElementById(areaID).innerHTML;
-            var originalContent = document.body.innerHTML;
-            document.body.innerHTML = printContent;
             window.print();
-            document.body.innerHTML = originalContent;
         }
     </script>
 </body>

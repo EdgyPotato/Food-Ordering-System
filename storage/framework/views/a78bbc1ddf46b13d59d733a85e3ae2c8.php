@@ -25,7 +25,7 @@
     <?php echo app('Illuminate\Foundation\Vite')(['resources/css/app.css','resources/js/app.js']); ?>
     <!-- Load icon library -->
     <title>Notification</title>
-    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('logo.ico')); ?>">
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon/logo.ico')); ?>">
 </head>
 
 <!-- Component Start -->
