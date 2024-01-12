@@ -33,9 +33,9 @@
         "DB_PORT": "3306",
         "MYSQL_ATTR_SSL_CA": "/etc/pki/tls/certs/ca-bundle.crt",
 
-        "MAIL_MAILER":"smtp",
-        "MAIL_HOST":"smtp.gmail.com",
-        "MAIL_PORT":"465",
-        "MAIL_ENCRYPTION":"tls"
+        "MAIL_MAILER": "smtp",
+        "MAIL_HOST": "smtp.gmail.com",
+        "MAIL_PORT": "465",
+        "MAIL_ENCRYPTION": "tls"
     }
 }
