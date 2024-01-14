@@ -134,13 +134,6 @@ class MenuController extends Controller
         $radiostr = "radio" . $count;
         $foodid = $request->input('foodid');
 
-        // Check if the 'table_no' is null
-        if ($request->session()->has('users')) {
-            // Handle the case where the 'table_no' is null
-            // You can redirect the user to an error page or display an error message
-            return response()->view('error', ['message' => 'Table number is missing'], 400);
-        }
-
         $food_no = new FoodOrderNo(); //change to take the largest number
         $food_no->table_no = session('table');
         $food_no->quantity = $request->input("quantity");
