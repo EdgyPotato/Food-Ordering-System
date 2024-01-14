@@ -135,7 +135,7 @@ class MenuController extends Controller
         $foodid = $request->input('foodid');
 
         $food_no = new FoodOrderNo(); //change to take the largest number
-        $food_no->table_no = session('table');
+        $food_no->table_no = session('table_no');
         $food_no->quantity = $request->input("quantity");
         $requestinput = $request->input("request");
         if($requestinput)
