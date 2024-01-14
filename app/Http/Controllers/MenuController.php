@@ -135,7 +135,7 @@ class MenuController extends Controller
         $foodid = $request->input('foodid');
 
         // Check if the 'table_no' is null
-        if ($request->session()->exists('table')) {
+        if ($request->session()->has('users')) {
             // Handle the case where the 'table_no' is null
             // You can redirect the user to an error page or display an error message
             return response()->view('error', ['message' => 'Table number is missing'], 400);
