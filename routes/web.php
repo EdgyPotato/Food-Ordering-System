@@ -75,7 +75,7 @@ Route::get('/logout', function () {
 
 //Customer (Not Need User Level) need table session
 Route::get('/', function () {
-    $table = request()->input('table');
+    $table = request()->get('table');
 
     if ($table) {
         // Perform any necessary validation or processing on $table
