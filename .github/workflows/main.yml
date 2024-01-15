@@ -1,21 +1,73 @@
-name: Vercel Production Deployment
-env:
-  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
 on:
   push:
-    branches:
-      - main
+    branches: main
 jobs:
-  Deploy-Production:
+  deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
       - name: Install Vercel CLI
         run: npm install --global vercel@latest
-      - name: Pull Vercel Environment Information
-        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Build Project Artifacts
-        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Install Dependencies
+        run: composer install
+
+      - name: Create .env file
+        run: |
+          echo "APP_NAME=Molek_Cafe" >> .env
+          echo "APP_ENV=production" >> .env
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
+          echo "APP_DEBUG=true" >> .env
+          echo "APP_URL=http://localhost" >> .env
+          echo "" >> .env
+          echo "LOG_CHANNEL=stack" >> .env
+          echo "LOG_DEPRECATIONS_CHANNEL=null" >> .env
+          echo "LOG_LEVEL=debug" >> .env
+          echo "" >> .env
+          echo "DB_CONNECTION=mysql" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_PORT=3306" >> .env
+          echo "DB_DATABASE=${{ secrets.DB_DATABASE }}" >> .env
+          echo "DB_USERNAME=${{ secrets.DB_USERNAME }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt" >> .env
+          echo "" >> .env
+          echo "BROADCAST_DRIVER=log" >> .env
+          echo "CACHE_DRIVER=file" >> .env
+          echo "FILESYSTEM_DISK=local" >> .env
+          echo "QUEUE_CONNECTION=sync" >> .env
+          echo "SESSION_DRIVER=file" >> .env
+          echo "SESSION_LIFETIME=120" >> .env
+          echo "" >> .env
+          echo "MEMCACHED_HOST=127.0.0.1" >> .env
+          echo "" >> .env
+          echo "REDIS_HOST=127.0.0.1" >> .env
+          echo "REDIS_PASSWORD=null" >> .env
+          echo "REDIS_PORT=6379" >> .env
+          echo "" >> .env
+          echo "MAIL_MAILER=smtp" >> .env
+          echo "MAIL_HOST=smtp.gmail.com" >> .env
+          echo "MAIL_PORT=465" >> .env
+          echo "MAIL_USERNAME=${{ secrets.MAIL_USERNAME }}" >> .env
+          echo "MAIL_PASSWORD=${{ secrets.MAIL_PASSWORD }}" >> .env
+          echo "MAIL_ENCRYPTION=tls" >> .env
+          echo "MAIL_FROM_ADDRESS=\"\${MAIL_USERNAME}\"" >> .env
+          echo "MAIL_FROM_NAME=\"\${APP_NAME}\"" >> .env
+          echo "" >> .env
+          echo "VITE_APP_NAME=\"\${APP_NAME}\"" >> .env
+
+      - name: Migrate DB
+        run: php artisan migrate --force
+
+      - name: Deploy to Vercel
+        run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
