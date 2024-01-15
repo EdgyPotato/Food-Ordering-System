@@ -200,7 +200,10 @@ class MenuController extends Controller
         } else if ($action == "minus") {
             $adjustfood = FoodOrderNo::where('id', $foodItemId)->first();
             if ($adjustfood->quantity <= 1) {
-                #no doing anything
+               // delete it
+                $deletefood = FoodOrderNo::where('id', $foodItemId)->first();
+                $deletetemp = tempOrder::where('food_no', $deletefood->id)->delete();
+                $deletefood->delete();
             } else {
                 // Decrease the quantity by 1
                 $adjustfood->quantity = $adjustfood->quantity - 1;
