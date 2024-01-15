@@ -14,7 +14,7 @@
         { "src": "/(.*)", "dest": "/api/index.php" }
     ],
     "env": {
-        "APP_NAME":"Molek Cafe",
+        "APP_NAME": "Molek Cafe",
         "APP_ENV": "production",
         "APP_DEBUG": "true",
         "APP_URL": "YOUR APP URL",

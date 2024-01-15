@@ -31,7 +31,10 @@ jobs:
           DB_USERNAME: ${{ secrets.DB_USERNAME }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           MYSQL_ATTR_SSL_CA: /etc/ssl/certs/ca-certificates.crt
-
+          CACHE_DRIVER: array
+          LOG_CHANNEL: stderr
+          SESSION_DRIVER: cookie
+          
       - name: Deploy to Vercel
         run: vercel --prod --token=${{ secrets.VERCEL_TOKEN }}
         env:
