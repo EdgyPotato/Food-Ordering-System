@@ -6,6 +6,8 @@ This project is about creating a web application for food ordering system using 
 
 The project is supervised by Assoc. Prof. Dr. Hishammuddin bin Asmuni @ Hasmuni. Thank you for the support!
 
+Live demo link (Offline): https://molek-cafe.vercel.app/
+
 ## Contributors
 
 1. Tan Kai Yuan - **[GitHub](https://github.com/EdgyPotato)**
