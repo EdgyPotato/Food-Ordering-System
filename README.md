@@ -18,7 +18,9 @@ Live demo link (Offline): https://molek-cafe.vercel.app/
 
 ### Prerequisites
 
-1. Install Laravel and Node.js
+1. Laravel
+2. Node.js
+3. XAMPP
 
 ### Step to Setup in localhost
 
