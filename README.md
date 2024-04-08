@@ -29,7 +29,7 @@ The project is supervised by Assoc. Prof. Dr. Hishammuddin bin Asmuni @ Hasmuni.
 3. Generate a new `.env`
     1. Run `copy .env.example .env` in your IDE terminal, or do `cp .env.example .env` if you are using linux
     2. Run `php artisan key:generate` & `php artisan optimize:clear` accordingly 
-4. Start both `Apache` & `MySQL` in XAMPP 
+4. Start both **Apache** & **MySQL** in XAMPP 
 5. Generate seed by running `php artisan migrate:refresh --seed`
 6. Run `npm run build`
 7. Execute `php artisan serve`
