@@ -2,7 +2,11 @@
 
 This project is about creating a web application for food ordering system using Laravel under the course (SECV3104 - APPLICATIONS DEVELOPMENT).
 
-![image](https://github.com/ADPROJECT11/AD-Project/assets/64056626/506fb3b4-7e0d-429a-9e09-cddc0a5e010f)
+![image](https://github.com/user-attachments/assets/b5984038-e3ac-4ee2-80cc-d203b988e9f9) ![image](https://github.com/user-attachments/assets/8d60f410-70d8-4401-8498-76f757540292) ![image](https://github.com/user-attachments/assets/1d9f7981-2123-4705-9fd1-728966e054df) ![image](https://github.com/user-attachments/assets/1170f35f-f938-4ef2-9193-fcf2c590f944)
+
+
+![image](https://github.com/user-attachments/assets/4b255e5a-f5ed-4ced-94bb-528538084138)
+
 
 The project is supervised by Assoc. Prof. Dr. Hishammuddin bin Asmuni @ Hasmuni. Thank you for the support!
 
